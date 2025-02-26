@@ -79,7 +79,7 @@ export function search(ns, hostName) {
     let money = ns.getServerMaxMoney(neighbor[i]);
     let level = ns.getServerRequiredHackingLevel(neighbor[i]);
     ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
-    if ((level < 700)){
+    if ((level < 1000)){
       //neighborRet.push(neighbor[i])
       neighborRet.push(new serverInfo(neighbor[i], money, level));
     }
