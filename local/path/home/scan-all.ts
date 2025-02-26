@@ -1,5 +1,5 @@
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: NS) {
 
   const ram = 1024 * 1024;
 
@@ -70,7 +70,7 @@ export async function main(ns) {
  * @param {NS} ns
  * @param {String} hostName
  *  */
-export function search(ns, hostName) {
+export function search(ns: NS, hostName) {
 
   let neighbor = ns.scan(hostName);
   neighbor.splice(0, 1);
@@ -89,6 +89,10 @@ export function search(ns, hostName) {
 }
 
 class serverInfo {
+
+  hostName: String;
+  money: String;
+  level: String;
 
   constructor (hostName, money, level){
     this.hostName = hostName;
