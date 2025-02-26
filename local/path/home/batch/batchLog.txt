@@ -1,25 +1,12 @@
-1740555206453[pre-batcher.js]: pre-batcher starting
-1740555206453[pre-batcher.js]: target host name = global-pharm
-1740555206453[pre-batcher.js]: executing host name = home
-1740555206453[pre-batcher.js]: free ram on homeserver is 4194290.1GB
-1740555206454[pre-batcher.js]: prepRam = 3.8GB
-1740555206455[pre-batcher.js]: prepWRam = 1.75GB
-1740555206456[pre-batcher.js]: prepGRam = 1.75GB
-1740555206456[pre-batcher.js]: prepWThreads = 479346
-1740555206456[pre-batcher.js]: prepGThreads = 1917387
-1740555206456[pre-batcher.js]: global-pharm max money is $37565442675 and min security is 26
-1740555206457[pre-batcher.js]: waiting for target prep
-1740555206457[target-prep.js]: starting target prep
-1740556389445[target-prep.js]: finished target prep
-1740556389602[pre-batcher.js]: done waiting for target prep
-1740556389602[pre-batcher.js]: global-pharm Hack time is 71406.05153616307 and Grow time is 228499.3649157218 and Weaken time is 285624.2061446523
-1740556389602[pre-batcher.js]: cores = 8
-1740556389602[pre-batcher.js]: hackThreads = 136
-1740556389602[pre-batcher.js]: growthThreads = 466
-1740556389602[pre-batcher.js]: hackSecurity = 0.272
-1740556389602[pre-batcher.js]: growSecurity = 1.864
-1740556389602[pre-batcher.js]: weakenAmount = 0.71875
-1740556389602[pre-batcher.js]: weaken1Threads = 10
-1740556389602[pre-batcher.js]: weaken2Threads = 30
-1740556389609[pre-batcher.js]: batchRam = 1116.7
-1740556389609[pre-batcher.js]: batches = 3755
+1740562199368[pre-batcher.js]: Batch successfully completed
+1740562199368[pre-batcher.js]: zeus-med Hack time is 52355.502358338344 and Grow time is 167537.6075466827 and Weaken time is 209422.00943335338
+1740562199368[pre-batcher.js]: cores = 8
+1740562199368[pre-batcher.js]: hackThreads = 70
+1740562199368[pre-batcher.js]: growthThreads = 367
+1740562199368[pre-batcher.js]: hackSecurity = 0.14
+1740562199368[pre-batcher.js]: growSecurity = 1.468
+1740562199368[pre-batcher.js]: weakenAmount = 0.71875
+1740562199368[pre-batcher.js]: weaken1Threads = 10
+1740562199368[pre-batcher.js]: weaken2Threads = 30
+1740562199368[pre-batcher.js]: batchRam = 831.25
+1740562199368[pre-batcher.js]: batches = 5045
