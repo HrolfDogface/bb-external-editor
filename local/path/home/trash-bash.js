@@ -7,30 +7,30 @@ export async function main(ns) {
 
   let neighbors = search(ns, "home");
 
-  neighbors = neighbors.sort(function (a, b) {  return b.level - a.level;  });
-  for (let i = 0; i < neighbors.length; i++){
+  neighbors = neighbors.sort(function (a, b) { return b.level - a.level; });
+  for (let i = 0; i < neighbors.length; i++) {
     ns.write("scan-all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
 
   }
-  neighbors = neighbors.sort(function (a, b) {  return b.money - a.money;  });
+  neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
 
-  ns.exec("pop.js", "home", 1, neighbors[0].hostName);  
+  ns.exec("pop.js", "home", 1, neighbors[0].hostName);
   await ns.sleep(2000);
   ns.exec("batch/pre-batcher.js", "home", 1, neighbors[0].hostName, "home");
   ns.write("scan-all.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
 
   let loopMax = 26;
-  if ( neighbors.length < 26){
+  if (neighbors.length < 26) {
     loopMax = neighbors.length;
   }
 
   let targets = [];
   targets.push(neighbors[0].hostName);
 
-  for (let i = 1; i < loopMax; i++){
+  for (let i = 1; i < loopMax; i++) {
     ns.write("scan-all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
     let hostname = "pserv-" + i;
-    if (!ns.serverExists(hostname)){
+    if (!ns.serverExists(hostname)) {
       hostname = ns.purchaseServer("pserv-" + i, ram);
     }
     ns.scp("batch/target-prep.js", hostname);
@@ -41,13 +41,13 @@ export async function main(ns) {
     ns.scp("batch/W-worker.js", hostname);
     ns.scp("batch/G-worker.js", hostname);
 
-    ns.exec("pop.js", "home", 1, neighbors[i].hostName);  
+    ns.exec("pop.js", "home", 1, neighbors[i].hostName);
     await ns.sleep(2000);
     ns.exec("batch/pre-batcher.js", hostname, 1, neighbors[i].hostName, hostname);
     targets.push(neighbors[i].hostName);
-  
+
   }
-  ns.exec("status-panel.js", "home", 1, ...targets);
+  ns.exec('status-panel.js', "home", 1, ...targets);
   //ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
 
 }
@@ -64,7 +64,7 @@ export function search(ns, hostName) {
   for (let i = 0; i < neighbor.length; i++) {
     let money = ns.getServerMaxMoney(neighbor[i]);
     let level = ns.getServerRequiredHackingLevel(neighbor[i]);
-    if ((level < 825)&&(level > 5)&&(money > 0)){
+    if ((level < 2000) && (level > 5) && (money > 0)) {
       //neighborRet.push(neighbor[i])
       neighborRet.push(new serverInfo(neighbor[i], money, level));
       //ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
@@ -76,7 +76,7 @@ export function search(ns, hostName) {
 
 class serverInfo {
 
-  constructor (hostName, money, level){
+  constructor(hostName, money, level) {
     this.hostName = hostName;
     this.money = money;
     this.level = level;
