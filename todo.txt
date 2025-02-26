@@ -1,6 +1,5 @@
 add max level parameter to trash-bash and scan-all
 change trash-bash to a different log file
-remove un-needd scripts
 test out typescript
 migrate to typescript
 refactor scripts
