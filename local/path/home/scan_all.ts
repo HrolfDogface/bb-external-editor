@@ -29,7 +29,9 @@ export async function main(ns: NS) {
 export function search(ns: NS, hostName: string, maxLevel: number) {
 
   const neighbor: string[] = ns.scan(hostName);
-  neighbor.splice(0, 1);
+  if(hostName != "home"){
+    neighbor.splice(0, 1);
+  }
   let neighborReturn: ServerInfo[] = [];
   for (let i: number = 0; i < neighbor.length; i++) {
     const money: number = ns.getServerMaxMoney(neighbor[i]);
