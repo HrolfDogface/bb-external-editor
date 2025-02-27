@@ -13,8 +13,8 @@ export async function main(ns) {
   //await ns.sleep(180000);
 
   //ns.exec("hack.js", "home", 45, "n00dles");
-  //ns.exec("controller-basic.js", "home", 1, "n00dles", 200, 1500, 20, "home");
-  ns.exec("controller-basic.js", "home", 1, "n00dles", 200, 1500, 20, "home");
+  //ns.exec("controller_basic.js", "home", 1, "n00dles", 200, 1500, 20, "home");
+  ns.exec("controller_basic.js", "home", 1, "n00dles", 200, 1500, 20, "home");
 
   //sleep 2 minutes
   ns.tprint("sleeping 2 minute")
@@ -53,8 +53,8 @@ export async function main(ns) {
   for (let i = 0; i < hostNames.length; i++){
     ns.exec("pop.js", "home", 1, hostNames[i]);
     await ns.sleep(2000);
-    //ns.exec("controller-basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
-    ns.exec("controller-basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
+    //ns.exec("controller_basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
+    ns.exec("controller_basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
   }
 
   /*while (ns.getHackingLevel() < 150){
@@ -67,7 +67,7 @@ export async function main(ns) {
   for (let i = 0; i < hostNames.length; i++){
     ns.exec("pop.js", "home", 1, hostNames[i]);
     await ns.sleep(2000);
-    ns.exec("controller-basic.js", "home", 1, hostNames[i], 179, 925, 45 );
+    ns.exec("controller_basic.js", "home", 1, hostNames[i], 179, 925, 45 );
   }*/
 
   ns.tprint("That death star is fully opperational!");

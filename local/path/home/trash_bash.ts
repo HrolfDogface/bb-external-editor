@@ -19,7 +19,7 @@ export async function main(ns: NS) {
 
   ns.exec("pop.js", "home", 1, neighbors[0].hostName);
   await ns.sleep(2000);
-  ns.exec("batch/pre-batcher.js", "home", 1, neighbors[0].hostName, "home");
+  ns.exec("batch/pre_batcher.js", "home", 1, neighbors[0].hostName, "home");
   ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
 
   let loopMax = 26;
@@ -36,17 +36,17 @@ export async function main(ns: NS) {
     if (!ns.serverExists(hostname)) {
       hostname = ns.purchaseServer("pserv-" + i, ram);
     }
-    ns.scp("batch/target-prep.js", hostname);
-    ns.scp("batch/pre-batcher.js", hostname);
+    ns.scp("batch/target_presp.js", hostname);
+    ns.scp("batch/pre_batcher.js", hostname);
     ns.scp("batch/money.js", hostname);
     ns.scp("batch/security.js", hostname);
-    ns.scp("batch/H-worker.js", hostname);
-    ns.scp("batch/W-worker.js", hostname);
-    ns.scp("batch/G-worker.js", hostname);
+    ns.scp("batch/H_worker.js", hostname);
+    ns.scp("batch/W_worker.js", hostname);
+    ns.scp("batch/G_worker.js", hostname);
 
     ns.exec("pop.js", "home", 1, neighbors[i].hostName);
     await ns.sleep(2000);
-    ns.exec("batch/pre-batcher.js", hostname, 1, neighbors[i].hostName, hostname);
+    ns.exec("batch/pre_batcher.js", hostname, 1, neighbors[i].hostName, hostname);
     targets.push(neighbors[i].hostName);
 
   }
