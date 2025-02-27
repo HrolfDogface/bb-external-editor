@@ -2,9 +2,7 @@
 export async function main(ns: NS) {
   //ns.args[0] = maxLevel
 
-  let maxLevel: number = Number(ns.args[0]);
-  const ram = 1024 * 1024;
-
+  const maxLevel: number = Number(ns.args[0]);
   ns.write("scan-all.txt", "starting full network scan\n", "w");
 
   let neighbors = search(ns, "home", maxLevel);
@@ -17,54 +15,10 @@ export async function main(ns: NS) {
   }
   neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
 
-  //let targets = [""];
-
   ns.write("scan-all.txt", "sorted by money\n", "a");
   for (let i = 0; i < neighbors.length; i++) {
     ns.write("scan-all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
-    //targets.push(neighbors[i].hostName);
   }
-  //targets.splice(0,1);
-  //targets = ["n00dles", "joesguns"];
-
-  //for (let i = 0; i < targets.length; i++){
-  //  ns.print(targets[i]);
-  //}
-  //ns.tail()
-  //ns.exec("status-panel.js", "home", 1, targets);
-
-  /*
-    ns.exec("pop.js", "home", 1, neighbors[0].hostName);  
-    await ns.sleep(2000);
-    ns.exec("batch/pre-batcher.js", "home", 1, neighbors[0].hostName, "home");
-    ns.write("scan-all.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
-  
-    let loopMax = 26;
-    if ( neighbors.length < 26){
-      loopMax = neighbors.length;
-    }
-  
-    for (let i = 1; i < loopMax; i++){
-      ns.write("scan-all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
-      let hostname = "pserv-" + i;
-      if (!ns.serverExists(hostname)){
-        hostname = ns.purchaseServer("pserv-" + i, ram);
-      }
-      ns.scp("batch/target-prep.js", hostname);
-      ns.scp("batch/pre-batcher.js", hostname);
-      ns.scp("batch/money.js", hostname);
-      ns.scp("batch/security.js", hostname);
-      ns.scp("batch/H-worker.js", hostname);
-      ns.scp("batch/W-worker.js", hostname);
-      ns.scp("batch/G-worker.js", hostname);
-  
-      ns.exec("pop.js", "home", 1, neighbors[i].hostName);  
-      await ns.sleep(2000);
-      ns.exec("batch/pre-batcher.js", hostname, 1, neighbors[i].hostName, hostname);
-  
-    }
-    */
-  //ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
 
 }
 
@@ -74,12 +28,12 @@ export async function main(ns: NS) {
  *  */
 export function search(ns: NS, hostName: string, maxLevel: number) {
 
-  let neighbor = ns.scan(hostName);
+  const neighbor = ns.scan(hostName);
   neighbor.splice(0, 1);
   let neighborRet = []; //neighbor.slice();
   for (let i = 0; i < neighbor.length; i++) {
-    let money = ns.getServerMaxMoney(neighbor[i]);
-    let level = ns.getServerRequiredHackingLevel(neighbor[i]);
+    const money = ns.getServerMaxMoney(neighbor[i]);
+    const level = ns.getServerRequiredHackingLevel(neighbor[i]);
     ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
     if (level < maxLevel) {
       //neighborRet.push(neighbor[i])
@@ -92,9 +46,9 @@ export function search(ns: NS, hostName: string, maxLevel: number) {
 
 class serverInfo {
 
-  hostName: String;
-  money: String;
-  level: String;
+  hostName: string;
+  money: string;
+  level: string;
 
   constructor(hostName, money, level) {
     this.hostName = hostName;

@@ -2,7 +2,7 @@
 export async function main(ns: NS) {
   //ns.args[0] = maxLevel
 
-  let maxLevel: number = Number(ns.args[0]);
+  const maxLevel: number = Number(ns.args[0]);
 
   const ram = 1024 * 1024;
 
@@ -27,7 +27,7 @@ export async function main(ns: NS) {
     loopMax = neighbors.length;
   }
 
-  let targets = [];
+  const targets = [];
   targets.push(neighbors[0].hostName);
 
   for (let i = 1; i < loopMax; i++) {
@@ -61,12 +61,12 @@ export async function main(ns: NS) {
  *  */
 export function search(ns: NS, hostName: string, maxLevel: number) {
 
-  let neighbor = ns.scan(hostName);
+  const neighbor = ns.scan(hostName);
   neighbor.splice(0, 1);
   let neighborRet = []; //neighbor.slice();
   for (let i = 0; i < neighbor.length; i++) {
-    let money = ns.getServerMaxMoney(neighbor[i]);
-    let level = ns.getServerRequiredHackingLevel(neighbor[i]);
+    const money = ns.getServerMaxMoney(neighbor[i]);
+    const level = ns.getServerRequiredHackingLevel(neighbor[i]);
     if ((level < maxLevel) && (level > 5) && (money > 0)) {
       //neighborRet.push(neighbor[i])
       neighborRet.push(new serverInfo(neighbor[i], money, level));
@@ -79,9 +79,9 @@ export function search(ns: NS, hostName: string, maxLevel: number) {
 
 class serverInfo {
 
-  hostName: String;
-  money: String;
-  level: String;
+  hostName: string;
+  money: string;
+  level: string;
 
   constructor(hostName, money, level) {
     this.hostName = hostName;
