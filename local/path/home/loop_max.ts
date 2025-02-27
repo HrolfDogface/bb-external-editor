@@ -24,9 +24,9 @@ export async function main(ns: NS) {
   
   const weakenThreadCount: number = Math.floor((freeRam - 5) * 0.17 / weakenRam);
     
-  const growThreadCount: number = Math.floor((freeRam - 5) * 0.77 / growRam);
+  const growThreadCount: number = Math.floor((freeRam - 5) * 0.78 / growRam);
     
-  const hackThreadCount: number = Math.floor((freeRam - 5) * 0.05 / hackRam);
+  const hackThreadCount: number = Math.floor((freeRam - 5) * 0.04 / hackRam);
 
   ns.exec("security.js", executingServer, weakenThreadCount, targetServer);
   while (ns.getServerSecurityLevel(targetServer) > (ns.getServerMinSecurityLevel(targetServer))){
