@@ -1,7 +1,6 @@
-add max level parameter to trash-bash and scan-all
-change trash-bash to a different log file
-debug and fix scan-all
-remove un-needd scripts
-test out typescript
+update scan_all output formatting
+add ls to scan_all output
+update controller basic to take all unused Ram - 5 GB
+optomize the batch server prep
 migrate to typescript
 refactor scripts

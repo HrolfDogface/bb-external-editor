@@ -6,7 +6,6 @@ export async function main(ns) {
   const red = "\u001b[31m";
   const white = "\u001b[37m";  
   const reset = "\u001b[0m";
-  const hostNames = ["n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net"]
 
   ns.disableLog('ALL');
   ns.clearLog();
