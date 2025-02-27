@@ -6,13 +6,13 @@ export async function main(ns: NS) {
 
   const ram = 1024 * 1024;
 
-  ns.write("scan-all.txt", "starting full network scan\n", "w");
+  ns.write("trash-log.txt", "starting full network scan\n", "w");
 
   let neighbors = search(ns, "home", maxLevel);
 
   neighbors = neighbors.sort(function (a, b) { return b.level - a.level; });
   for (let i = 0; i < neighbors.length; i++) {
-    ns.write("scan-all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
+    ns.write("trash-log.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
 
   }
   neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
@@ -20,7 +20,7 @@ export async function main(ns: NS) {
   ns.exec("pop.js", "home", 1, neighbors[0].hostName);
   await ns.sleep(2000);
   ns.exec("batch/pre-batcher.js", "home", 1, neighbors[0].hostName, "home");
-  ns.write("scan-all.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
+  ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
 
   let loopMax = 26;
   if (neighbors.length < 26) {
@@ -31,7 +31,7 @@ export async function main(ns: NS) {
   targets.push(neighbors[0].hostName);
 
   for (let i = 1; i < loopMax; i++) {
-    ns.write("scan-all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
+    ns.write("trash-log.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
     let hostname = "pserv-" + i;
     if (!ns.serverExists(hostname)) {
       hostname = ns.purchaseServer("pserv-" + i, ram);
@@ -51,7 +51,7 @@ export async function main(ns: NS) {
 
   }
   ns.exec('status-panel.js', "home", 1, ...targets);
-  //ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
+  //ns.write("trash-log.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
 
 }
 
@@ -70,7 +70,7 @@ export function search(ns: NS, hostName: string, maxLevel: number) {
     if ((level < maxLevel) && (level > 5) && (money > 0)) {
       //neighborRet.push(neighbor[i])
       neighborRet.push(new serverInfo(neighbor[i], money, level));
-      //ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
+      //ns.write("trash-log.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
     }
     neighborRet = neighborRet.concat(search(ns, neighbor[i], maxLevel));
   }
