@@ -23,10 +23,10 @@ export async function main(ns) {
     let prepGRam = ns.getScriptRam("batch/money.js", exHost);
     ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.js]: prepGRam = " + prepGRam + "GB\n", "a");
   
-    let prepWThreads = Math.floor((freeRam - prepRam - 2) * 0.2 / prepWRam);
+    let prepWThreads = Math.floor((freeRam - prepRam - 2) * 0.19 / prepWRam);
     ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.js]: prepWThreads = " + prepWThreads + "\n", "a");
     
-    let prepGThreads = Math.floor((freeRam - prepRam - 2) * 0.8 / prepGRam);
+    let prepGThreads = Math.floor((freeRam - prepRam - 2) * 0.79 / prepGRam);
     ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.js]: prepGThreads = " + prepGThreads + "\n", "a");
   
     
@@ -36,7 +36,7 @@ export async function main(ns) {
     ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.js]: " + targetHost + " max money is $"
             + maxMoney + " and min security is " + minSecurity + "\n", "a");
 
-    ns.exec("batch/target_presp.js", exHost, 1, targetHost, prepWThreads, prepGThreads, exHost);
+    ns.exec("batch/target_prep.js", exHost, 1, targetHost, prepWThreads, prepGThreads, exHost);
   
     ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.js]: waiting for target prep\n", "a");
     
