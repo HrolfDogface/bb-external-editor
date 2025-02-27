@@ -1,4 +1,3 @@
-update scan_all output formatting
 add ls to scan_all output
 update controller basic to take all unused Ram - 5 GB
 optomize the batch server prep

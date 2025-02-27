@@ -7,7 +7,7 @@ export async function main(ns: NS) {
 
   let neighbors: ServerInfo[] = search(ns, "home", maxLevel);
 
-  ns.write("scan_all.txt", "sorted by level\n", "a");
+  ns.write("scan_all.txt", "\nsorted by level\n\n", "a");
   neighbors = neighbors.sort(function (a, b) { return b.level - a.level; });
   for (let i: number = 0; i < neighbors.length; i++) {
     ns.write("scan_all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
@@ -15,7 +15,7 @@ export async function main(ns: NS) {
   }
   neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
 
-  ns.write("scan_all.txt", "sorted by money\n", "a");
+  ns.write("scan_all.txt", "\nsorted by money\n\n", "a");
   for (let i = 0; i < neighbors.length; i++) {
     ns.write("scan_all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
   }
