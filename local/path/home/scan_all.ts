@@ -5,11 +5,11 @@ export async function main(ns: NS) {
   const maxLevel: number = Number(ns.args[0]);
   ns.write("scan_all.txt", "starting full network scan\n", "w");
 
-  let neighbors = search(ns, "home", maxLevel);
+  let neighbors: ServerInfo[] = search(ns, "home", maxLevel);
 
   ns.write("scan_all.txt", "sorted by level\n", "a");
   neighbors = neighbors.sort(function (a, b) { return b.level - a.level; });
-  for (let i = 0; i < neighbors.length; i++) {
+  for (let i: number = 0; i < neighbors.length; i++) {
     ns.write("scan_all.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
 
   }
@@ -28,29 +28,28 @@ export async function main(ns: NS) {
  *  */
 export function search(ns: NS, hostName: string, maxLevel: number) {
 
-  const neighbor = ns.scan(hostName);
+  const neighbor: string[] = ns.scan(hostName);
   neighbor.splice(0, 1);
-  let neighborRet = []; //neighbor.slice();
-  for (let i = 0; i < neighbor.length; i++) {
-    const money = ns.getServerMaxMoney(neighbor[i]);
-    const level = ns.getServerRequiredHackingLevel(neighbor[i]);
+  let neighborReturn: ServerInfo[] = [];
+  for (let i: number = 0; i < neighbor.length; i++) {
+    const money: number = ns.getServerMaxMoney(neighbor[i]);
+    const level: number = ns.getServerRequiredHackingLevel(neighbor[i]);
     ns.write("scan_all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
     if (level < maxLevel) {
-      //neighborRet.push(neighbor[i])
-      neighborRet.push(new serverInfo(neighbor[i], money, level));
+      neighborReturn.push(new ServerInfo(neighbor[i], money, level));
     }
-    neighborRet = neighborRet.concat(search(ns, neighbor[i], maxLevel));
+    neighborReturn = neighborReturn.concat(search(ns, neighbor[i], maxLevel));
   }
-  return neighborRet;
+  return neighborReturn;
 }
 
-class serverInfo {
+class ServerInfo {
 
   hostName: string;
-  money: string;
-  level: string;
+  money: number;
+  level: number;
 
-  constructor(hostName, money, level) {
+  constructor(hostName: string, money: number, level: number) {
     this.hostName = hostName;
     this.money = money;
     this.level = level;
