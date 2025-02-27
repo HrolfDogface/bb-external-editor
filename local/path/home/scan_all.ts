@@ -34,7 +34,8 @@ export function search(ns: NS, hostName: string, maxLevel: number) {
   for (let i: number = 0; i < neighbor.length; i++) {
     const money: number = ns.getServerMaxMoney(neighbor[i]);
     const level: number = ns.getServerRequiredHackingLevel(neighbor[i]);
-    ns.write("scan_all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
+    const files: string[] = ns.ls(neighbor[i]);
+    ns.write("scan_all.txt", neighbor[i] + " " + money + " " + level + " " + files.join(" ") + "\n", "a");
     if (level < maxLevel) {
       neighborReturn.push(new ServerInfo(neighbor[i], money, level));
     }
