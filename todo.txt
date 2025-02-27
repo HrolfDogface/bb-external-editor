@@ -1,5 +1,3 @@
-add max level parameter to trash-bash and scan-all
 change trash-bash to a different log file
-test out typescript
 migrate to typescript
 refactor scripts
