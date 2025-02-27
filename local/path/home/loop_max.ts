@@ -11,7 +11,10 @@ export async function main(ns: NS) {
   ns.kill("money.js", executingServer, targetServer);
   ns.kill("hack.js", executingServer, targetServer);
 
-  const freeRam = ns.getServerMaxRam(executingServer) - ns.getServerUsedRam(executingServer);
+  let freeRam = ns.getServerMaxRam(executingServer) - ns.getServerUsedRam(executingServer);
+  if (freeRam > 2028){
+    freeRam = 2028;
+  }  
   
   const weakenRam = ns.getScriptRam("security.js", executingServer);
   

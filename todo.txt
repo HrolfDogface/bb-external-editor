@@ -1,5 +1,5 @@
-add ls to scan_all output
-update controller basic to take all unused Ram - 5 GB
+migrate pre-batcher to typescript
 optomize the batch server prep
-migrate to typescript
+read cores in pre-batcher
+migrate all to typescript
 refactor scripts
