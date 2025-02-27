@@ -1,3 +1,2 @@
-change trash-bash to a different log file
 migrate to typescript
 refactor scripts
