@@ -1,11 +1,13 @@
 /** @param {NS} ns */
 export async function main(ns: NS) {
+  //ns.args[0] = maxLevel
 
+  let maxLevel: number = Number(ns.args[0]);
   const ram = 1024 * 1024;
 
   ns.write("scan-all.txt", "starting full network scan\n", "w");
 
-  let neighbors = search(ns, "home");
+  let neighbors = search(ns, "home", maxLevel);
 
   ns.write("scan-all.txt", "sorted by level\n", "a");
   neighbors = neighbors.sort(function (a, b) { return b.level - a.level; });
@@ -70,7 +72,7 @@ export async function main(ns: NS) {
  * @param {NS} ns
  * @param {String} hostName
  *  */
-export function search(ns: NS, hostName) {
+export function search(ns: NS, hostName: string, maxLevel: number) {
 
   let neighbor = ns.scan(hostName);
   neighbor.splice(0, 1);
@@ -79,11 +81,11 @@ export function search(ns: NS, hostName) {
     let money = ns.getServerMaxMoney(neighbor[i]);
     let level = ns.getServerRequiredHackingLevel(neighbor[i]);
     ns.write("scan-all.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
-    if ((level < 25000)) {
+    if (level < maxLevel) {
       //neighborRet.push(neighbor[i])
       neighborRet.push(new serverInfo(neighbor[i], money, level));
     }
-    neighborRet = neighborRet.concat(search(ns, neighbor[i]));
+    neighborRet = neighborRet.concat(search(ns, neighbor[i], maxLevel));
   }
   return neighborRet;
 }
