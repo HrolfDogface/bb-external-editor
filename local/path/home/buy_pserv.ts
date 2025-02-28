@@ -9,6 +9,6 @@ export async function main(ns: NS) {
         ramCost = ns.getPurchasedServerCost(maxRam)
     }
 
-    ns.tprintf("purchased %s with %fGB of ram.",ns.purchaseServer("pserv-", maxRam), maxRam);
+    ns.tprintf("purchased %s with %fGB of ram.",ns.purchaseServer("pserv", maxRam), maxRam);
 
 }
