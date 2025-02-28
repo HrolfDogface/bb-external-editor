@@ -1,6 +1,9 @@
+scan all number formatting easier to read: eg. 2.3B 4.5M 257K
+allow trashbash to automatically calculate a good pserv loadout for however much money is available(start with blocks of 50B for max server size)
 migrate pre-batcher to typescript
 optomize the batch server prep
 read cores in pre-batcher
 add network path to scan_all reporting
+add timers to status panel? At least for server prep
 migrate all to typescript
 refactor scripts
