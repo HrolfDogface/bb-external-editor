@@ -2,6 +2,11 @@ fix trashbash to handle and use already purchased servers
 migrate pre-batcher to typescript
 optomize the batch server prep
 read cores in pre-batcher
+write script for early game to purchase servers and run max_loops on them against the best target
+    automatically select new targets and run server prep on them from home and change pservs targets when ready
+    use ports to set all the targets without killing scripts
+    automatically buy new bigger servers and run max loops on them
+    automatically upgrade servers and restart max loop on them
 scan all number formatting easier to read: eg. 2.3B 4.5M 257K
 add network path to scan_all reporting
 add timers to status panel? At least for server prep
@@ -9,4 +14,5 @@ migrate all to typescript
 do contracts!
 refactor scripts
 do BN4.1
+do JIT batcher
 
