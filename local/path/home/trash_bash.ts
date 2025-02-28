@@ -2,8 +2,8 @@ export async function main(ns: NS) {
   //ns.args[0] = maxLevel
 
   const maxLevel: number = Number(ns.args[0]);
-
-  const ram = 1024 * 1024;
+  let maxRam: number = ns.getPurchasedServerMaxRam();
+  let ramCost: number = ns.getPurchasedServerCost(maxRam);
 
   ns.write("trash-log.txt", "starting full network scan\n", "w");
 
@@ -16,24 +16,52 @@ export async function main(ns: NS) {
   }
   neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
 
-  ns.exec("pop.js", "home", 1, neighbors[0].hostName);
-  await ns.sleep(2000);
-  ns.exec("batch/pre_batcher.js", "home", 1, neighbors[0].hostName, "home");
-  ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
+  let serverCount: number = 0;
+  const currentMoney = ns.getServerMoneyAvailable("home");
 
-  let loopMax = 26;
-  if (neighbors.length < 26) {
+  while(currentMoney < ramCost){
+    maxRam = maxRam / 2;
+    if(maxRam < 2048){
+      maxRam = 2048;      
+      ramCost = ns.getPurchasedServerCost(maxRam)
+      break;
+    }
+    ramCost = ns.getPurchasedServerCost(maxRam)
+  }
+
+  if (currentMoney >= ramCost){
+    serverCount = Math.floor(currentMoney/ramCost);
+  }
+  
+  const targets = [];
+  let count: number = 0
+  if((maxRam <= ns.getServerMaxRam("home"))||(serverCount == 0)){
+    count = 1;
+    ns.exec("pop.js", "home", 1, neighbors[0].hostName);
+    await ns.sleep(2000);
+    ns.exec("batch/pre_batcher.js", "home", 1, neighbors[0].hostName, "home");
+    ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
+    targets.push(neighbors[0].hostName);
+  }
+
+  const maxServers: number = ns.getPurchasedServerLimit();
+
+  if(serverCount > maxServers){
+    serverCount = maxServers;
+  }
+
+  let loopMax = serverCount + count;
+  if (neighbors.length < loopMax) {
     loopMax = neighbors.length;
   }
 
-  const targets = [];
-  targets.push(neighbors[0].hostName);
+ 
 
-  for (let i = 1; i < loopMax; i++) {
-    ns.write("trash-log.txt", neighbors[i].hostName + " " + neighbors[i].money + " " + neighbors[i].level + "\n", "a");
-    let hostname = "pserv-" + i;
+  for (; count < loopMax; count++) {
+    ns.write("trash-log.txt", neighbors[count].hostName + " " + neighbors[count].money + " " + neighbors[count].level + "\n", "a");
+    let hostname = "pserv-" + count;
     if (!ns.serverExists(hostname)) {
-      hostname = ns.purchaseServer("pserv-" + i, ram);
+      hostname = ns.purchaseServer("pserv-" + count, maxRam);
     }
     ns.scp("batch/target_prep.js", hostname);
     ns.scp("batch/pre_batcher.js", hostname);
@@ -43,10 +71,10 @@ export async function main(ns: NS) {
     ns.scp("batch/W_worker.js", hostname);
     ns.scp("batch/G_worker.js", hostname);
 
-    ns.exec("pop.js", "home", 1, neighbors[i].hostName);
+    ns.exec("pop.js", "home", 1, neighbors[count].hostName);
     await ns.sleep(2000);
-    ns.exec("batch/pre_batcher.js", hostname, 1, neighbors[i].hostName, hostname);
-    targets.push(neighbors[i].hostName);
+    ns.exec("batch/pre_batcher.js", hostname, 1, neighbors[count].hostName, hostname);
+    targets.push(neighbors[count].hostName);
 
   }
   ns.exec('status_panel.js', "home", 1, ...targets);
