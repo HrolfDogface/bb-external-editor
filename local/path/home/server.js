@@ -9,15 +9,15 @@ export async function main(ns) {
 
   ns.tprintf(`%dGB server costs $%d`, ram, cost);
   
-  ns.deleteServer("pserv-1");
-  ns.deleteServer("pserv-2");
-  ns.deleteServer("pserv-3");
-  ns.deleteServer("pserv-4");
-  ns.deleteServer("pserv-5");
-  ns.deleteServer("pserv-6");
-  ns.deleteServer("pserv-7");
-  ns.deleteServer("pserv-8");
-  ns.deleteServer("pserv-9");
+  //ns.deleteServer("pserv-1");
+  //ns.deleteServer("pserv-2");
+  //ns.deleteServer("pserv-3");
+  //ns.deleteServer("pserv-4");
+  //ns.deleteServer("pserv-5");
+  //ns.deleteServer("pserv-6");
+  //ns.deleteServer("pserv-7");
+  //ns.deleteServer("pserv-8");
+  //ns.deleteServer("pserv-9");
   
  /*
   let hostname = ns.purchaseServer("pserv-" + ns.args[0], ram);
