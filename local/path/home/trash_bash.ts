@@ -36,7 +36,7 @@ export async function main(ns: NS) {
     if (!ns.serverExists(hostname)) {
       hostname = ns.purchaseServer("pserv-" + i, ram);
     }
-    ns.scp("batch/target_presp.js", hostname);
+    ns.scp("batch/target_prep.js", hostname);
     ns.scp("batch/pre_batcher.js", hostname);
     ns.scp("batch/money.js", hostname);
     ns.scp("batch/security.js", hostname);
@@ -50,7 +50,7 @@ export async function main(ns: NS) {
     targets.push(neighbors[i].hostName);
 
   }
-  ns.exec('status-panel.js', "home", 1, ...targets);
+  ns.exec('status_panel.js', "home", 1, ...targets);
   //ns.write("trash-log.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
 
 }
