@@ -1,4 +1,3 @@
-/** @param {NS} ns */
 export async function main(ns: NS) {
   //ns.args[0] = maxLevel
 
@@ -22,10 +21,6 @@ export async function main(ns: NS) {
 
 }
 
-/** 
- * @param {NS} ns
- * @param {String} hostName
- *  */
 export function search(ns: NS, hostName: string, maxLevel: number) {
 
   const neighbor: string[] = ns.scan(hostName);

@@ -1,4 +1,3 @@
-/** @param {NS} ns */
 export async function main(ns: NS) {
 
   //args[0]:executing host name
