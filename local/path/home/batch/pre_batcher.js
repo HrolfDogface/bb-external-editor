@@ -73,7 +73,7 @@ export async function main(ns) {
 
       let cores = 1;
       if (exHost == "home"){
-        cores = 7;
+        cores = 8;
       }
       ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.js]: cores = " + cores + "\n", "a"); 
       let weakenAmount = ns.weakenAnalyze(10, cores);

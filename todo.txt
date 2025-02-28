@@ -2,6 +2,7 @@ fix trashbash to handle and use already purchased servers
 migrate pre-batcher to typescript
 optomize the batch server prep
 read cores in pre-batcher
+create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.
 write script for early game to purchase servers and run max_loops on them against the best target
     automatically select new targets and run server prep on them from home and change pservs targets when ready
     use ports to set all the targets without killing scripts
