@@ -69,10 +69,8 @@ export async function main(ns: NS) {
       const hackSecurity: number = ns.hackAnalyzeSecurity(hackThreads, targetHost);
       const growSecurity: number = growthThreads * 0.004;
 
-      let cores: number = 1;
-      if (exHost == "home"){
-        cores = 7;
-      }
+      const cores: number = ns.getServer(exHost).cpuCores;
+
       ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: cores = " + cores + "\n", "a"); 
       const weakenAmount: number = ns.weakenAnalyze(10, cores);
 
