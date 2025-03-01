@@ -17,7 +17,7 @@ export async function main(ns: NS) {
   neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
 
   let serverCount: number = 0;
-  const currentMoney = ns.getServerMoneyAvailable("home");
+  const currentMoney: number = ns.getServerMoneyAvailable("home");
 
   while(currentMoney < ramCost){
     maxRam = maxRam / 2;
