@@ -61,7 +61,9 @@ export async function main(ns: NS) {
     ns.write("trash-log.txt", neighbors[count].hostName + " " + neighbors[count].money + " " + neighbors[count].level + "\n", "a");
     let hostname = "pserv-" + (count - countStart);
     if (!ns.serverExists(hostname)) {
-      hostname = ns.purchaseServer("pserv-" + count, maxRam);
+      hostname = ns.purchaseServer("pserv-" + (count - countStart), maxRam);
+    }else if(ns.getServerMaxRam(hostname) < maxRam){
+        ns.upgradePurchasedServer(hostname, maxRam);
     }
     ns.scp("batch/target_prep.js", hostname);
     ns.scp("batch/pre_batcher.js", hostname);
