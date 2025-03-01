@@ -1,7 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-  //const ram = 1024;
+  //const ram = 1024 * 1024;
   const ram = 1024 * 1024;//ns.getPurchasedServerMaxRam();
   
   
