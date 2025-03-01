@@ -1,5 +1,4 @@
-/** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: NS) {
 
   ns.exec("pop.js", "home", 1, "n00dles");
   await ns.sleep(10000);
@@ -45,7 +44,7 @@ export async function main(ns) {
   ns.kill("hack.js", "home", "n00dles");
 
   
-  let hostNames = ["sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", 
+  const hostNames = ["sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", 
                   "harakiri-sushi", "iron-gym", "phantasy", "silver-helix", 
                   "foodnstuff", "zer0"/*, "crush-fitness", "max-hardware", "neo-net", 
                   "omega-net"*/];
