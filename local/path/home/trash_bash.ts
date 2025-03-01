@@ -56,10 +56,10 @@ export async function main(ns: NS) {
   }
 
  
-
+  const countStart = count
   for (; count < loopMax; count++) {
     ns.write("trash-log.txt", neighbors[count].hostName + " " + neighbors[count].money + " " + neighbors[count].level + "\n", "a");
-    let hostname = "pserv-" + count;
+    let hostname = "pserv-" + (count - countStart);
     if (!ns.serverExists(hostname)) {
       hostname = ns.purchaseServer("pserv-" + count, maxRam);
     }
