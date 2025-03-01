@@ -11,27 +11,25 @@ export async function main(ns) {
     ns.kill("security.js", ns.args[3], ns.args[0]);
     ns.kill("money.js", ns.args[3], ns.args[0]);
     ns.kill("hack.js", ns.args[3], ns.args[0]);
-
-    ns.kill("batch/security.js", ns.args[3], ns.args[0]);
-    ns.kill("batch/money.js", ns.args[3], ns.args[0]);
-    ns.kill("batch/hack.js", ns.args[3], ns.args[0]);
   
-    ns.exec("batch/security.js", ns.args[3], ns.args[1], ns.args[0]);
+    ns.exec("security.js", ns.args[3], ns.args[1] + ns.args[2], ns.args[0]);
     while (ns.getServerSecurityLevel(ns.args[0]) > (ns.getServerMinSecurityLevel(ns.args[0]))){
       await ns.sleep(100);
     }
+    ns.kill("security.js", ns.args[3], ns.args[0]);
+    ns.exec("security.js", ns.args[3], ns.args[1], ns.args[0]);
   
-    ns.exec("batch/money.js", ns.args[3], ns.args[2], ns.args[0]);
+    ns.exec("money.js", ns.args[3], ns.args[2], ns.args[0]);
     while (ns.getServerMoneyAvailable(ns.args[0]) < (ns.getServerMaxMoney(ns.args[0]))){
       await ns.sleep(100);
     }
-    ns.kill("batch/money.js", ns.args[3], ns.args[0]);
+    ns.kill("money.js", ns.args[3], ns.args[0]);
   
     
     while (ns.getServerSecurityLevel(ns.args[0]) > (ns.getServerMinSecurityLevel(ns.args[0]))){
       await ns.sleep(100);
     }  
-    ns.kill("batch/security.js", ns.args[3], ns.args[0]);
+    ns.kill("security.js", ns.args[3], ns.args[0]);
   
     ns.write("batch/batchLog.txt", Date.now() + "[target_presp.js]: finished target prep\n", "a");
   

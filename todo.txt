@@ -1,4 +1,3 @@
-migrate pre-batcher to typescript
 optomize the batch server prep
 read cores in pre-batcher
 create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.

@@ -39,7 +39,7 @@ export async function main(ns: NS) {
     count = 1;
     ns.exec("pop.js", "home", 1, neighbors[0].hostName);
     await ns.sleep(2000);
-    ns.exec("batch/pre_batcher.js", "home", 1, neighbors[0].hostName, "home");
+    ns.exec("batch/pre_batcher.ts", "home", 1, "home", neighbors[0].hostName);
     ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
     targets.push(neighbors[0].hostName);
   }
@@ -65,17 +65,17 @@ export async function main(ns: NS) {
     }else if(ns.getServerMaxRam(hostname) < maxRam){
         ns.upgradePurchasedServer(hostname, maxRam);
     }
-    ns.scp("batch/target_prep.js", hostname);
-    ns.scp("batch/pre_batcher.js", hostname);
-    ns.scp("batch/money.js", hostname);
-    ns.scp("batch/security.js", hostname);
+    ns.scp("target_prep.js", hostname);
+    ns.scp("batch/pre_batcher.ts", hostname);
+    ns.scp("money.js", hostname);
+    ns.scp("security.js", hostname);
     ns.scp("batch/H_worker.js", hostname);
     ns.scp("batch/W_worker.js", hostname);
     ns.scp("batch/G_worker.js", hostname);
 
     ns.exec("pop.js", "home", 1, neighbors[count].hostName);
     await ns.sleep(2000);
-    ns.exec("batch/pre_batcher.js", hostname, 1, neighbors[count].hostName, hostname);
+    ns.exec("batch/pre_batcher.ts", hostname, 1, hostname, neighbors[count].hostName);
     targets.push(neighbors[count].hostName);
 
   }
@@ -94,7 +94,7 @@ export function search(ns: NS, hostName: string, maxLevel: number) {
   for (let i = 0; i < neighbor.length; i++) {
     const money = ns.getServerMaxMoney(neighbor[i]);
     const level = ns.getServerRequiredHackingLevel(neighbor[i]);
-    if ((level < maxLevel) && (level > 5) && (money > 0)) {
+    if ((level <= maxLevel) && (level > 5) && (money > 0)) {
       //neighborRet.push(neighbor[i])
       neighborRet.push(new serverInfo(neighbor[i], money, level));
       //ns.write("trash-log.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
