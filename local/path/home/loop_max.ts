@@ -21,15 +21,22 @@ export async function main(ns: NS) {
   
   const hackRam = ns.getScriptRam("hack.js", executingServer);
   
-  const weakenThreadCount: number = Math.floor((freeRam - 5) * 0.17 / weakenRam);
+  const weakenThreadCount: number = Math.floor((freeRam - 2) * 0.17 / weakenRam);
     
-  const growThreadCount: number = Math.floor((freeRam - 5) * 0.78 / growRam);
+  const growThreadCount: number = Math.floor((freeRam - 2) * 0.78 / growRam);
     
-  const hackThreadCount: number = Math.floor((freeRam - 5) * 0.04 / hackRam);
+  let hackThreadCount: number = Math.floor((freeRam - 2) * 0.04 / hackRam);
+
+  if (hackThreadCount < 1) {
+    hackThreadCount = 1;
+  }
 
   ns.exec("target_prep.js", executingServer, 1, targetServer, weakenThreadCount, growThreadCount, executingServer);
 
+  await ns.sleep(5000);
+
   ns.exec("security.js", executingServer, weakenThreadCount, targetServer);
+
   while (ns.getServerSecurityLevel(targetServer) > (ns.getServerMinSecurityLevel(targetServer))){
     await ns.sleep(10000);
   }
@@ -38,7 +45,6 @@ export async function main(ns: NS) {
   while (ns.getServerMoneyAvailable(targetServer) < (ns.getServerMaxMoney(targetServer))){
     await ns.sleep(10000);
   }
-
 
   ns.exec("hack.js", executingServer, hackThreadCount, targetServer);
 

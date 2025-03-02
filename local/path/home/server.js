@@ -5,7 +5,7 @@ export async function main(ns) {
   const ram = 1024 * 1024;//ns.getPurchasedServerMaxRam();
   
   
-  let cost = ns.getPurchasedServerCost(ram);
+  let cost = ns.getPurchasedServerCost(256);
 
   ns.tprintf(`%dGB server costs $%d`, ram, cost);
   
