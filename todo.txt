@@ -1,16 +1,13 @@
 have pop chec if it can pop enough ports and send out a cry for help if not
+have status panel use ports and be able to add and remove servers
 create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.
-write script for early game to purchase servers and run max_loops on them against the best target
-    automatically select new targets and run server prep on them from home and change pservs targets when ready
-    use ports to set all the targets without killing scripts
-    automatically buy new bigger servers and run max loops on them
-    automatically upgrade servers and restart max loop on them
 scan all number formatting easier to read: eg. 2.3B 4.5M 257K
 add network path to scan_all reporting
 add timers to status panel? At least for server prep
 migrate all to typescript
 do contracts!
 refactor scripts
+do ports
 do BN4.1
 do JIT batcher
 

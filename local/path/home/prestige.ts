@@ -7,7 +7,7 @@ export async function main(ns: NS) {
 
 
   let currentMoney: number = 0;
-  let serverCost: number = ns.getPurchasedServerCost(64);
+  let serverCost: number = ns.getPurchasedServerCost(256);
   while( currentMoney < serverCost){
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
@@ -23,7 +23,7 @@ export async function main(ns: NS) {
   let hostname: string;
 
   while (true){
-    let level: number = ns.getHackingLevel() / 2;
+    let level: number = ns.getHackingLevel() / 3;
     let ramCost: number = ns.getPurchasedServerCost(maxRam);
 
     if (level < 5){
@@ -81,7 +81,7 @@ export async function main(ns: NS) {
         if(maxRam != maxMaxRam){
           break;
         } else {
-          if(ns.getHackingLevel() > level * 3){
+          if(ns.getHackingLevel() > level * 4.5){
             break;        
           }
         }
