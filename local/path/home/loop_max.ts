@@ -33,19 +33,21 @@ export async function main(ns: NS) {
 
   ns.exec("target_prep.js", executingServer, 1, targetServer, weakenThreadCount, growThreadCount, executingServer);
 
-  await ns.sleep(5000);
+  const maxMoney = ns.getServerMaxMoney(targetServer);
+  const minSecurity = ns.getServerMinSecurityLevel(targetServer);
 
+  while (ns.getServerMoneyAvailable(targetServer) < maxMoney){
+    await ns.sleep(100);
+  }
+
+  while (ns.getServerSecurityLevel(targetServer) > minSecurity){
+    await ns.sleep(100);
+  }  
+
+  await ns.sleep(1000);
+  
   ns.exec("security.js", executingServer, weakenThreadCount, targetServer);
-
-  while (ns.getServerSecurityLevel(targetServer) > (ns.getServerMinSecurityLevel(targetServer))){
-    await ns.sleep(10000);
-  }
-
   ns.exec("money.js", executingServer, growThreadCount, targetServer);
-  while (ns.getServerMoneyAvailable(targetServer) < (ns.getServerMaxMoney(targetServer))){
-    await ns.sleep(10000);
-  }
-
   ns.exec("hack.js", executingServer, hackThreadCount, targetServer);
 
 }
