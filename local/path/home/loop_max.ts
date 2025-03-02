@@ -23,9 +23,9 @@ export async function main(ns: NS) {
   
   const weakenThreadCount: number = Math.floor((freeRam - 2) * 0.17 / weakenRam);
     
-  const growThreadCount: number = Math.floor((freeRam - 2) * 0.78 / growRam);
+  const growThreadCount: number = Math.floor((freeRam - 2) * 0.79 / growRam);
     
-  let hackThreadCount: number = Math.floor((freeRam - 2) * 0.04 / hackRam);
+  let hackThreadCount: number = Math.floor((freeRam - 2) * 0.03 / hackRam);
 
   if (hackThreadCount < 1) {
     hackThreadCount = 1;
@@ -45,7 +45,7 @@ export async function main(ns: NS) {
   }  
 
   await ns.sleep(1000);
-  
+
   ns.exec("security.js", executingServer, weakenThreadCount, targetServer);
   ns.exec("money.js", executingServer, growThreadCount, targetServer);
   ns.exec("hack.js", executingServer, hackThreadCount, targetServer);
