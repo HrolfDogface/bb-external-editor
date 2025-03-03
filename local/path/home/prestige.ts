@@ -5,6 +5,14 @@ export async function main(ns: NS) {
 
   //ns.exec("loop_max.ts", "home", 1, "home", "n00dles");
 
+  const universityTargetLevel: number = 20;
+  ns.exec("university.ts", "home", 1, universityTargetLevel);
+  while (ns.getHackingLevel() < universityTargetLevel){
+    await ns.sleep(10000);
+  }
+
+  const crime: string = "Mug";
+  ns.exec("gym_crime.ts", "home", 1, crime);
 
   let currentMoney: number = 0;
   let serverCost: number = ns.getPurchasedServerCost(256);
