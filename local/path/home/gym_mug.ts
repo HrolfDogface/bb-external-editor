@@ -1,8 +1,10 @@
-export async function main(ns: NS, crime: string) {
+export async function main(ns: NS) {
 
-    
-    while(ns.singularity.getCrimeChance(ns.enums.CrimeType[crime]) < 100)
+    //const crimeVar: CrimeType = ns.enums.CrimeType[crime];
+
+    while(ns.singularity.getCrimeChance("Mug") < 1)
     {        
+        ns.print("Chance to mug: " + ns.singularity.getCrimeChance("Mug") );
         ns.singularity.gymWorkout(ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.agility);
         await ns.sleep(60000);     
         ns.singularity.gymWorkout(ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.defense);
@@ -13,6 +15,6 @@ export async function main(ns: NS, crime: string) {
         await ns.sleep(60000);
     }
 
-    ns.singularity.commitCrime(ns.enums.CrimeType[crime])
+    ns.singularity.commitCrime("Mug")
 
 }

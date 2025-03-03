@@ -11,8 +11,8 @@ export async function main(ns: NS) {
     await ns.sleep(10000);
   }
 
-  const crime: string = "Mug";
-  ns.exec("gym_crime.ts", "home", 1, crime);
+  //const crime: string = "Mug";
+  ns.exec("gym_mug.ts", "home", 1);
 
   let currentMoney: number = 0;
   let serverCost: number = ns.getPurchasedServerCost(256);
