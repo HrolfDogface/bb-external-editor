@@ -55,7 +55,7 @@ export async function main(ns: NS) {
     ns.exec("trash_bash.ts", "home", 1, level/2);
 
     while (true){
-      if (ns.getHackingLevel() > level * 1.5){
+      if (ns.getHackingLevel() > level * 1.25){
         break;
       }
       await ns.sleep(10000);

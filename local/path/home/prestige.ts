@@ -21,13 +21,13 @@ export async function main(ns: NS) {
   let maxRam: number = ns.getPurchasedServerMaxRam();
   const maxMaxRam: number = maxRam;
   let hostname: string;
-
+  let previousTarget: string = "";
   while (true){
     let level: number = ns.getHackingLevel() / 3;
     let ramCost: number = ns.getPurchasedServerCost(maxRam);
 
-    if (level < 5){
-      level = 5;
+    if (level < 10){
+      level = 10;
     }
     
     if(firstLoop){
@@ -51,7 +51,14 @@ export async function main(ns: NS) {
 
     let neighbors = search(ns, "home", level);
     neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
-    const target: string = neighbors[0].hostName;
+    let target: string;
+    if (neighbors[0].hostName != previousTarget)
+    {
+      target = neighbors[0].hostName;
+      previousTarget = target;
+    } else {
+      target = neighbors[1].hostName;
+    }
 
     //need to add port check to pop
     ns.exec("pop.js", "home", 1, target);
@@ -68,7 +75,7 @@ export async function main(ns: NS) {
     {
       break;
     }
-    
+
     maxRam = maxRam * 4;
     if (maxRam > maxMaxRam){
       maxRam = maxMaxRam;
