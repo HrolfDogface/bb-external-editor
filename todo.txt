@@ -1,21 +1,16 @@
-
-write univ training script and add to prestige scripts
-write combat training script and add to prestige scripts
-write start crime script and add to prestige scripts
-allow status panel to have targets added and removed via ports
-read through every function in the documentation again
-script to buy onion router and .exe's
+script to buy onion router and .exe's in pop if needed and return true or false so scripts can loop on pop until it completes
 create script to run max share threads on a server
-update pop to find path to the server and then backdoor it
+add sharing home into prestige and prestige_trash
+update pop_all to find path to the server and then backdoor it
 join factions scripts
 upgrading ram and cores
-Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
 Working for factions and switching between them
-Working for companies, training CHA to qualify for promotions, accepting promotions, and joining the company faction once it's available
-add sharing home into prestige and prestige_trash
+Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
 restart (install augments after buying)
 script to figure out when to restart
-have pop chec if it can pop enough ports and send out a cry for help if not
+
+read through every function in the documentation again
+Working for companies, training CHA to qualify for promotions, accepting promotions, and joining the company faction once it's available
 have status panel use ports and be able to add and remove servers
 create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.
 scan all number formatting easier to read: eg. 2.3B 4.5M 257K
