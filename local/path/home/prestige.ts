@@ -27,7 +27,7 @@ export async function main(ns: NS) {
   ns.exec("loop_max.ts", "home", 1, "home", startingTarget);
 
   let currentMoney: number = 0;
-  let serverCost: number = ns.getPurchasedServerCost(256);
+  let serverCost: number = ns.getPurchasedServerCost(128);
   while( currentMoney < serverCost){
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
@@ -78,6 +78,7 @@ export async function main(ns: NS) {
       previousTarget = target;
     } else {
       target = neighbors[1].hostName;
+      previousTarget = target;
     }
 
     //need to add port check to pop
