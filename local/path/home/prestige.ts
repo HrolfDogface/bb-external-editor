@@ -84,7 +84,7 @@ export async function main(ns: NS) {
       ns.exec("batch/pre_batcher.ts", hostname, 1, hostname, target);
     }
 
-    ns.exec('status_panel.js', "home", 1, target);
+    ns.exec('status_panel.ts', "home", 1, target);
 
     if (ns.getPurchasedServers().length >= ns.getPurchasedServerLimit() )
     {
@@ -116,7 +116,7 @@ export async function main(ns: NS) {
       await ns.sleep(10000);
     }
 
-    //ns.kill('status_panel.js', "home", target);
+    //ns.kill('status_panel.ts', "home", target);
   }
 
   //while (!ns.hasTorRouter()){

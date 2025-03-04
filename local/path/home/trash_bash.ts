@@ -79,7 +79,7 @@ export async function main(ns: NS) {
     targets.push(neighbors[count].hostName);
 
   }
-  ns.exec('status_panel.js', "home", 1, ...targets);
+  ns.exec('status_panel.ts', "home", 1, ...targets);
   //ns.write("trash-log.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
 
 }
