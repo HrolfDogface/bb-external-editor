@@ -43,7 +43,7 @@ export async function main(ns: NS) {
   let hostname: string;
   let previousTarget: string = "";
   while (true){
-    let level: number = ns.getHackingLevel() / 3;
+    let level: number = ns.getHackingLevel() / 2;
     let ramCost: number = ns.getPurchasedServerCost(maxRam);
 
     if (level < 10){
@@ -99,7 +99,7 @@ export async function main(ns: NS) {
       break;
     }
 
-    maxRam = maxRam * 4;
+    maxRam = maxRam * 2;
     if (maxRam > maxMaxRam){
       maxRam = maxMaxRam;
     }
@@ -111,7 +111,7 @@ export async function main(ns: NS) {
         if(maxRam != maxMaxRam){
           break;
         } else {
-          if(ns.getHackingLevel() > level * 4.5){
+          if(ns.getHackingLevel() > level * 1.5){
             break;        
           }
         }
