@@ -1,6 +1,8 @@
+import { pop } from "./pop"
+
 export async function main(ns: NS) {
 
-  //ns.exec("pop.js", "home", 1, "n00dles");
+  //ns.exec("pop.ts", "home", 1, "n00dles");
   //await ns.sleep(10000);
 
   //ns.exec("loop_max.ts", "home", 1, "home", "n00dles");
@@ -17,7 +19,10 @@ export async function main(ns: NS) {
   let startingTargets = search(ns, "home", 40);
   startingTargets = startingTargets.sort(function (a, b) { return b.money - a.money; });
   const startingTarget: string = startingTargets[0].hostName;
-  ns.exec("pop.js", "home", 1, startingTarget);
+  //ns.exec("pop.ts", "home", 1, startingTarget);
+  while(!pop(ns, startingTarget)){    
+  await ns.sleep(15000);
+  }
   await ns.sleep(2000);
   ns.exec("loop_max.ts", "home", 1, "home", startingTarget);
 
@@ -76,7 +81,10 @@ export async function main(ns: NS) {
     }
 
     //need to add port check to pop
-    ns.exec("pop.js", "home", 1, target);
+    //ns.exec("pop.ts", "home", 1, target);
+    while(!pop(ns, target)){    
+      await ns.sleep(15000);
+      }
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){
       ns.exec("loop_max.ts", hostname, 1, hostname, target);
@@ -150,7 +158,7 @@ export async function main(ns: NS) {
   //                "omega-net"*/];
 
  //for (let i = 0; i < hostNames.length; i++){
- //  ns.exec("pop.js", "home", 1, hostNames[i]);
+ //  ns.exec("pop.ts", "home", 1, hostNames[i]);
  //  await ns.sleep(2000);
  //  //ns.exec("controller_basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
  //  ns.exec("controller_basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
@@ -164,7 +172,7 @@ export async function main(ns: NS) {
   hostNames = ["iron-gym", "phantasy", "silver-helix"]
 
   for (let i = 0; i < hostNames.length; i++){
-    ns.exec("pop.js", "home", 1, hostNames[i]);
+    ns.exec("pop.ts", "home", 1, hostNames[i]);
     await ns.sleep(2000);
     ns.exec("controller_basic.js", "home", 1, hostNames[i], 179, 925, 45 );
   }*/

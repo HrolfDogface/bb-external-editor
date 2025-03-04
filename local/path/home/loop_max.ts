@@ -25,7 +25,7 @@ export async function main(ns: NS) {
     
   const growThreadCount: number = Math.floor((freeRam - 2) * 0.79 / growRam);
     
-  let hackThreadCount: number = Math.floor((freeRam - 2) * 0.03 / hackRam);
+  let hackThreadCount: number = Math.floor((freeRam - 2) * 0.04 / hackRam);
 
   if (hackThreadCount < 1) {
     hackThreadCount = 1;
