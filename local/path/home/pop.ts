@@ -85,7 +85,7 @@ export function pop(ns: NS, target: string): boolean {
   }
 
   // Get root access to target server
-  ns.nuke(target);  
+  ns.nuke(target);
   return true;
 
 }

@@ -1,13 +1,11 @@
 export async function main(ns: NS) {
 
+  const universityTargetLevel: number = 80;
+  ns.exec("university.ts", "home", 1);
+  while (ns.getHackingLevel() < universityTargetLevel){
+    await ns.sleep(10000);
+  }
 
-  //let currentMoney: number = 0;
-  //let serverCost: number = ns.getPurchasedServerCost(256);
-  //while( currentMoney < serverCost){
-  //  currentMoney = ns.getServerMoneyAvailable("home");
-  //  await ns.sleep(10000);
-  //}
-  
   ns.exec("trash_bash.ts", "home", 1, 40);
 
   let currentMoney: number = 0;
@@ -65,38 +63,4 @@ export async function main(ns: NS) {
   }
 
   ns.tprint("That death star is fully opperational!");
-}
-
-
-export function search(ns: NS, hostName: string, maxLevel: number) {
-
-  const neighbor = ns.scan(hostName);
-  if(hostName != "home"){
-    neighbor.splice(0, 1);
-  }
-  let neighborRet = []; //neighbor.slice();
-  for (let i = 0; i < neighbor.length; i++) {
-    const money = ns.getServerMaxMoney(neighbor[i]);
-    const level = ns.getServerRequiredHackingLevel(neighbor[i]);
-    if ((level <= maxLevel) && (level > 1) && (money > 0)) {
-      //neighborRet.push(neighbor[i])
-      neighborRet.push(new serverInfo(neighbor[i], money, level));
-      //ns.write("trash-log.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
-    }
-    neighborRet = neighborRet.concat(search(ns, neighbor[i], maxLevel));
-  }
-  return neighborRet;
-}
-
-class serverInfo {
-
-  hostName: string;
-  money: string;
-  level: string;
-
-  constructor(hostName, money, level) {
-    this.hostName = hostName;
-    this.money = money;
-    this.level = level;
-  }
-}  
+} 

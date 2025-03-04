@@ -24,6 +24,8 @@ export async function main(ns: NS) {
   await ns.sleep(15000);
   }
   await ns.sleep(2000);
+  pop(ns, startingTarget);
+  await ns.sleep(2000);
   ns.exec("loop_max.ts", "home", 1, "home", startingTarget);
 
   let currentMoney: number = 0;
@@ -86,6 +88,8 @@ export async function main(ns: NS) {
     while(!pop(ns, target)){    
       await ns.sleep(15000);
       }
+    await ns.sleep(2000);
+    pop(ns, target)
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){
       ns.exec("loop_max.ts", hostname, 1, hostname, target);
