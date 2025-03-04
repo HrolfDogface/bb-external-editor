@@ -15,7 +15,7 @@ export async function main(ns: NS) {
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
   }
-
+/*
   while (!ns.hasTorRouter()){
     ns.tprint("Buy Tor Router and scripts please");
     await ns.sleep(10000);
@@ -30,7 +30,7 @@ export async function main(ns: NS) {
     ns.tprint("Buy FTPCrack.exe please");
     await ns.sleep(5000);
   }
-
+*/
   ns.killall("home", true);
 
   ns.exec("trash_bash.ts", "home", 1, 100);
