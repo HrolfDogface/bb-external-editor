@@ -6,7 +6,7 @@ export async function main(ns: NS) {
   //ns.exec("loop_max.ts", "home", 1, "home", "n00dles");
 
   const universityTargetLevel: number = 80;
-  ns.exec("university.ts", "home", 1, universityTargetLevel);
+  ns.exec("university.ts", "home", 1);
   while (ns.getHackingLevel() < universityTargetLevel){
     await ns.sleep(10000);
   }
