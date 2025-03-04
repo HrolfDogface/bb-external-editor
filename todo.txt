@@ -1,4 +1,3 @@
-script to buy onion router and .exe's in pop if needed and return true or false so scripts can loop on pop until it completes
 update pop_all to find path to the server and then backdoor it
 create script to run max share threads on a server
 add sharing home into prestige and prestige_trash
