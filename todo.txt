@@ -1,24 +1,24 @@
 
-Have Batcher Auto increase and decrease target % absed on RAM
+
 join factions scripts
 Working for factions and switching between them
 Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
 upgrading ram and cores
-create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
-add sharing home into prestige and prestige_trash
 script to figure out when to restart
 restart (install augments after buying)
 
-read through every function in the documentation again
-Working for companies, training CHA to qualify for promotions, accepting promotions, and joining the company faction once it's available
+convert all scripts to TS
 have status panel use ports and be able to add and remove servers
-create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.
-scan all number formatting easier to read: eg. 2.3B 4.5M 257K
-add network path to scan_all reporting
-add timers to status panel? At least for server prep
-migrate all to typescript
-do contracts!
 refactor scripts
 do ports
 do JIT batcher
 
+create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
+add sharing home into prestige and prestige_trash
+read through every function in the documentation again
+Working for companies, training CHA to qualify for promotions, accepting promotions, and joining the company faction once it's available
+create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.
+add timers to status panel? At least for server prep
+migrate all to typescript
+do contracts!
+Have Batcher Auto increase and decrease target % absed on RAM
