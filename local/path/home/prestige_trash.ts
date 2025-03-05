@@ -33,7 +33,7 @@ export async function main(ns: NS) {
 
   ns.exec("trash_bash.ts", "home", 1, 100);
 
-  const maxRam: number = ns.getPurchasedServerMaxRam();
+  const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
   currentMoney = 0;
   while ( currentMoney < ramCost * 25){

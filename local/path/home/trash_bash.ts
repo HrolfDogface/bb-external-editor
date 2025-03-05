@@ -32,6 +32,8 @@ export async function main(ns: NS) {
   if (currentMoney >= ramCost){
     serverCount = Math.floor(currentMoney/ramCost);
   }
+
+  serverCount += ns.getPurchasedServers().length;
   
   const targets = [];
   let count: number = 0

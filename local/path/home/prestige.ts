@@ -122,7 +122,7 @@ export async function main(ns: NS) {
         if(maxRam != maxMaxRam){
           break;
         } else {
-          if(ns.getHackingLevel() > level * 1.5){
+          if(ns.getHackingLevel() > level * 2.5){
             break;        
           }
         }
