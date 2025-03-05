@@ -1,4 +1,4 @@
-import { pop } from "./pop"
+import { portHack } from "./pop"
 
 export async function main(ns: NS) {
 
@@ -20,11 +20,11 @@ export async function main(ns: NS) {
   startingTargets = startingTargets.sort(function (a, b) { return b.money - a.money; });
   const startingTarget: string = startingTargets[0].hostName;
   //ns.exec("pop.ts", "home", 1, startingTarget);
-  while(!pop(ns, startingTarget)){    
+  while(!portHack(ns, startingTarget)){    
   await ns.sleep(15000);
   }
   await ns.sleep(2000);
-  pop(ns, startingTarget);
+  ns.exec("pop.ts", "home", 1, startingTarget);
   await ns.sleep(2000);
   ns.exec("loop_max.ts", "home", 1, "home", startingTarget);
 
@@ -85,11 +85,11 @@ export async function main(ns: NS) {
 
     //need to add port check to pop
     //ns.exec("pop.ts", "home", 1, target);
-    while(!pop(ns, target)){    
+    while(!portHack(ns, target)){    
       await ns.sleep(15000);
       }
     await ns.sleep(2000);
-    pop(ns, target)
+    ns.exec("pop.ts", "home", 1, target);
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){
       ns.exec("loop_max.ts", hostname, 1, hostname, target);

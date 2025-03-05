@@ -1,9 +1,11 @@
 export async function main(ns: NS) {
-  pop(ns, String(ns.args[0]));
+  const target = String(ns.args[0]);
+  // Get root access to target server
+  ns.nuke(target);
 }
 
 
-export function pop(ns: NS, target: string): boolean {
+export function portHack(ns: NS, target: string): boolean {
 
   const portsRequired: number = ns.getServer(target).numOpenPortsRequired;
 
@@ -84,10 +86,7 @@ export function pop(ns: NS, target: string): boolean {
     }
   }
 
-  // Get root access to target server
-  ns.nuke(target);
   return true;
-
 }
 
 export function test(ns: NS, message: string){

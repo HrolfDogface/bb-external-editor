@@ -1,4 +1,5 @@
-import { pop } from "./pop"
+import { portHack } from "./pop";
+
 
 export async function main(ns: NS) {
 
@@ -10,7 +11,7 @@ export async function main(ns: NS) {
     
     //ns.toast("Not enough money to purchase Tor router", "warning", null);
 
-    while (!pop(ns, "The-Cave")){
+    while (!portHack(ns, "The-Cave")){
         await ns.sleep(2000);
     }
 

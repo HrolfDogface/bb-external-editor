@@ -38,8 +38,6 @@ export async function main(ns: NS) {
   if((maxRam <= ns.getServerMaxRam("home"))||(serverCount == 0)){
     count = 1;
     ns.exec("pop.ts", "home", 1, neighbors[0].hostName);
-    await ns.sleep(2000);    
-    ns.exec("pop.ts", "home", 1, neighbors[0].hostName);
     await ns.sleep(2000);
     ns.exec("batch/pre_batcher.ts", "home", 1, "home", neighbors[0].hostName);
     ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
