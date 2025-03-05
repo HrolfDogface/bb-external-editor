@@ -23,10 +23,16 @@ export async function main(ns: NS) {
   while(!portHack(ns, startingTarget)){    
   await ns.sleep(15000);
   }
-  await ns.sleep(2000);
+  //await ns.sleep(2000);
   ns.exec("pop.ts", "home", 1, startingTarget);
   await ns.sleep(2000);
+
+  const homeRam: number = ns.getServerMaxRam("home");
+  if(homeRam < 1024 * 4){
   ns.exec("loop_max.ts", "home", 1, "home", startingTarget);
+  }else{
+    ns.exec("batch/pre_batcher.ts", "home", 1, "home", startingTarget);
+  }
 
   let currentMoney: number = 0;
   let serverCost: number = ns.getPurchasedServerCost(128);
@@ -88,7 +94,7 @@ export async function main(ns: NS) {
     while(!portHack(ns, target)){    
       await ns.sleep(15000);
       }
-    await ns.sleep(2000);
+    //await ns.sleep(2000);
     ns.exec("pop.ts", "home", 1, target);
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){

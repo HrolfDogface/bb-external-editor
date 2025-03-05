@@ -23,6 +23,7 @@ export function portHack(ns: NS, target: string): boolean {
         ns.toast("Not enough money to purchase BruteSSH.exe", "warning", null);
         return false;
       }
+      ns.brutessh(target);
     }
   }
 
@@ -38,6 +39,7 @@ export function portHack(ns: NS, target: string): boolean {
         ns.toast("Not enough money to purchase FTPCrack.exe", "warning", null);
         return false;
       }
+      ns.ftpcrack(target);
     }
   }
 
@@ -53,6 +55,7 @@ export function portHack(ns: NS, target: string): boolean {
         ns.toast("Not enough money to purchase relaySMTP.exe", "warning", null);
         return false;
       }
+      ns.relaysmtp(target);
     }
   }
 
@@ -68,6 +71,7 @@ export function portHack(ns: NS, target: string): boolean {
         ns.toast("Not enough money to purchase HTTPWorm.exe", "warning", null);
         return false;
       }
+      ns.httpworm(target);
     }
   }
 
@@ -83,6 +87,7 @@ export function portHack(ns: NS, target: string): boolean {
         ns.toast("Not enough money to purchase SQLInject.exe", "warning", null);
         return false;
       }
+      ns.sqlinject(target);
     }
   }
 
