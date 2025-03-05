@@ -63,6 +63,9 @@ export async function main(ns: NS) {
     ns.write("trash-log.txt", neighbors[count].hostName + " " + neighbors[count].money + " " + neighbors[count].level + "\n", "a");
     let hostname = "pserv-" + (count - countStart);
     if (!ns.serverExists(hostname)) {
+      if(ns.getPurchasedServerCost(maxRam) > ns.getServerMoneyAvailable("home")){
+        break;
+      }
       hostname = ns.purchaseServer("pserv-" + (count - countStart), maxRam);
     }else if(ns.getServerMaxRam(hostname) < maxRam){
         ns.upgradePurchasedServer(hostname, maxRam);

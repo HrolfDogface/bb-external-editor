@@ -36,7 +36,7 @@ export async function main(ns: NS) {
   const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
   currentMoney = 0;
-  while ( currentMoney < ramCost * 25){
+  while ( currentMoney < ramCost){
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
   }

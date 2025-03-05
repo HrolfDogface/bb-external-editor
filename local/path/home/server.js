@@ -2,7 +2,7 @@
 export async function main(ns) {
 
   //const ram = 1024 * 1024;
-  const ram = 1024 * 1024;//ns.getPurchasedServerMaxRam();
+  const ram = 1024 * 128;//ns.getPurchasedServerMaxRam();
   
   
   let cost = ns.getPurchasedServerCost(ram);
@@ -13,7 +13,7 @@ export async function main(ns) {
 
   ns.tprintf(`%s server upgrade costs $%s`, ns.formatRam(ram), ns.formatNumber(cost));
 
-  ns.upgradePurchasedServer("pserv-prestige", ram);
+  //ns.upgradePurchasedServer("pserv-prestige", ram);
   
   //ns.deleteServer("pserv-1");
   //ns.deleteServer("pserv-2");
