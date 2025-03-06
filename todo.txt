@@ -5,8 +5,9 @@ upgrading ram and cores
 script to figure out when to restart
 restart (install augments after buying)
 
+allow status panel to remove ports
+
 convert all scripts to TS
-have status panel use ports and be able to add and remove servers
 refactor scripts
 do ports
 do JIT batcher
