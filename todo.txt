@@ -1,6 +1,3 @@
-
-prestige skip starting target hack for 32GB home
-tweak prestige to give a stronger hack ratio on loop_max
 join factions scripts
 Working for factions and switching between them
 Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
