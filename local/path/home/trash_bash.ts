@@ -35,7 +35,7 @@ export async function main(ns: NS) {
 
   serverCount += ns.getPurchasedServers().length;
   
-  const targets = [];
+
   let count: number = 0
   if((maxRam <= ns.getServerMaxRam("home"))||(serverCount == 0)){
     count = 1;
@@ -43,7 +43,7 @@ export async function main(ns: NS) {
     await ns.sleep(2000);
     ns.exec("batch/pre_batcher.ts", "home", 1, "home", neighbors[0].hostName);
     ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
-    targets.push(neighbors[0].hostName);
+    ns.writePort(1, neighbors[0].hostName);
   }
 
   const maxServers: number = ns.getPurchasedServerLimit();
@@ -81,10 +81,10 @@ export async function main(ns: NS) {
     ns.exec("popz.ts", "home", 1, neighbors[count].hostName);
     await ns.sleep(2000);
     ns.exec("batch/pre_batcher.ts", hostname, 1, hostname, neighbors[count].hostName);
-    targets.push(neighbors[count].hostName);
+    ns.writePort(1, neighbors[count].hostName);
 
   }
-  ns.exec('status_panel.ts', "home", 1, ...targets);
+  //ns.exec('status_panel.ts', "home", 1, ...targets);
   //ns.write("trash-log.txt", neighbor[i] + " " + money + " " + level + "\n", "a");
 
 }

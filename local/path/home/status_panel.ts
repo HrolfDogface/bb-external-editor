@@ -13,13 +13,25 @@ export async function main(ns: NS) {
   ns.setTitle("Targets Status");
   ns.moveTail(1635, 0);
 
+  const targets: string[] = [];
+  for (let i = 0; i < ns.args.length; i++){
+    targets.push(String(ns.args[i]));
+  }
+
   while(true)
   {
-    ns.clearLog();
-    for (let i = 0; i < ns.args.length; i++){
+    const readValue: string = ns.readPort(1);
+    if ((readValue != "NULL PORT DATA") && !targets.includes(readValue)){
+      targets.push(readValue);
+    }
+    
+    ns.resizeTail(495, 32 + (24 * targets.length));
 
-      const cashRatio: number = ns.getServerMoneyAvailable(String(ns.args[i]))/ns.getServerMaxMoney(String(ns.args[i]));
-      const threatRatio: number = ns.getServerSecurityLevel(String(ns.args[i]))/ns.getServerMinSecurityLevel(String(ns.args[i]));
+    ns.clearLog();
+    for (let i = 0; i < targets.length; i++){
+
+      const cashRatio: number = ns.getServerMoneyAvailable(targets[i])/ns.getServerMaxMoney(targets[i]);
+      const threatRatio: number = ns.getServerSecurityLevel(targets[i])/ns.getServerMinSecurityLevel(targets[i]);
 
       let cashColor: string = red;
       if (cashRatio > 0.8) cashColor = green;
@@ -28,7 +40,7 @@ export async function main(ns: NS) {
       let threatColor: string = red;
       if (threatRatio < 1.5) threatColor = green;
       else if (threatRatio < 3.0) threatColor = yellow;
-      ns.printf(`${cyan}%-20s${white}Money: ${cashColor}%3.0f%%${white}\tThreat: ${threatColor}%3.0f%%${reset}`, ns.args[i], cashRatio * 100, (threatRatio - 1) * 100);
+      ns.printf(`${cyan}%-20s${white}Money: ${cashColor}%3.0f%%${white}\tThreat: ${threatColor}%3.0f%%${reset}`, targets[i], cashRatio * 100, (threatRatio - 1) * 100);
     }
     await ns.sleep(250);
   }

@@ -6,6 +6,8 @@ export async function main(ns: NS) {
     await ns.sleep(10000);
   }
 
+  ns.exec('status_panel.ts', "home");
+
   ns.exec("trash_bash.ts", "home", 1, 40);
 
   let currentMoney: number = 0;
