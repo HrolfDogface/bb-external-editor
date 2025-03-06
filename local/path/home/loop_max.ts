@@ -21,11 +21,11 @@ export async function main(ns: NS) {
   
   const hackRam = ns.getScriptRam("hack.js", executingServer);
   
-  const weakenThreadCount: number = Math.floor((freeRam - 2) * 0.17 / weakenRam);
+  const weakenThreadCount: number = Math.floor((freeRam) * 0.16 / weakenRam);
     
-  const growThreadCount: number = Math.floor((freeRam - 2) * 0.79 / growRam);
+  const growThreadCount: number = Math.floor((freeRam) * 0.77 / growRam);
     
-  let hackThreadCount: number = Math.floor((freeRam - 2) * 0.04 / hackRam);
+  let hackThreadCount: number = Math.floor((freeRam) * 0.06 / hackRam);
 
   if (hackThreadCount < 1) {
     hackThreadCount = 1;

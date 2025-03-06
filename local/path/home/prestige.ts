@@ -15,7 +15,7 @@ export async function main(ns: NS) {
 
   //const crime: string = "Mug";
   ns.exec("gym_mug.ts", "home", 1);
-
+/*
   let startingTargets = search(ns, "home", 40);
   startingTargets = startingTargets.sort(function (a, b) { return b.money - a.money; });
   const startingTarget: string = startingTargets[0].hostName;
@@ -33,7 +33,7 @@ export async function main(ns: NS) {
   }else{
     ns.exec("batch/pre_batcher.ts", "home", 1, "home", startingTarget);
   }
-
+*/
   let currentMoney: number = 0;
   let serverCost: number = ns.getPurchasedServerCost(128);
   while( currentMoney < serverCost){
@@ -98,7 +98,7 @@ export async function main(ns: NS) {
     ns.exec("pop.ts", "home", 1, target);
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){
-      ns.exec("loop_max.ts", hostname, 1, hostname, target);
+      ns.exec("loop_max.ts", "home", 1, hostname, target);
     }else{
       ns.exec("batch/pre_batcher.ts", hostname, 1, hostname, target);
     }
