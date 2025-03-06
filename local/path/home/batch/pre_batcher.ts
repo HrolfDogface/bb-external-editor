@@ -64,8 +64,10 @@ export async function main(ns: NS) {
       const weaken2Delay: number = 30;
       const batchDelay: number = 60;
 
-      const hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/2));
-      const growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 2.2));
+      //const hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/2));
+      //const growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 2.2));
+      const hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/5));
+      const growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 1.3));
       const hackSecurity: number = ns.hackAnalyzeSecurity(hackThreads, targetHost);
       const growSecurity: number = growthThreads * 0.004;
 
