@@ -13,7 +13,7 @@ export async function main(ns: NS) {
   ns.setTitle("Targets Status");
   ns.moveTail(1635, 0);
 
-  const targets: string[] = [];
+  let targets: string[] = [];
   for (let i = 0; i < ns.args.length; i++){
     targets.push(String(ns.args[i]));
   }
@@ -21,7 +21,9 @@ export async function main(ns: NS) {
   while(true)
   {
     const readValue: string = ns.readPort(1);
-    if ((readValue != "NULL PORT DATA") && !targets.includes(readValue)){
+    if (readValue == "clear"){
+      targets = [];
+    }else if ((readValue != "NULL PORT DATA") && !targets.includes(readValue)){
       targets.push(readValue);
     }
     

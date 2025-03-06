@@ -6,9 +6,13 @@ export async function main(ns: NS) {
     await ns.sleep(10000);
   }
 
-  ns.exec('status_panel.ts', "home");
+  ns.exec("pop.ts", "home", 1, "joesguns");
+  
+  await ns.sleep(2000);
+  ns.scp("status_panel.js", "joesguns");
+  ns.exec('status_panel.ts', "joesguns");
 
-  ns.exec("trash_bash.ts", "home", 1, 40);
+  ns.exec("bash.ts", "home", 1, 40);
 
   let currentMoney: number = 0;
   while( currentMoney < 500000000){
