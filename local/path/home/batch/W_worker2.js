@@ -4,6 +4,7 @@ export async function main(ns) {
   //args[0]:target host name
   //args[1]:delay msec
   //args[2]:port id
+  //args[3]:level delay batch
 
   //ns.write("batch/batchLog.txt", Date.now() + "[W_worker.js]: starting Weaken of " 
   //                  + ns.args[0] + " with a delay of " + ns.args[1] + " msec\n", "a");
@@ -11,9 +12,12 @@ export async function main(ns) {
   let money = await ns.weaken(ns.args[0], {additionalMsec:  ns.args[1]});
   let totalTime = Date.now() - startTime;
 
-  ns.writePort(ns.args[2], true);
-  
-  //ns.write("batch/batchLog.txt", Date.now() + "[W_worker.js]: finished Weaken of " 
-  //                  + ns.args[0] + ". Security by " + money + " in" + totalTime + " msec\n", "a");
+  if(ns.args[3] == "delay"){
+    ns.writePort(ns.args[2], "true");
+  }else {    
+    ns.writePort(ns.args[2], "false");
+  }
+  ns.write("batch/batchLog.txt", Date.now() + "[W_worker2.js]: finished Weaken of " 
+                    + ns.args[0] + ". Security by " + money + " in" + totalTime + " msec " + ns.args[3] + "\n", "a");
 
 }
