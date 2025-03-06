@@ -126,7 +126,7 @@ export async function main(ns: NS) {
       }
 
       if (delayFlagInternal){   
-        //await ns.sleep(10000);     
+        await ns.sleep(10000);     
         ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackDelay);    
         ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weaken1Delay);
         ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growDelay);    
