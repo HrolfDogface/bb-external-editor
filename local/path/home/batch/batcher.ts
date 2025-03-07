@@ -68,8 +68,11 @@ export async function main(ns: NS) {
     const weaken2Delay: number = 60;
     const batchDelay: number = 120;
 
-    const hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/5));
-    const growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 1.3));
+    let hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/5));
+    let growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 1.3));
+    if (hackThreads < 1) hackThreads = 1;
+    if (growthThreads < 1) growthThreads = 1;
+
     const hackSecurity: number = ns.hackAnalyzeSecurity(hackThreads, targetHost);
     const growSecurity: number = growthThreads * 0.004;
 
@@ -78,8 +81,10 @@ export async function main(ns: NS) {
     ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: cores = " + cores + "\n", "a"); 
     const weakenAmount: number = ns.weakenAnalyze(10, cores);
 
-    const weaken1Threads: number = Math.ceil(hackSecurity/weakenAmount)*10;
-    const weaken2Threads: number = Math.ceil(growSecurity/weakenAmount)*10;
+    let weaken1Threads: number = Math.ceil(hackSecurity/weakenAmount)*10;
+    let weaken2Threads: number = Math.ceil(growSecurity/weakenAmount)*10;
+    if ( weaken1Threads < 1)  weaken1Threads = 1;
+    if ( weaken2Threads < 1)  weaken2Threads = 1;
 
     ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: hackThreads = " + hackThreads + "\n", "a");    
     ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: growthThreads = " + growthThreads + "\n", "a");
