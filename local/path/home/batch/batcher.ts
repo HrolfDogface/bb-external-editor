@@ -60,7 +60,7 @@ export async function main(ns: NS) {
     const weakenTime: number = ns.getWeakenTime(targetHost);   
 
     ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: " + targetHost + " Hack time is "
-            + hackTime + " and Grow time is " + growTime + " and Weaken time is " + weakenTime + "\n", "a");
+            + hackTime + " and Grow time is " + growTime + " and Weaken time is " + weakenTime + "\n", "w");
 
     const hackDelay: number = weakenTime - hackTime - 5;
     const weaken1Delay: number = 0;
