@@ -7,8 +7,6 @@ upgrading ram and cores
 script to figure out when to restart
 restart (install augments after buying)
 
-allow status panel to remove ports
-
 update prebatcher to redo server prep if needed in between batches
 fix continuous batcher
 
