@@ -1,5 +1,4 @@
-update prebatcher to redo server prep if needed in between batches
-update continuous batcher with new timing control mechanism
+
 join factions scripts
 Working for factions and switching between them
 Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
@@ -8,6 +7,9 @@ script to figure out when to restart
 restart (install augments after buying)
 
 allow status panel to remove ports
+
+update prebatcher to redo server prep if needed in between batches
+fix continuous batcher
 
 convert all scripts to TS
 refactor scripts
