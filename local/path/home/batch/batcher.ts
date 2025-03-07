@@ -51,6 +51,7 @@ export async function main(ns: NS) {
   ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: done waiting for target prep\n", "a");
 
   let workerPid = 0;
+  const hackPids: number [] = [];
 
   let firstLoop: boolean = true;
   while (true){
@@ -106,7 +107,7 @@ export async function main(ns: NS) {
     if(firstLoop){
       firstLoop = false;
       for (let i: number = 0; i < batches; i++){
-        ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + batchDelay * i);    
+        hackPids.push(ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + batchDelay * i));    
         ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + batchDelay * i);
         ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + batchDelay * i);    
         ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + batchDelay * i, ns.pid, 0);
@@ -120,19 +121,26 @@ export async function main(ns: NS) {
       await ns.nextPortWrite(ns.pid);
       workerPid = ns.readPort(ns.pid);
 
+      //remove top hack worker pid from the list of pids
+      hackPids.shift();
 
-        //Nice try, doesn't work
-      if (ns.getServerSecurityLevel(targetHost) > minSecurity){        
-      ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 15);
-      }else{
-        ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 30);    
+
+      if ((ns.getServerSecurityLevel(targetHost) > minSecurity)||(ns.getServerMoneyAvailable(targetHost) < (ns.getServerMaxMoney(targetHost) * 0.98))){ 
+        const killNumber: number = 10;
+        for (let i = 0; i < killNumber; i++){
+          ns.kill(hackPids[i]);
+        }
       }
+      hackPids.push(ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 30));
       ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 30);
       ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + 30);    
       ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 30, ns.pid, workerPid);
       
       if (level != ns.getHackingLevel()){
         level = ns.getHackingLevel()
+        for (let i = 0; i < hackPids.length; i += 2){
+          ns.kill(hackPids[i]);
+        }
         break;
       }
       
