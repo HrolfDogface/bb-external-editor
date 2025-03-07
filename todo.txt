@@ -1,3 +1,4 @@
+debug prestige_trash crash
 
 update time frome date to  performance.now() 
 join factions scripts
