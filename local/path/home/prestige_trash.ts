@@ -59,7 +59,7 @@ export async function main(ns: NS) {
     let scanLevel: number = level/3;
     if (servers.length > 10) scanLevel = level/2
     ns.exec("trash_bash.ts", "home", 1, scanLevel);
-    const serverCost = ns.getPurchasedServerCost(ns.getServerMaxRam(servers[0]);
+    const serverCost = ns.getPurchasedServerCost(ns.getServerMaxRam(servers[0]));
     while (true){
       if (ns.getHackingLevel() > level * 1.25){
         break;
