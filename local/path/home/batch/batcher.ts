@@ -6,38 +6,38 @@ export async function main(ns: NS) {
   const exHost: string = String(ns.args[0]);
   const targetHost: string = String(ns.args[1]);
 
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: pre_batcher starting\n", "w");
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: target host name = " + targetHost + "\n", "a");
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: executing host name = " + exHost + "\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: batcher starting\n", "w");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: target host name = " + targetHost + "\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: executing host name = " + exHost + "\n", "a");
 
   const freeRam: number = ns.getServerMaxRam(exHost) - ns.getServerUsedRam(exHost);
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: free ram on " + exHost + "server is " + freeRam + "GB\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: free ram on " + exHost + "server is " + freeRam + "GB\n", "a");
 
   const prepRam: number = ns.getScriptRam("target_prep.js", exHost);
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: prepRam = " + prepRam + "GB\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: prepRam = " + prepRam + "GB\n", "a");
 
   const prepWRam: number = ns.getScriptRam("security.js", exHost);
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: prepWRam = " + prepWRam + "GB\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: prepWRam = " + prepWRam + "GB\n", "a");
 
   const prepGRam: number = ns.getScriptRam("money.js", exHost);
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: prepGRam = " + prepGRam + "GB\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: prepGRam = " + prepGRam + "GB\n", "a");
 
   const prepWThreads: number = Math.floor((freeRam - prepRam - 2) * 0.19 / prepWRam);
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: prepWThreads = " + prepWThreads + "\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: prepWThreads = " + prepWThreads + "\n", "a");
   
   const prepGThreads: number = Math.floor((freeRam - prepRam - 2) * 0.79 / prepGRam);
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: prepGThreads = " + prepGThreads + "\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: prepGThreads = " + prepGThreads + "\n", "a");
 
   
   const maxMoney: number = ns.getServerMaxMoney(targetHost);
   const minSecurity: number = ns.getServerMinSecurityLevel(targetHost);
 
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: " + targetHost + " max money is $"
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: " + targetHost + " max money is $"
           + maxMoney + " and min security is " + minSecurity + "\n", "a");
 
   ns.exec("target_prep.js", exHost, 1, targetHost, prepWThreads, prepGThreads, exHost);
 
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: waiting for target prep\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: waiting for target prep\n", "a");
   
   while (ns.getServerMoneyAvailable(targetHost) < maxMoney){
     await ns.sleep(100);
@@ -48,7 +48,7 @@ export async function main(ns: NS) {
   }  
   await ns.sleep(150);
 
-  ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: done waiting for target prep\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: done waiting for target prep\n", "a");
 
   let workerPid = 0;
   const hackPids: number [] = [];
@@ -59,7 +59,7 @@ export async function main(ns: NS) {
     const growTime: number = ns.getGrowTime(targetHost);
     const weakenTime: number = ns.getWeakenTime(targetHost);   
 
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: " + targetHost + " Hack time is "
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: " + targetHost + " Hack time is "
             + hackTime + " and Grow time is " + growTime + " and Weaken time is " + weakenTime + "\n", "a");
 
     const hackDelay: number = weakenTime - hackTime - 30;
@@ -75,19 +75,19 @@ export async function main(ns: NS) {
 
     const cores: number = ns.getServer(exHost).cpuCores;
 
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: cores = " + cores + "\n", "a"); 
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: cores = " + cores + "\n", "a"); 
     const weakenAmount: number = ns.weakenAnalyze(10, cores);
 
     const weaken1Threads: number = Math.ceil(hackSecurity/weakenAmount)*10;
     const weaken2Threads: number = Math.ceil(growSecurity/weakenAmount)*10;
 
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: hackThreads = " + hackThreads + "\n", "a");    
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: growthThreads = " + growthThreads + "\n", "a");
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: hackSecurity = " + hackSecurity + "\n", "a");
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: growSecurity = " + growSecurity + "\n", "a");
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: weakenAmount = " + weakenAmount + "\n", "a");
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: weaken1Threads = " + weaken1Threads + "\n", "a");
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: weaken2Threads = " + weaken2Threads + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: hackThreads = " + hackThreads + "\n", "a");    
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: growthThreads = " + growthThreads + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: hackSecurity = " + hackSecurity + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: growSecurity = " + growSecurity + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: weakenAmount = " + weakenAmount + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: weaken1Threads = " + weaken1Threads + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: weaken2Threads = " + weaken2Threads + "\n", "a");
 
     const hackRam: number = ns.getScriptRam("batch/H_worker.js", exHost) * hackThreads;
     const growRam: number = ns.getScriptRam("batch/G_worker.js", exHost) * growthThreads;
@@ -98,11 +98,11 @@ export async function main(ns: NS) {
     
     const depth: number = weakenTime / batchDelay;
     if (batches > (depth * .9)) batches = Math.floor(depth * .9);
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: batchRam = " + batchRam + "\n", "a");
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: batches = " + batches + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: batchRam = " + batchRam + "\n", "a");
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: batches = " + batches + "\n", "a");
 
     let level = ns.getHackingLevel();    
-    ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: level = " + level + "\n", "a");    
+    ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: level = " + level + "\n", "a");    
     //if (batches > 50000) batches = 50000;
     if(firstLoop){
       firstLoop = false;
