@@ -51,9 +51,6 @@ export async function main(ns: NS) {
   ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: done waiting for target prep\n", "a");
 
   let workerPid = 0;
-  let finishedBatchCount = 0;
-  let finishedSets = 0;
-  let finishedFlag = false;
 
   let firstLoop: boolean = true;
   while (true){
@@ -106,9 +103,8 @@ export async function main(ns: NS) {
     let level = ns.getHackingLevel();    
     ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: level = " + level + "\n", "a");    
     //if (batches > 50000) batches = 50000;
-    if(firstLoop||finishedFlag){
+    if(firstLoop){
       firstLoop = false;
-      finishedFlag = false;
       for (let i: number = 0; i < batches; i++){
         ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + batchDelay * i);    
         ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + batchDelay * i);
@@ -117,39 +113,23 @@ export async function main(ns: NS) {
       }
     }
 
-    
-    const maxFinishedSets = 10;
-    let tempPid = -1;
+
     while (true)
     {
      
       await ns.nextPortWrite(ns.pid);
       workerPid = ns.readPort(ns.pid);
 
-      if (finishedFlag){
-        if(tempPid != workerPid){
-          continue;
-        }else{
-          break;
-        }
 
+        //Nice try, doesn't work
+      if (ns.getServerSecurityLevel(targetHost) > minSecurity){        
+      ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 15);
+      }else{
+        ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 30);    
       }
-      finishedBatchCount++;
-
-      ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 30);    
       ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 30);
       ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + 30);    
-      tempPid = ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 30, ns.pid, workerPid);
-    
-      if ( finishedBatchCount == batches){
-      finishedBatchCount = 0
-      finishedSets++;
-      }
-      if(finishedSets == maxFinishedSets)
-      {
-        finishedSets = 0;
-        finishedFlag = true;
-      }
+      ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 30, ns.pid, workerPid);
       
       if (level != ns.getHackingLevel()){
         level = ns.getHackingLevel()

@@ -9,7 +9,7 @@ export async function main(ns: NS) {
   ns.exec("pop.ts", "home", 1, "joesguns");
   
   await ns.sleep(2000);
-  ns.scp("status_panel.js", "joesguns");
+  ns.scp("status_panel.ts", "joesguns");
   ns.exec('status_panel.ts', "joesguns");
 
   ns.exec("trash_bash.ts", "home", 1, 40);
@@ -42,7 +42,7 @@ export async function main(ns: NS) {
   const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
   currentMoney = 0;
-  while (( currentMoney < ramCost)||(ns.getHackingLevel() < 600)){
+  while (( currentMoney < ramCost)&&(ns.getHackingLevel() < 600)){
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
   }

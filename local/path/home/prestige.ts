@@ -16,7 +16,7 @@ export async function main(ns: NS) {
   ns.exec("pop.ts", "home", 1, "joesguns");
   
   await ns.sleep(2000);
-  ns.scp("status_panel.js", "joesguns");
+  ns.scp("status_panel.ts", "joesguns");
   ns.exec('status_panel.ts', "joesguns");
 
   //const crime: string = "Mug";
