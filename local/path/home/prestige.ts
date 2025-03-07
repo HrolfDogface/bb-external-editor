@@ -13,6 +13,12 @@ export async function main(ns: NS) {
     await ns.sleep(10000);
   }
 
+  ns.exec("pop.ts", "home", 1, "joesguns");
+  
+  await ns.sleep(2000);
+  ns.scp("status_panel.js", "joesguns");
+  ns.exec('status_panel.ts', "joesguns");
+
   //const crime: string = "Mug";
   ns.exec("gym_mug.ts", "home", 1);
 /*

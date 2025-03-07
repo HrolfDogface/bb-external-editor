@@ -1,3 +1,4 @@
+update prebatcher to redo server prep if needed in between batches
 update continuous batcher with new timing control mechanism
 join factions scripts
 Working for factions and switching between them

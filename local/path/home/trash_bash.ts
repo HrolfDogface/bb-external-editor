@@ -41,7 +41,7 @@ export async function main(ns: NS) {
     count = 1;
     ns.exec("popz.ts", "home", 1, neighbors[0].hostName);
     await ns.sleep(2000);
-    ns.exec("batch/batcher.ts", "home", 1, "home", neighbors[0].hostName);
+    ns.exec("batch/pre_batcher.ts", "home", 1, "home", neighbors[0].hostName);
     ns.write("trash-log.txt", neighbors[0].hostName + " " + neighbors[0].money + " " + neighbors[0].level + "\n", "a");
     ns.writePort(1, neighbors[0].hostName);
   }
@@ -71,7 +71,7 @@ export async function main(ns: NS) {
         ns.upgradePurchasedServer(hostname, maxRam);
     }
     ns.scp("target_prep.js", hostname);
-    ns.scp("batch/batcher.ts", hostname);
+    ns.scp("batch/pre_batcher.ts", hostname);
     ns.scp("money.js", hostname);
     ns.scp("security.js", hostname);
     ns.scp("batch/H_worker.js", hostname);
@@ -81,7 +81,7 @@ export async function main(ns: NS) {
 
     ns.exec("popz.ts", "home", 1, neighbors[count].hostName);
     await ns.sleep(2000);
-    ns.exec("batch/batcher.ts", hostname, 1, hostname, neighbors[count].hostName);
+    ns.exec("batch/pre_batcher.ts", hostname, 1, hostname, neighbors[count].hostName);
     ns.writePort(1, neighbors[count].hostName);
 
   }

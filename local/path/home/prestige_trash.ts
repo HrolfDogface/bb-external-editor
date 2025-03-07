@@ -12,7 +12,7 @@ export async function main(ns: NS) {
   ns.scp("status_panel.js", "joesguns");
   ns.exec('status_panel.ts', "joesguns");
 
-  ns.exec("bash.ts", "home", 1, 40);
+  ns.exec("trash_bash.ts", "home", 1, 40);
 
   let currentMoney: number = 0;
   while( currentMoney < 500000000){
