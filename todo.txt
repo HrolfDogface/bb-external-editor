@@ -1,5 +1,5 @@
 
-update time frome date to  performance.now() 
+
 join factions scripts
 Working for factions and switching between them
 Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
@@ -7,7 +7,8 @@ upgrading ram and cores
 script to figure out when to restart
 restart (install augments after buying)
 
-
+update prebatcher to redo server prep if needed in between batches
+fix continuous batcher
 
 convert all scripts to TS
 refactor scripts
