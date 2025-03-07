@@ -2,22 +2,25 @@
 export async function main(ns) {
 
   //args[0]:target host name
-  //args[1]:delay msec
-  //args[2]:port id
-  //args[3]:level delay batch
+  //args[1]:execution time
+  //args[2]:completion time
+  //args[3]:port id  
+  //args[4]:port id of triggering worker
 
   //ns.write("batch/batchLog.txt", Date.now() + "[W_worker.js]: starting Weaken of " 
   //                  + ns.args[0] + " with a delay of " + ns.args[1] + " msec\n", "a");
   let startTime = Date.now();
-  let money = await ns.weaken(ns.args[0], {additionalMsec:  ns.args[1]});
+  let delay = ns.args[2] - startTime - ns.args[1];
+  if (delay < 0){
+    delay = 0;
+  }
+  let money = await ns.weaken(ns.args[0], {additionalMsec:  delay});
   let totalTime = Date.now() - startTime;
 
-  if(ns.args[3] == "delay"){
-    ns.writePort(ns.args[2], "true");
-  }else {    
-    ns.writePort(ns.args[2], "false");
-  }
+  const error = Date.now() - ns.args[2];
+
+  ns.writePort(ns.args[3], ns.pid);
   ns.write("batch/batchLog.txt", Date.now() + "[W_worker2.js]: finished Weaken of " 
-                    + ns.args[0] + ". Security by " + money + " in" + totalTime + " msec " + ns.args[3] + "\n", "a");
+                   + ns.args[0] + ". Security by " + money + " in" + totalTime + " msec " +  error + " " + ns.args[4] + " " + ns.pid + "\n", "a");
 
 }

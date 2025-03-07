@@ -1,3 +1,4 @@
+update continuous batcher with new timing control mechanism
 join factions scripts
 Working for factions and switching between them
 Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
