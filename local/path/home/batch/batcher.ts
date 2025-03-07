@@ -118,21 +118,18 @@ export async function main(ns: NS) {
      
       await ns.nextPortWrite(ns.pid);
       workerPid = ns.readPort(ns.pid);
+
+      //if a batch finishes out of sequence do not trigger a new batch from it
       if (workerPid < previousWorkerPid){
+        ns.write("batch/batchLog.txt", Date.now() + "[pre_batcher.ts]: eject batch with pid= " + workerPid + "\n", "a");   
         continue;
       }
       previousWorkerPid = workerPid;
       ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 30);    
       ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 30);
       ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + 30);    
-      const launchedPid = ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 30, ns.pid, workerPid);
+      ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 30, ns.pid, workerPid);
 
-      if((launchedPid - workerPid )< (batches * 4)){        
-        ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 45);    
-        ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 45);
-        ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + 45);    
-        ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 45, ns.pid, workerPid);
-      }
       if (level != ns.getHackingLevel()){
         level = ns.getHackingLevel()
         break;

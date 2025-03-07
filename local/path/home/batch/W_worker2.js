@@ -14,13 +14,13 @@ export async function main(ns) {
   if (delay < 0){
     delay = 0;
   }
-  let money = await ns.weaken(ns.args[0], {additionalMsec:  delay});
+  let security = await ns.weaken(ns.args[0], {additionalMsec:  delay});
   let totalTime = Date.now() - startTime;
 
   const error = Date.now() - ns.args[2];
 
   ns.writePort(ns.args[3], ns.pid);
   ns.write("batch/batchLog.txt", Date.now() + "[W_worker2.js]: finished Weaken of " 
-                   + ns.args[0] + ". Security by " + money + " in" + totalTime + " msec " +  error + " " + ns.args[4] + " " + ns.pid + "\n", "a");
+                   + ns.args[0] + ". Security by " + security + " in" + totalTime + " msec " +  error + " " + ns.args[4] + " " + ns.pid + "\n", "a");
 
 }
