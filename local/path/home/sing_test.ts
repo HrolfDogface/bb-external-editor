@@ -9,5 +9,8 @@ export async function main(ns: NS) {
     //ns.writePort(1, "zer0");
     ns.writePort(1, "harakiri-sushi");
 
+    //ns.kill(999999999);
+    //ns.tprint("foo");
+
 
 }
