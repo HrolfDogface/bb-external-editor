@@ -97,10 +97,10 @@ export async function main(ns: NS) {
 
       if (batches > 50000) batches = 50000;
       for (let i: number = 0; i < batches; i++){
-        ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackDelay + batchDelay * i);    
-        ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weaken1Delay + batchDelay * i);
-        ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growDelay + batchDelay * i);    
-        ns.exec("batch/W_worker.js", exHost, weaken2Threads, targetHost, weaken2Delay + batchDelay * i);
+        ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + batchDelay * i);    
+        ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + batchDelay * i);
+        ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + batchDelay * i);    
+        ns.exec("batch/W_worker.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + batchDelay * i, ns.pid, 0);
       }
 
       await ns.sleep(weakenTime + 1080 + batchDelay * batches);
