@@ -138,7 +138,7 @@ export async function main(ns: NS) {
       
       if (level != ns.getHackingLevel()){
         level = ns.getHackingLevel()
-        for (let i = 0; i < hackPids.length; i += 2){
+        for (let i = 0; i < hackPids.length; i += 10){
           ns.kill(hackPids[i]);
         }
         break;
