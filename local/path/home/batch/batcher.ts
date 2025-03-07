@@ -62,11 +62,11 @@ export async function main(ns: NS) {
     ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: " + targetHost + " Hack time is "
             + hackTime + " and Grow time is " + growTime + " and Weaken time is " + weakenTime + "\n", "a");
 
-    const hackDelay: number = weakenTime - hackTime - 30;
+    const hackDelay: number = weakenTime - hackTime - 15;
     const weaken1Delay: number = 0;
-    const growDelay: number = weakenTime - growTime + 30;
-    const weaken2Delay: number = 60;
-    const batchDelay: number = 120;
+    const growDelay: number = weakenTime - growTime + 15;
+    const weaken2Delay: number = 30;
+    const batchDelay: number = 60;
 
     let hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/5));
     let growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 1.3));
@@ -136,10 +136,10 @@ export async function main(ns: NS) {
           ns.kill(hackPids[i]);
         }
       }
-      hackPids.push(ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 30));
-      ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 30);
-      ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + 30);    
-      ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 30, ns.pid, workerPid);
+      hackPids.push(ns.exec("batch/H_worker.js", exHost, hackThreads, targetHost, hackTime, Date.now() + hackTime + hackDelay + 15));
+      ns.exec("batch/W_worker.js", exHost, weaken1Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken1Delay + 15);
+      ns.exec("batch/G_worker.js", exHost, growthThreads, targetHost, growTime, Date.now() + growTime + growDelay + 15);    
+      ns.exec("batch/W_worker2.js", exHost, weaken2Threads, targetHost, weakenTime, Date.now() + weakenTime + weaken2Delay + 15, ns.pid, workerPid);
       
       if (level != ns.getHackingLevel()){
         level = ns.getHackingLevel()
