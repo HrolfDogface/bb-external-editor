@@ -13,11 +13,11 @@ export async function main(ns) {
     delay = 0;
   }
   let money = await ns.hack(ns.args[0], {additionalMsec:  delay});
-  let totalTime = Date.now() - startTime;
+  //let totalTime = Date.now() - startTime;
   
-  const error = Date.now() - ns.args[2];
+  //const error = Date.now() - ns.args[2];
   
-  ns.write("batch/batchLog.txt", Date.now() + "[H_worker.js]: finished Hack of " 
-                    + ns.args[0] + " $" + money + " stolen in " + totalTime + " msec " +  error + " " + ns.pid + "\n", "a");
+  //ns.write("batch/batchLog.txt", Date.now() + "[H_worker.js]: finished Hack of " 
+  //                  + ns.args[0] + " $" + money + " stolen in " + totalTime + " msec " +  error + " " + ns.pid + "\n", "a");
 
 }

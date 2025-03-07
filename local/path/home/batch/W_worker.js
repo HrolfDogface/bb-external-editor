@@ -13,11 +13,11 @@ export async function main(ns) {
     delay = 0;
   }
   let money = await ns.weaken(ns.args[0], {additionalMsec:  delay});
-  let totalTime = Date.now() - startTime;
+  //let totalTime = Date.now() - startTime;
   
-  const error = Date.now() - ns.args[2];
+  //const error = Date.now() - ns.args[2];
   
-  ns.write("batch/batchLog.txt", Date.now() + "[W_worker.js]: finished Weaken of " 
-                    + ns.args[0] + ". Security by " + money + " in" + totalTime + " msec " + error + " " + ns.pid + "\n", "a");
+  //ns.write("batch/batchLog.txt", Date.now() + "[W_worker.js]: finished Weaken of " 
+  //                  + ns.args[0] + ". Security by " + money + " in" + totalTime + " msec " + error + " " + ns.pid + "\n", "a");
 
 }
