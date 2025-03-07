@@ -13,11 +13,11 @@ export async function main(ns) {
     delay = 0;
   }
   let money = await ns.grow(ns.args[0], {additionalMsec:  delay});
-  //let totalTime = Date.now() - startTime;
+  let totalTime = Date.now() - startTime;
   
-  //const error = Date.now() - ns.args[2];
+  const error = Date.now() - ns.args[2];
   
-  //ns.write("batch/batchLog.txt", Date.now() + "[G_worker.js]: finished Grow of " 
-  //                  + ns.args[0] + ". Money grown by " + money + "% in" + totalTime + " msec " + error + " " + ns.pid + "\n", "a");
+  ns.write("batch/batchLog.txt", Date.now() + "[G_worker.js]: finished Grow of " 
+                    + ns.args[0] + ". Money grown by " + money + "% in" + totalTime + " msec " + error + " " + ns.pid + "\n", "a");
 
 }

@@ -120,7 +120,7 @@ export async function main(ns: NS) {
     }
 
     
-    const maxFinishedSets = 5;
+    const maxFinishedSets = 2;
     let tempPid = -1;
     while (true)
     {
@@ -166,6 +166,7 @@ export async function main(ns: NS) {
         {
           finishedSets = 0;
           finishedFlag = true;
+          previousWorkerPid = 0;
         }
         
         if (level != ns.getHackingLevel()){
