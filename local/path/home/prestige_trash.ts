@@ -60,6 +60,7 @@ export async function main(ns: NS) {
     let scanLevel: number = level/3;
     if (servers.length > 10) scanLevel = level/2;
     ns.exec("trash_bash.ts", "home", 1, scanLevel);
+    await ns.sleep(10000);
     const currentRam: number = ns.getServerMaxRam(servers[0]);
     const serverCost = ns.getPurchasedServerCost(currentRam);
     while (true){
