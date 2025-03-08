@@ -39,6 +39,8 @@ export async function main(ns: NS) {
 
   ns.exec("trash_bash.ts", "home", 1, 100);
 
+
+  ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 1\n", "w");
   const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
   currentMoney = 0;
@@ -46,7 +48,6 @@ export async function main(ns: NS) {
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
   }
-
 
   while (true){
     ns.killall("home", true);
@@ -59,7 +60,8 @@ export async function main(ns: NS) {
     let scanLevel: number = level/3;
     if (servers.length > 10) scanLevel = level/2;
     ns.exec("trash_bash.ts", "home", 1, scanLevel);
-    const serverCost = ns.getPurchasedServerCost(ns.getServerMaxRam(servers[0]));
+    const currentRam: number = ns.getServerMaxRam(servers[0]);
+    const serverCost = ns.getPurchasedServerCost(currentRam);
     while (true){
       if (ns.getHackingLevel() > level * 1.25){
         break;
