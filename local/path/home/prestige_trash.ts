@@ -40,7 +40,7 @@ export async function main(ns: NS) {
   ns.exec("trash_bash.ts", "home", 1, 100);
 
 
-  ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 1\n", "w");
+  //ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 1\n", "w");
   const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
   currentMoney = 0;
