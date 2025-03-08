@@ -40,7 +40,6 @@ export async function main(ns: NS) {
   ns.exec("trash_bash.ts", "home", 1, 100);
 
 
-  ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 1\n", "w");
   const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
   currentMoney = 0;
@@ -51,7 +50,7 @@ export async function main(ns: NS) {
 
   while (true){
     ns.killall("home", true);
-    const servers: string[] = ns.getPurchasedServers();
+    let servers: string[] = ns.getPurchasedServers();
     for(let i: number = 0; i < servers.length; i++){
       ns.killall(servers[i]);
     }
@@ -60,25 +59,17 @@ export async function main(ns: NS) {
     let scanLevel: number = level/3;
     if (servers.length > 10) scanLevel = level/2;
     ns.exec("trash_bash.ts", "home", 1, scanLevel);
-    await ns.sleep(10000);
-    ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 2\n", "a");
-    const currentRam: number = ns.getServerMaxRam(servers[0]);
-    
-    ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 2a\n", "a");
+    await ns.sleep(60000);
+    servers = ns.getPurchasedServers();
+    const currentRam: number = ns.getServerMaxRam(servers[0]);    
     const serverCost = ns.getPurchasedServerCost(currentRam);
-    ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 2b\n", "a");
     while (true){
-      ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 3a\n", "a");
       if (ns.getHackingLevel() > level * 1.25){
-        ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 3\n", "a");
         break;
       }
-      ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 4a\n", "a");
       if ((servers.length < 10)&&(ns.getServerMoneyAvailable("home") > serverCost)){
-        ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 4\n", "a");
         break;
       }
-      ns.write("prestigeLog.txt", Date.now() + "[prestige_trash.ts]: debug pt, 5\n", "a");
       await ns.sleep(10000);
     }
 
