@@ -3,14 +3,31 @@ kill all batcher.ts script targetin all pserv and home
 
 update time frome date to  performance.now() 
 join factions scripts
+-join all available factions
+-check if any factions can have their joining criteria met 
+-meet criteria (pop servers and travel places)
+-join all available factions
+
 Working for factions and switching between them
+-Work for CSEC if favor + favor gained is less than 150
+-work for all other factions that have favor less than 150 and augments available in increments of 10k rep (maybe scale this ammount)
+
 Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
+-Buy max ammount of NFG, donating as needed
+-Spend rest of money to buy as many augments as possible. Starting with most expensive that can be purchased including cost of any necessary donations
+
 upgrading ram and cores
 script to figure out when to restart
+-Can you ugrade ram to minimum 8TB?
+-Can you stack 10 levels of NFG?
+
 restart (install augments after buying)
+-Buy home ram upgrades
+-buy augments
+-buy cores
+-restart
 
 update prebatcher to redo server prep if needed in between batches
-fix continuous batcher
 
 convert all scripts to TS
 refactor scripts
