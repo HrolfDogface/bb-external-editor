@@ -142,3 +142,4 @@ build/
 
 .vscode/*
 !.vscode/launch.json
+local/path/home/prestigeLog.txt
