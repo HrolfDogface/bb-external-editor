@@ -1,0 +1,12 @@
+export async function main(ns: NS) {
+
+    const factions: string[] = ["CyberSec", "Aevum", "Chongqing", "Daedalus", "Ishima", "New Tokyo", "NiteSec", "Sector-12", "Slum Snakes", "Tetrads", "The Black Hand", "Tian Di Hui", "Volhaven"];
+
+    for(let i = 0; i < factions.length; i++){
+        if ((ns.singularity.getFactionRep(factions[i])>0) && ((ns.singularity.getFactionFavor(factions[i]) + ns.singularity.getFactionFavorGain(factions[i])) < 150)){
+            ns.singularity.workForFaction(factions[i],ns.singularity.getFactionWorkTypes(factions[i])[0]);
+            break;
+        }
+    }
+
+}
