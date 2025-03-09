@@ -1,4 +1,4 @@
-debug prestige_trash crash
+
 kill all batcher.ts script targetin all pserv and home
 
 update time frome date to  performance.now() 
@@ -10,8 +10,9 @@ join factions scripts
 -join all available factions
 
 Working for factions and switching between them
--Work for CSEC if favor + favor gained is less than 150
--work for all other factions that have favor less than 150 and augments available in increments of 10k rep (maybe scale this ammount)
+*-Work for CSEC if favor + favor gained is less than 150
+*-work for all other factions that have favor less than 150 one at a time until they have 150 favor
+-rotate through and check augments available in increments of 10k rep (maybe scale this ammount)
 
 Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
 -Buy max ammount of NFG, donating as needed
@@ -28,6 +29,11 @@ restart (install augments after buying)
 -buy cores
 -restart
 
+create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
+add sharing home into prestige and prestige_trash
+
+upgrade batcher targeting to figure out actual money gain
+
 update prebatcher to redo server prep if needed in between batches
 
 convert all scripts to TS
@@ -35,8 +41,6 @@ refactor scripts
 do ports
 do JIT batcher
 
-create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
-add sharing home into prestige and prestige_trash
 read through every function in the documentation again
 Working for companies, training CHA to qualify for promotions, accepting promotions, and joining the company faction once it's available
 create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.
@@ -61,3 +65,22 @@ Factions:
 "The Black Hand"
 "Tian Di Hui"
 "Volhaven"
+
+figure out ram cost
+upgrade ram
+upgrade cores
+
+finish_bitnode.ts
+
+check to see if upgrading ram is a better idea
+check to see if you can donate or not 
+if not check other augments along with NFG to get to 10 augments
+figure total NFG upgrade cost
+figure total NFG donation cost
+
+wait for money
+donate
+purchase NFG
+purchase all other augments
+
+install augments
