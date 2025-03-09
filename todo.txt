@@ -2,6 +2,7 @@ debug prestige_trash crash
 kill all batcher.ts script targetin all pserv and home
 
 update time frome date to  performance.now() 
+
 join factions scripts
 -join all available factions
 -check if any factions can have their joining criteria met 

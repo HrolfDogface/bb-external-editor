@@ -131,7 +131,8 @@ export async function main(ns: NS) {
 
 
       if ((ns.getServerSecurityLevel(targetHost) > minSecurity)||(ns.getServerMoneyAvailable(targetHost) < (ns.getServerMaxMoney(targetHost) * 0.98))){ 
-        const killNumber: number = 10;
+        let killNumber: number = 10;
+        if (killNumber > hackPids.length) killNumber = hackPids.length;
         for (let i = 0; i < killNumber; i++){
           ns.kill(hackPids[i]);
         }
