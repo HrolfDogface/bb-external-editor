@@ -44,3 +44,20 @@ add timers to status panel? At least for server prep
 migrate all to typescript
 do contracts!
 Have Batcher Auto increase and decrease target % absed on RAM
+
+
+
+Factions:
+"Aevum"
+"Chongqing"
+"CyberSec"
+"Daedalus"
+"Ishima"
+"New Tokyo"
+"NiteSec"
+"Sector-12"
+"Slum Snakes"
+"Tetrads"
+"The Black Hand"
+"Tian Di Hui"
+"Volhaven"

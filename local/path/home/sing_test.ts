@@ -13,10 +13,12 @@ export async function main(ns: NS) {
     //ns.kill();
     //ns.tprint("baz");
 
-    const pid: number = ns.exec("factions/join_faction.ts", "home", 1, "CyberSec");
-    await ns.nextPortWrite(pid);
-    const result: boolean = ns.readPort(pid);
-    ns.tprint(result);
+    //const pid: number = ns.exec("factions/join_faction.ts", "home", 1, "CyberSec");
+    //await ns.nextPortWrite(pid);
+    //const result: boolean = ns.readPort(pid);
+    //ns.tprint(result);
+
+    ns.tprint(ns.singularity.getFactionRep("CyberSec"));
 
 
 
