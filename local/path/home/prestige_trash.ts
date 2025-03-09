@@ -39,6 +39,9 @@ export async function main(ns: NS) {
 
   ns.exec("trash_bash.ts", "home", 1, 100);
 
+  ns.exec("pop_all.ts", "home", 1);
+  await ns.sleep(10000);
+  ns.exec("factions/join_all_factions.ts", "home", 1);
 
   const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
@@ -59,7 +62,11 @@ export async function main(ns: NS) {
     let scanLevel: number = level/3;
     if (servers.length > 10) scanLevel = level/2;
     ns.exec("trash_bash.ts", "home", 1, scanLevel);
+    
+    ns.exec("pop_all.ts", "home", 1);
     await ns.sleep(60000);
+    ns.exec("factions/join_all_factions.ts", "home", 1);
+    
     servers = ns.getPurchasedServers();
     const currentRam: number = ns.getServerMaxRam(servers[0]);    
     const serverCost = ns.getPurchasedServerCost(currentRam);

@@ -111,6 +111,11 @@ export async function main(ns: NS) {
 
     ns.writePort(1, target);
 
+    
+  ns.exec("pop_all.ts", "home", 1);
+  await ns.sleep(10000);
+  ns.exec("factions/join_all_factions.ts", "home", 1);
+
     if (ns.getPurchasedServers().length >= ns.getPurchasedServerLimit() )
     {
       break;
