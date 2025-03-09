@@ -62,11 +62,11 @@ export async function main(ns: NS) {
     ns.write("batch/batchLog.txt", Date.now() + "[batcher.ts]: " + targetHost + " Hack time is "
             + hackTime + " and Grow time is " + growTime + " and Weaken time is " + weakenTime + "\n", "w");
 
-    const hackDelay: number = weakenTime - hackTime - 5;
+    const hackDelay: number = weakenTime - hackTime - 0;
     const weaken1Delay: number = 0;
-    const growDelay: number = weakenTime - growTime + 5;
-    const weaken2Delay: number = 10;
-    const batchDelay: number = 20;
+    const growDelay: number = weakenTime - growTime + 0;
+    const weaken2Delay: number = 0;
+    const batchDelay: number = 5;
 
     let hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/5));
     let growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 1.3));
