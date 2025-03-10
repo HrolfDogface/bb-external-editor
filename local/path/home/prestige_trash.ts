@@ -75,8 +75,12 @@ export async function main(ns: NS) {
     const currentRam: number = ns.getServerMaxRam(servers[0]);    
     const serverCost = ns.getPurchasedServerCost(currentRam);
     const upgradeCost = ns.getPurchasedServerCost(currentRam*2);
+    const maxCost = ns.getPurchasedServerCost(ns.getPurchasedServerMaxRam());
     while (true){
-      if (ns.getHackingLevel() > level * 1.25){
+      if (ns.getHackingLevel() > level * 1.15){
+        break;
+      }  
+      if ((servers.length < ns.getPurchasedServerLimit())&&(ns.getServerMoneyAvailable("home") )> maxCost){
         break;
       }      
       if (ns.getServerMoneyAvailable("home") > upgradeCost){
