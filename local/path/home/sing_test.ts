@@ -18,22 +18,24 @@ export async function main(ns: NS) {
     //const result: boolean = ns.readPort(pid);
     //ns.tprint(result);
 
-    ns.tprint(ns.singularity.getFactionRep("CyberSec"));
-    ns.tprint(ns.singularity.getAugmentationPrice("NeuroFlux Governor"));
-    ns.tprint(ns.singularity.getAugmentationRepReq("NeuroFlux Governor"));
-    const startRep: number = ns.singularity.getFactionRep("CyberSec");
-    ns.singularity.donateToFaction("CyberSec", 100);
-    const hundredRep: number = ns.singularity.getFactionRep("CyberSec");
-    ns.singularity.donateToFaction("CyberSec", 1000000);
-    const millionRep: number = ns.singularity.getFactionRep("CyberSec");
+    //ns.tprint(ns.singularity.getFactionRep("CyberSec"));
+    //ns.tprint(ns.singularity.getAugmentationPrice("NeuroFlux Governor"));
+    //ns.tprint(ns.singularity.getAugmentationRepReq("NeuroFlux Governor"));
+    //const startRep: number = ns.singularity.getFactionRep("CyberSec");
+    //ns.singularity.donateToFaction("CyberSec", 100);
+    //const hundredRep: number = ns.singularity.getFactionRep("CyberSec");
+    //ns.singularity.donateToFaction("CyberSec", 1000000);
+    //const millionRep: number = ns.singularity.getFactionRep("CyberSec");
+//
+    //ns.tprint(hundredRep - startRep);
+    //ns.tprint(millionRep - hundredRep);
+    //
+    //ns.tprint((millionRep - hundredRep)/(hundredRep - startRep));
+    //ns.tprint((hundredRep - startRep)*10000);
 
-    ns.tprint(hundredRep - startRep);
-    ns.tprint(millionRep - hundredRep);
-    
-    ns.tprint((millionRep - hundredRep)/(hundredRep - startRep));
-    ns.tprint((hundredRep - startRep)*10000);
+    const factionName: string = ns.enums.FactionName.CyberSec;
 
-
+    ns.tprint(factionName);
 
 
 }

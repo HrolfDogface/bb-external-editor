@@ -1,3 +1,6 @@
+have pop_all check level requirement so as not to spam errors
+
+upgrade to 64GB home server asap in prestige.ts
 Ram Dodge pop_all
 
 kill all batcher.ts script targetin all pserv and home
@@ -39,7 +42,6 @@ update prebatcher to redo server prep if needed in between batches
 
 convert all scripts to TS
 refactor scripts
-do JIT batcher
 
 read through every function in the documentation again
 Working for companies, training CHA to qualify for promotions, accepting promotions, and joining the company faction once it's available
@@ -50,6 +52,7 @@ do contracts!
 do infiltration
 do stocks
 Have Batcher Auto increase and decrease target % absed on RAM
+do JIT batcher**maybe**
 
 
 
