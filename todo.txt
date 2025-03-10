@@ -1,3 +1,4 @@
+Ram Dodge pop_all
 
 kill all batcher.ts script targetin all pserv and home
 
