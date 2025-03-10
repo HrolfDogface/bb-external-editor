@@ -78,9 +78,11 @@ export async function main(ns: NS) {
     ns.scp("security.js", hostname);
     ns.scp("hack.js", hostname);
     ns.scp("batch/pre_batcher.ts", hostname);
+    ns.scp("batch/batcher.ts", hostname);
     ns.scp("batch/H_worker.js", hostname);
     ns.scp("batch/W_worker.js", hostname);
     ns.scp("batch/G_worker.js", hostname);
+    ns.scp("batch/W_worker2.js", hostname);
     firstLoop = false;
 
     let neighbors = search(ns, "home", level);
@@ -106,7 +108,7 @@ export async function main(ns: NS) {
     if(maxRam < 1024 * 4){
       ns.exec("loop_max.ts", "home", 1, hostname, target);
     }else{
-      ns.exec("batch/pre_batcher.ts", hostname, 1, hostname, target);
+      ns.exec("batch/batcher.ts", hostname, 1, hostname, target);
     }
 
     ns.writePort(1, target);
