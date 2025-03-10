@@ -18,13 +18,13 @@ Buying augments (and any prerequisites, using recursion) from most to least expe
 -Buy max ammount of NFG, donating as needed
 -Spend rest of money to buy as many augments as possible. Starting with most expensive that can be purchased including cost of any necessary donations
 
-upgrading ram and cores
-script to figure out when to restart
--Can you ugrade ram to minimum 8TB?
--Can you stack 10 levels of NFG?
+#upgrading ram and cores
+#script to figure out when to restart
+#-Can you ugrade ram to minimum 8TB?
+#-Can you stack 10 levels of NFG?
 
 restart (install augments after buying)
--Buy home ram upgrades
+#-Buy home ram upgrades
 -buy augments
 -buy cores
 -restart
@@ -38,7 +38,6 @@ update prebatcher to redo server prep if needed in between batches
 
 convert all scripts to TS
 refactor scripts
-do ports
 do JIT batcher
 
 read through every function in the documentation again
@@ -47,6 +46,8 @@ create server prep daemon to buy, upgrade and run on a pserv. Also decrease max 
 add timers to status panel? At least for server prep
 migrate all to typescript
 do contracts!
+do infiltration
+do stocks
 Have Batcher Auto increase and decrease target % absed on RAM
 
 
@@ -84,3 +85,14 @@ purchase NFG
 purchase all other augments
 
 install augments
+
+NFG: 14% increase per level plus mult increase of 1.9 per mult.
+so tenth level of NFG costs (first level cost) * 1.14^10 * 1.9^10
+
+2.884
+6.248 1.9 mult
+13.533 3.610 mult 2.499m rep
+29.312 6.859 2.849m rep
+63.489 13.032 3.248
+137.518 24.761 3.703
+

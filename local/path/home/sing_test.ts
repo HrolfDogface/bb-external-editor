@@ -29,6 +29,8 @@ export async function main(ns: NS) {
 
     ns.tprint(hundredRep - startRep);
     ns.tprint(millionRep - hundredRep);
+    
+    ns.tprint((millionRep - hundredRep)/(hundredRep - startRep));
     ns.tprint((hundredRep - startRep)*10000);
 
 
