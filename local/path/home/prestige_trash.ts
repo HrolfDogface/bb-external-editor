@@ -80,9 +80,12 @@ export async function main(ns: NS) {
       if (ns.getHackingLevel() > level * 1.15){
         break;
       }  
-      if ((servers.length < ns.getPurchasedServerLimit())&&(ns.getServerMoneyAvailable("home") )> maxCost){
+      //if ((servers.length < ns.getPurchasedServerLimit())&&(ns.getServerMoneyAvailable("home") )> maxCost){
+      //  break;
+      //}
+      if ((servers.length < 15)&&(ns.getServerMoneyAvailable("home") )> maxCost){
         break;
-      }      
+      }       
       if (ns.getServerMoneyAvailable("home") > upgradeCost){
         break;
       }

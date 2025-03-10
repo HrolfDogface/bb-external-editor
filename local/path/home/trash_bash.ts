@@ -46,7 +46,9 @@ export async function main(ns: NS) {
     ns.writePort(1, neighbors[0].hostName);
   }
 
-  const maxServers: number = ns.getPurchasedServerLimit();
+  //const maxServers: number = ns.getPurchasedServerLimit();
+  const maxServers: number = 15;
+
 
   if(serverCount > maxServers){
     serverCount = maxServers;
