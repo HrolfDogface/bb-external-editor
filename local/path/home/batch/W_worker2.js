@@ -18,8 +18,8 @@ export async function main(ns) {
   //let totalTime = performance.now() - startTime;
 
   //const error = performance.now() - ns.args[2];
-
-  ns.writePort(ns.args[3], ns.pid);
+  ns.atExit(() => ns.writePort(ns.args[3], ns.pid));
+  //ns.writePort(ns.args[3], ns.pid);
   //ns.write("batch/batchLog.txt", performance.now() + "[W_worker2.js]: finished Weaken of " 
   //                 + ns.args[0] + ". Security by " + security + " in" + totalTime + " msec " +  error + " " + ns.args[4] + " " + ns.pid + "\n", "a");
 

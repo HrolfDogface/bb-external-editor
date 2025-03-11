@@ -8,10 +8,10 @@ export async function main(ns: NS) {
 
   ns.disableLog('ALL');
   ns.clearLog();
-  ns.tail();
-  ns.resizeTail(495, 32 + (24 * ns.args.length));
-  ns.setTitle("Targets Status");
-  ns.moveTail(1635, 0);
+  ns.ui.openTail();
+  ns.ui.resizeTail(495, 32 + (24 * ns.args.length));
+  ns.ui.setTailTitle("Targets Status");
+  ns.ui.moveTail(1635, 0);
 
   let targets: string[] = [];
   for (let i = 0; i < ns.args.length; i++){

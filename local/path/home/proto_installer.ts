@@ -21,7 +21,7 @@ export async function main(ns: NS) {
 
     //const installCost: number = ramUpgradeCost + nfgCost;
 
-   // ns.tprint("Money threshold for buying and installing augments: " + ns.formatNumber(installCost));
+   //ns.tprint("Money threshold for buying and installing augments: " + ns.formatNumber(nfgCost));
 
     if (ns.getServerMoneyAvailable("home") > nfgCost){
         //ns.singularity.upgradeHomeRam();
@@ -34,15 +34,20 @@ export async function main(ns: NS) {
             const nfgRepReq: number = ns.singularity.getAugmentationRepReq("NeuroFlux Governor");
             const csecRep: number = ns.singularity.getFactionRep("CyberSec");
             if(nfgRepReq > csecRep){
+                //ns.tprint("debug pt. A");
                 if(ns.getFavorToDonate() > ns.singularity.getFactionFavor("CyberSec")){
+                    //ns.tprint("debug pt. B");
                     break;
                 }else{
+                    //ns.tprint("debug pt. C");
                     ns.singularity.donateToFaction("CyberSec", 100);
                     const donationResult: number = ns.singularity.getFactionRep("CyberSec") - csecRep;
                     const donationAmmount: number = 99 * (nfgRepReq - csecRep) / donationResult;
-                    if(donationAmmount > ns.singularity.getFactionFavor("CyberSec")){
+                    if(donationAmmount > ns.getServerMoneyAvailable("home")){
+                        //ns.tprint("debug pt. D");
                         break;
                     }else {
+                        //ns.tprint("debug pt. E");
                         ns.singularity.donateToFaction("CyberSec", donationAmmount);
                     }
                 }
