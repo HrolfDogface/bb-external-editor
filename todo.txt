@@ -1,3 +1,5 @@
+have batcher fill up the rest of a server's ram with share
+
 have pop_all check level requirement so as not to spam errors
 
 upgrade to 64GB home server asap in prestige.ts
