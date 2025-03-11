@@ -13,6 +13,8 @@ export async function main(ns: NS) {
             ns.singularity.upgradeHomeRam();
         }
     }
+
+    if (ns.getServerMaxRam("home") < (1024 * 8)) return;
     
     const nfgBaseCost: number = ns.singularity.getAugmentationPrice("NeuroFlux Governor");
     const nfgCost: number = nfgBaseCost * Math.pow(1.14, 10) * Math.pow(1.9, 10);
