@@ -6,7 +6,7 @@ export async function main(ns) {
     //args[2]:G thread count
     //args[3]:executing host name
     
-    ns.write("batch/batchLog.txt", Date.now() + "[target_presp.js]: starting target prep\n", "a");
+    ns.write("batch/batchLog.txt", performance.now() + "[target_presp.js]: starting target prep\n", "a");
   
     ns.kill("security.js", ns.args[3], ns.args[0]);
     ns.kill("money.js", ns.args[3], ns.args[0]);
@@ -31,6 +31,6 @@ export async function main(ns) {
     }  
     ns.kill("security.js", ns.args[3], ns.args[0]);
   
-    ns.write("batch/batchLog.txt", Date.now() + "[target_presp.js]: finished target prep\n", "a");
+    ns.write("batch/batchLog.txt", performance.now() + "[target_presp.js]: finished target prep\n", "a");
   
   }
