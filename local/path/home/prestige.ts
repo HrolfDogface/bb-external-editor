@@ -125,7 +125,7 @@ export async function main(ns: NS) {
         currentMoney = ns.getServerMoneyAvailable("home");
         await ns.sleep(10000);
       }
-      ns.singularity.upgradeHomeRam();
+      ns.exec("upgrade_Ram.ts", "home", 1);
     }
     
   ns.exec("pop_all.ts", "home", 1);
