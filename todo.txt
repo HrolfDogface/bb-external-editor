@@ -1,3 +1,5 @@
+NFG level 46
+
 
 have batcher fill up the rest of a server's ram with share
 
