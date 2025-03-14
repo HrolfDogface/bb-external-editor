@@ -24,11 +24,7 @@ export async function main(ns: NS) {
    //ns.tprint("Money threshold for buying and installing augments: " + ns.formatNumber(nfgCost));
 
     if (ns.getServerMoneyAvailable("home") > nfgCost){
-        //ns.singularity.upgradeHomeRam();
-        //while (ns.getServerMaxRam("home") < (1024 * 8)){
-        //    ns.singularity.upgradeHomeRam();
-        //}
-
+        
         //Purchase NFG
         while(ns.getServerMoneyAvailable("home") > ns.singularity.getAugmentationPrice("NeuroFlux Governor")){
             const nfgRepReq: number = ns.singularity.getAugmentationRepReq("NeuroFlux Governor");
@@ -55,8 +51,23 @@ export async function main(ns: NS) {
             ns.singularity.purchaseAugmentation("CyberSec", "NeuroFlux Governor");
         }  
 
-        
+            //go through each faction to see which ones have any rep to detect joined factions
+        for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){
+            if (ns.singularity.getFactionRep(Object.values(ns.enums.FactionName)[i]) > 0){
+                ns.tprint(ns.enums.FactionName[i]);
+                const augmentations: string [] = ns.singularity.getAugmentationsFromFaction(Object.values(ns.enums.FactionName)[i]);
+                for (let i = 0; i<augmentations.length;i++){
+                    ns.tprint(augmentations[i]);
+                }
+            }
+
+
+        }
         //Purchase other augments
+            //go through each faction's augments and find the most expensive one that can be afforded across all factions
+            //buy the most expensive augment then the next until can't afford any more or they are all purchased
+            //look for augments that can be afforded after a donation then donate and buy
+
         //purchase cores
         //install
 

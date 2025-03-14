@@ -47,9 +47,9 @@ export async function main(ns: NS) {
     await ns.sleep(10000);
   }
   
-  //ns.kill("security.js", "home", "n00dles");
-  //ns.kill("money.js", "home", "n00dles");
-  //ns.kill("hack.js","home", "n00dles");
+  //ns.kill("security.ts", "home", "n00dles");
+  //ns.kill("money.ts", "home", "n00dles");
+  //ns.kill("hack.ts","home", "n00dles");
 
   let firstLoop: boolean = true;
   let maxRam: number = ns.getPurchasedServerMaxRam();
@@ -72,17 +72,17 @@ export async function main(ns: NS) {
     }
     hostname = ns.purchaseServer("pserv-prestige", maxRam);
     
-    ns.scp("target_prep.js", hostname);
+    ns.scp("target_prep.ts", hostname);
     ns.scp("loop_max.ts", hostname);
-    ns.scp("money.js", hostname);
-    ns.scp("security.js", hostname);
-    ns.scp("hack.js", hostname);
+    ns.scp("money.ts", hostname);
+    ns.scp("security.ts", hostname);
+    ns.scp("hack.ts", hostname);
     ns.scp("batch/pre_batcher.ts", hostname);
     ns.scp("batch/batcher.ts", hostname);
-    ns.scp("batch/H_worker.js", hostname);
-    ns.scp("batch/W_worker.js", hostname);
-    ns.scp("batch/G_worker.js", hostname);
-    ns.scp("batch/W_worker2.js", hostname);
+    ns.scp("batch/H_worker.ts", hostname);
+    ns.scp("batch/W_worker.ts", hostname);
+    ns.scp("batch/G_worker.ts", hostname);
+    ns.scp("batch/W_worker2.ts", hostname);
     firstLoop = false;
 
     let neighbors = search(ns, "home", level);
@@ -173,9 +173,9 @@ export async function main(ns: NS) {
   //  await ns.sleep(250);
   //}
 //
-  //ns.kill("security.js", "home", "n00dles");
-  //ns.kill("money.js", "home", "n00dles");
-  //ns.kill("hack.js", "home", "n00dles");
+  //ns.kill("security.ts", "home", "n00dles");
+  //ns.kill("money.ts", "home", "n00dles");
+  //ns.kill("hack.ts", "home", "n00dles");
 //
   //
   //const hostNames = ["sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", 
@@ -186,8 +186,8 @@ export async function main(ns: NS) {
  //for (let i = 0; i < hostNames.length; i++){
  //  ns.exec("pop.ts", "home", 1, hostNames[i]);
  //  await ns.sleep(2000);
- //  //ns.exec("controller_basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
- //  ns.exec("controller_basic.js", "home", 1, hostNames[i], 200, 1500, 20, "home");
+ //  //ns.exec("controller_basic.ts", "home", 1, hostNames[i], 200, 1500, 20, "home");
+ //  ns.exec("controller_basic.ts", "home", 1, hostNames[i], 200, 1500, 20, "home");
  //}
 
   /*while (ns.getHackingLevel() < 150){
@@ -200,7 +200,7 @@ export async function main(ns: NS) {
   for (let i = 0; i < hostNames.length; i++){
     ns.exec("pop.ts", "home", 1, hostNames[i]);
     await ns.sleep(2000);
-    ns.exec("controller_basic.js", "home", 1, hostNames[i], 179, 925, 45 );
+    ns.exec("controller_basic.ts", "home", 1, hostNames[i], 179, 925, 45 );
   }*/
 
   ns.tprint("That death star is fully opperational!");

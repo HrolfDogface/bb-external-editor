@@ -6,20 +6,20 @@ export async function main(ns: NS) {
   const executingServer: string = String(ns.args[0]);
   const targetServer: string = String(ns.args[1]);
   
-  ns.kill("security.js", executingServer, targetServer);
-  ns.kill("money.js", executingServer, targetServer);
-  ns.kill("hack.js", executingServer, targetServer);
+  ns.kill("security.ts", executingServer, targetServer);
+  ns.kill("money.ts", executingServer, targetServer);
+  ns.kill("hack.ts", executingServer, targetServer);
 
   let freeRam = ns.getServerMaxRam(executingServer) - ns.getServerUsedRam(executingServer);
   if (freeRam > 2028){
     freeRam = 2028;
   }  
   
-  const weakenRam = ns.getScriptRam("security.js", executingServer);
+  const weakenRam = ns.getScriptRam("security.ts", executingServer);
   
-  const growRam = ns.getScriptRam("money.js", executingServer);  
+  const growRam = ns.getScriptRam("money.ts", executingServer);  
   
-  const hackRam = ns.getScriptRam("hack.js", executingServer);
+  const hackRam = ns.getScriptRam("hack.ts", executingServer);
   
   const weakenThreadCount: number = Math.floor((freeRam) * 0.16 / weakenRam);
     
@@ -31,7 +31,7 @@ export async function main(ns: NS) {
     hackThreadCount = 1;
   }
 
-  ns.exec("target_prep.js", executingServer, 1, targetServer, weakenThreadCount, growThreadCount, executingServer);
+  ns.exec("target_prep.ts", executingServer, 1, targetServer, weakenThreadCount, growThreadCount, executingServer);
 
   const maxMoney = ns.getServerMaxMoney(targetServer);
   const minSecurity = ns.getServerMinSecurityLevel(targetServer);
@@ -46,8 +46,8 @@ export async function main(ns: NS) {
 
   await ns.sleep(1000);
 
-  ns.exec("security.js", executingServer, weakenThreadCount, targetServer);
-  ns.exec("money.js", executingServer, growThreadCount, targetServer);
-  ns.exec("hack.js", executingServer, hackThreadCount, targetServer);
+  ns.exec("security.ts", executingServer, weakenThreadCount, targetServer);
+  ns.exec("money.ts", executingServer, growThreadCount, targetServer);
+  ns.exec("hack.ts", executingServer, hackThreadCount, targetServer);
 
 }

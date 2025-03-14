@@ -72,14 +72,14 @@ export async function main(ns: NS) {
     }else if(ns.getServerMaxRam(hostname) < maxRam){
         ns.upgradePurchasedServer(hostname, maxRam);
     }
-    ns.scp("target_prep.js", hostname);
+    ns.scp("target_prep.ts", hostname);
     ns.scp("batch/batcher.ts", hostname);
-    ns.scp("money.js", hostname);
-    ns.scp("security.js", hostname);
-    ns.scp("batch/H_worker.js", hostname);
-    ns.scp("batch/W_worker.js", hostname);
-    ns.scp("batch/G_worker.js", hostname);
-    ns.scp("batch/W_worker2.js", hostname);
+    ns.scp("money.ts", hostname);
+    ns.scp("security.ts", hostname);
+    ns.scp("batch/H_worker.ts", hostname);
+    ns.scp("batch/W_worker.ts", hostname);
+    ns.scp("batch/G_worker.ts", hostname);
+    ns.scp("batch/W_worker2.ts", hostname);
 
     ns.exec("popz.ts", "home", 1, neighbors[count].hostName);
     await ns.sleep(2000);
