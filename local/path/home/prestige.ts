@@ -2,6 +2,8 @@ import { portHack } from "./pop"
 
 export async function main(ns: NS) {
 
+  
+  ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: new bitnode starting\n", "a");
   //ns.exec("pop.ts", "home", 1, "n00dles");
   //await ns.sleep(10000);
 
@@ -42,7 +44,9 @@ export async function main(ns: NS) {
 */
   let currentMoney: number = 0;
   let serverCost: number = ns.getPurchasedServerCost(128);
-  while( currentMoney < serverCost){
+
+  //wait for enough money and then start the loop
+  while (currentMoney < serverCost){
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
   }
@@ -113,6 +117,16 @@ export async function main(ns: NS) {
 
     ns.writePort(1, target);
 
+    if (ns.getServerMaxRam("home") < 64){
+      const ramUpgradeCost: number = ns.singularity.getUpgradeHomeRamCost();
+        
+      //wait for enough money and then upgrade home ram one time before doing anything else
+      while (currentMoney < ramUpgradeCost){
+        currentMoney = ns.getServerMoneyAvailable("home");
+        await ns.sleep(10000);
+      }
+      ns.singularity.upgradeHomeRam();
+    }
     
   ns.exec("pop_all.ts", "home", 1);
   await ns.sleep(10000);

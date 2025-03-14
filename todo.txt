@@ -1,12 +1,23 @@
-NFG level 46
+NFG level 61
 
+#automate backdooring world daemon and log time stamps etc.
+add a bitnode timer to the prestige logging
+
+put all faction stuff in a seperate launcher that cycles every five minutes or some such and runs independantly from the prestige scripts
 
 have batcher fill up the rest of a server's ram with share
 
 have pop_all check level requirement so as not to spam errors
 
-upgrade to 64GB home server asap in prestige.ts
-Ram Dodge pop_all
+#upgrade to 64GB home server asap in prestige.ts
+Ram Dodge pop_all etc.
+Ram Dodge prestige.ts
+
+after ram dodging pop, popz and pop all remove the initial server ram upgrade from prestige
+
+improve prestige and prestige_trash looping logic
+
+set and peek reserved ports for global variables
 
 kill all batcher.ts script targetin all pserv and home
 
@@ -21,20 +32,20 @@ Working for factions and switching between them
 *-work for all other factions that have favor less than 150 one at a time until they have 150 favor
 -rotate through and check augments available in increments of 10k rep (maybe scale this ammount)
 
-Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
--Buy max ammount of NFG, donating as needed
--Spend rest of money to buy as many augments as possible. Starting with most expensive that can be purchased including cost of any necessary donations
+#Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
+#-Buy max ammount of NFG, donating as needed
+#-Spend rest of money to buy as many augments as possible. Starting with most expensive that can be purchased including cost of any necessary donations
 
 #upgrading ram and cores
 #script to figure out when to restart
 #-Can you ugrade ram to minimum 8TB?
 #-Can you stack 10 levels of NFG?
 
-restart (install augments after buying)
+#restart (install augments after buying)
 #-Buy home ram upgrades
--buy augments
--buy cores
--restart
+#-buy augments
+#-buy cores
+#-restart
 
 create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
 add sharing home into prestige and prestige_trash

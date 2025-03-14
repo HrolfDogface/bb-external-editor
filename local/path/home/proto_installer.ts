@@ -1,5 +1,13 @@
 export async function main(ns: NS) {
 
+    const level: number = ns.getHackingLevel();
+    const daemonLevel: number = ns.getServerRequiredHackingLevel("w0r1d_d43m0n");
+    if(level >= daemonLevel){
+        ns.exec("popz.ts", "home", 1, "w0r1d_d43m0n");      
+        await ns.sleep(10000);  
+        ns.singularity.destroyW0r1dD43m0n(12, "prestige.ts");
+    }
+
     const currentRam: number = ns.getServerMaxRam("home");
     let ramUpgradeCost: number = ns.singularity.getUpgradeHomeRamCost();
 
