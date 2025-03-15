@@ -1,7 +1,17 @@
 export async function main(ns: NS) {
-  const target = String(ns.args[0]);
+  const target: string = String(ns.args[0]);
+  let hackFlag: boolean;
+  if(ns.args.length > 1) hackFlag = Boolean(ns.args[1]);
+
+  if( hackFlag == true){
+    while(!portHack(ns, target)){    
+      await ns.sleep(15000);
+      }
+  }
   // Get root access to target server
   ns.nuke(target);
+  
+  ns.atExit(() => ns.writePort(ns.pid, true));
 }
 
 

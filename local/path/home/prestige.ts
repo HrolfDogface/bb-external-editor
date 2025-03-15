@@ -1,49 +1,38 @@
-import { portHack } from "./pop"
-
 export async function main(ns: NS) {
 
   
   ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: new bitnode starting\n", "a");
-  //ns.exec("pop.ts", "home", 1, "n00dles");
-  //await ns.sleep(10000);
 
-  //ns.exec("loop_max.ts", "home", 1, "home", "n00dles");
+  //set aside 50 pids to use as port id's for global variable storage
+  ns.exec("burn_pids.ts", "home", 1, 50);
 
   const universityTargetLevel: number = 80;
   ns.exec("university.ts", "home", 1);
-  while (ns.getHackingLevel() < universityTargetLevel){
+  let tempPid: number = ns.exec("get_hacking_level.ts", "home");
+  await ns.nextPortWrite(tempPid);
+  let level: number = ns.readPort(tempPid);
+
+  while (level < universityTargetLevel){
     await ns.sleep(10000);
+    tempPid = ns.exec("get_hacking_level.ts", "home");
+    await ns.nextPortWrite(tempPid);
+    level = ns.readPort(tempPid);
   }
 
   ns.exec("pop.ts", "home", 1, "joesguns");
   
   await ns.sleep(2000);
-  ns.scp("status_panel.ts", "joesguns");
+  ns.exec("scp.ts", "home", 1, "status_panel.ts", "joesguns");
   ns.exec('status_panel.ts', "joesguns");
 
   //const crime: string = "Mug";
   ns.exec("gym_mug.ts", "home", 1);
-/*
-  let startingTargets = search(ns, "home", 40);
-  startingTargets = startingTargets.sort(function (a, b) { return b.money - a.money; });
-  const startingTarget: string = startingTargets[0].hostName;
-  //ns.exec("pop.ts", "home", 1, startingTarget);
-  while(!portHack(ns, startingTarget)){    
-  await ns.sleep(15000);
-  }
-  //await ns.sleep(2000);
-  ns.exec("pop.ts", "home", 1, startingTarget);
-  await ns.sleep(2000);
 
-  const homeRam: number = ns.getServerMaxRam("home");
-  if(homeRam < 1024 * 4){
-  ns.exec("loop_max.ts", "home", 1, "home", startingTarget);
-  }else{
-    ns.exec("batch/pre_batcher.ts", "home", 1, "home", startingTarget);
-  }
-*/
   let currentMoney: number = 0;
-  let serverCost: number = ns.getPurchasedServerCost(128);
+
+  tempPid = ns.exec("get_purchased_server_cost.ts", "home", 1, 128);
+  await ns.nextPortWrite(tempPid);
+  let serverCost: number = ns.readPort(tempPid);
 
   //wait for enough money and then start the loop
   while (currentMoney < serverCost){
@@ -61,8 +50,13 @@ export async function main(ns: NS) {
   let hostname: string;
   let previousTarget: string = "";
   while (true){
-    let level: number = ns.getHackingLevel() / 2;
-    let ramCost: number = ns.getPurchasedServerCost(maxRam);
+    tempPid = ns.exec("get_hacking_level.ts", "home");
+    await ns.nextPortWrite(tempPid);
+    level = ns.readPort(tempPid) / 2;
+
+    tempPid = ns.exec("get_purchased_server_cost.ts", "home", 1, maxRam);
+    await ns.nextPortWrite(tempPid);
+    let ramCost: number = ns.readPort(tempPid);
 
     if (level < 10){
       level = 10;
@@ -71,22 +65,26 @@ export async function main(ns: NS) {
     if(firstLoop){
       while(currentMoney < ramCost){
         maxRam = maxRam / 2;
-        ramCost = ns.getPurchasedServerCost(maxRam)
+        tempPid = ns.exec("get_purchased_server_cost.ts", "home", 1, maxRam);
+        await ns.nextPortWrite(tempPid);
+        ramCost = ns.readPort(tempPid);
       }
     }
-    hostname = ns.purchaseServer("pserv-prestige", maxRam);
-    
-    ns.scp("target_prep.ts", hostname);
-    ns.scp("loop_max.ts", hostname);
-    ns.scp("money.ts", hostname);
-    ns.scp("security.ts", hostname);
-    ns.scp("hack.ts", hostname);
-    ns.scp("batch/pre_batcher.ts", hostname);
-    ns.scp("batch/batcher.ts", hostname);
-    ns.scp("batch/H_worker.ts", hostname);
-    ns.scp("batch/W_worker.ts", hostname);
-    ns.scp("batch/G_worker.ts", hostname);
-    ns.scp("batch/W_worker2.ts", hostname);
+    ns.exec("purchase_server.ts", "home", 1, "pserv-prestige", maxRam);
+    await ns.nextPortWrite(tempPid);
+    hostname = ns.readPort(tempPid);
+
+    ns.exec("scp.ts", "home", 1, "target_prep.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "loop_max.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "money.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "security.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "hack.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "batch/pre_batcher.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "batch/batcher.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "batch/H_worker.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "batch/W_worker.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "batch/G_worker.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "batch/W_worker2.ts", hostname);
     firstLoop = false;
 
     let neighbors = search(ns, "home", level);
@@ -103,11 +101,12 @@ export async function main(ns: NS) {
 
     //need to add port check to pop
     //ns.exec("pop.ts", "home", 1, target);
-    while(!portHack(ns, target)){    
-      await ns.sleep(15000);
-      }
+    //while(!portHack(ns, target)){    
+    //  await ns.sleep(15000);
+    //  }
     //await ns.sleep(2000);
-    ns.exec("pop.ts", "home", 1, target);
+    tempPid = ns.exec("pop.ts", "home", 1, target, true);
+    await ns.nextPortWrite(tempPid);
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){
       ns.exec("loop_max.ts", hostname, 1, hostname, target);
@@ -118,7 +117,9 @@ export async function main(ns: NS) {
     ns.writePort(1, target);
 
     if (ns.getServerMaxRam("home") < 64){
-      const ramUpgradeCost: number = ns.singularity.getUpgradeHomeRamCost();
+      tempPid = ns.exec("get_upgraded_home_ram_cost.ts", "home");
+      await ns.nextPortWrite(tempPid);
+      const ramUpgradeCost: number = ns.readPort(tempPid);
         
       //wait for enough money and then upgrade home ram one time before doing anything else
       while (currentMoney < ramUpgradeCost){
@@ -128,12 +129,12 @@ export async function main(ns: NS) {
       ns.exec("upgrade_Ram.ts", "home", 1);
     }
     
-  ns.exec("pop_all.ts", "home", 1);
-  await ns.sleep(10000);
-  ns.exec("factions/join_all_factions.ts", "home", 1);
-  await ns.sleep(10000);
-  ns.exec("factions/auto_set_work.ts", "home", 1);
-  ns.exec("proto_installer.ts", "home", 1);
+    ns.exec("pop_all.ts", "home", 1);
+    await ns.sleep(10000);
+    ns.exec("factions/join_all_factions.ts", "home", 1);
+    await ns.sleep(10000);
+    ns.exec("factions/auto_set_work.ts", "home", 1);
+    ns.exec("proto_installer.ts", "home", 1);
 
     if (ns.getPurchasedServers().length >= ns.getPurchasedServerLimit() )
     {
@@ -144,79 +145,28 @@ export async function main(ns: NS) {
     if (maxRam > maxMaxRam){
       maxRam = maxMaxRam;
     }
-    serverCost = ns.getPurchasedServerCost(maxRam);
+    tempPid = ns.exec("get_purchased_server_cost.ts", "home", 1, maxRam);
+    await ns.nextPortWrite(tempPid);
+    serverCost = ns.readPort(tempPid);
     while(true){
       
       currentMoney = ns.getServerMoneyAvailable("home");
       if( currentMoney >= serverCost){
         if(maxRam != maxMaxRam){
           break;
-        } else {
-          if(ns.getHackingLevel() > level * 2.5){
+        } else {          
+          tempPid = ns.exec("get_hacking_level.ts", "home");
+          await ns.nextPortWrite(tempPid);
+          const tempLevel: number = ns.readPort(tempPid);          
+          if(tempLevel > level * 2.5){
             break;        
           }
         }
       }
-
-      //if(ns.getHackingLevel() > level * 4.5){
-      //  break;        
-      //}
-
       await ns.sleep(10000);
     }
-
-    //ns.kill('status_panel.ts', "home", target);
   }
 
-  //while (!ns.hasTorRouter()){
-  //  ns.tprint("Buy Tor Router and scripts please");
-  //  await ns.sleep(10000);
-  //}
-//
-  //while (!ns.fileExists("BruteSSH.exe", "home")){
-  //  ns.tprint("Buy BruteSSH.exe please");
-  //  await ns.sleep(5000);
-  //}
-  //
-  //while (!ns.fileExists("FTPCrack.exe", "home")){
-  //  ns.tprint("Buy FTPCrack.exe please");
-  //  await ns.sleep(5000);
-  //}
-//
-  //while (ns.getHackingLevel() < 250){
-  //  ns.tprint("Waiting for level 500");
-  //  await ns.sleep(250);
-  //}
-//
-  //ns.kill("security.ts", "home", "n00dles");
-  //ns.kill("money.ts", "home", "n00dles");
-  //ns.kill("hack.ts", "home", "n00dles");
-//
-  //
-  //const hostNames = ["sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", 
-  //                "harakiri-sushi", "iron-gym", "phantasy", "silver-helix", 
-  //                "foodnstuff", "zer0"/*, "crush-fitness", "max-hardware", "neo-net", 
-  //                "omega-net"*/];
-
- //for (let i = 0; i < hostNames.length; i++){
- //  ns.exec("pop.ts", "home", 1, hostNames[i]);
- //  await ns.sleep(2000);
- //  //ns.exec("controller_basic.ts", "home", 1, hostNames[i], 200, 1500, 20, "home");
- //  ns.exec("controller_basic.ts", "home", 1, hostNames[i], 200, 1500, 20, "home");
- //}
-
-  /*while (ns.getHackingLevel() < 150){
-    ns.tprint("Waiting for level 100");
-    await ns.sleep(30000);
-  }
-
-  hostNames = ["iron-gym", "phantasy", "silver-helix"]
-
-  for (let i = 0; i < hostNames.length; i++){
-    ns.exec("pop.ts", "home", 1, hostNames[i]);
-    await ns.sleep(2000);
-    ns.exec("controller_basic.ts", "home", 1, hostNames[i], 179, 925, 45 );
-  }*/
 
   ns.tprint("That death star is fully opperational!");
 }

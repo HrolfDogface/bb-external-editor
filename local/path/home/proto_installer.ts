@@ -1,11 +1,14 @@
 export async function main(ns: NS) {
 
-    const level: number = ns.getHackingLevel();
-    const daemonLevel: number = ns.getServerRequiredHackingLevel("w0r1d_d43m0n");
-    if(level >= daemonLevel){
-        ns.exec("popz.ts", "home", 1, "w0r1d_d43m0n");      
-        await ns.sleep(10000);  
-        ns.singularity.destroyW0r1dD43m0n(12, "prestige.ts");
+    const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(false);
+    if(ownedAugs.includes("TheRedPill")){    
+        const level: number = ns.getHackingLevel();
+        const daemonLevel: number = ns.getServerRequiredHackingLevel("w0r1d_d43m0n");
+        if(level >= daemonLevel){
+            ns.exec("popz.ts", "home", 1, "w0r1d_d43m0n");      
+            await ns.sleep(10000);  
+            ns.exec("destroy_world_daemon.ts", "home", 1, 12, "prestige.ts"); 
+        }
     }
 
     const currentRam: number = ns.getServerMaxRam("home");
@@ -110,15 +113,6 @@ export async function main(ns: NS) {
             ns.singularity.installAugmentations("prestige_trash.ts")
 
         }
-
-
-        //Purchase other augments
-            //go through each faction's augments and find the most expensive one that can be afforded across all factions
-            //buy the most expensive augment then the next until can't afford any more or they are all purchased
-            //look for augments that can be afforded after a donation then donate and buy
-
-        //purchase cores
-        //install
 
     }
 
