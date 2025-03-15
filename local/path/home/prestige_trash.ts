@@ -36,14 +36,10 @@ export async function main(ns: NS) {
   }
 */
   ns.killall("home", true);
+  
+  ns.exec("factions/meta_daemon.ts", "home", 1);
 
   ns.exec("trash_bash.ts", "home", 1, 100);
-
-  ns.exec("pop_all.ts", "home", 1);
-  await ns.sleep(10000);
-  ns.exec("factions/join_all_factions.ts", "home", 1);
-  await ns.sleep(10000);
-  ns.exec("factions/auto_set_work.ts", "home", 1);
 
   const maxRam: number = ns.getServerMaxRam("home");
   const ramCost: number = ns.getPurchasedServerCost(maxRam);
@@ -95,12 +91,6 @@ export async function main(ns: NS) {
       if(servers.length >= 15){        
       ns.exec("share_pserv.ts", "home", 1);
       }
-      ns.exec("pop_all.ts", "home", 1);
-      await ns.sleep(60000);
-      ns.exec("factions/join_all_factions.ts", "home", 1);
-      await ns.sleep(300000);
-      ns.exec("factions/auto_set_work.ts", "home", 1);
-      ns.exec("proto_installer.ts", "home", 1);
     }
 
 
