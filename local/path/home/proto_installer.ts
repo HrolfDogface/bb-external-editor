@@ -114,31 +114,29 @@ export async function main(ns: NS) {
                 }
             }
         }
+    }
 
-        if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= 10){
+    if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= 10){
+        tempPid = ns.exec("factions/get_ram_cost.ts", "home");
+        await ns.nextPortWrite(tempPid);
+        ramUpgradeCost = ns.readPort(tempPid);
+        while (ns.getServerMoneyAvailable("home") > ramUpgradeCost){ //BOOP
+            ns.exec("factions/upgrade_ram.ts", "home");
             tempPid = ns.exec("factions/get_ram_cost.ts", "home");
             await ns.nextPortWrite(tempPid);
             ramUpgradeCost = ns.readPort(tempPid);
-            while (ns.getServerMoneyAvailable("home") > ramUpgradeCost){ //BOOP
-                ns.exec("factions/upgrade_ram.ts", "home");
-                tempPid = ns.exec("factions/get_ram_cost.ts", "home");
-                await ns.nextPortWrite(tempPid);
-                ramUpgradeCost = ns.readPort(tempPid);
-            }
-
-            
+        }
+        
+        tempPid = ns.exec("factions/get_core_cost.ts", "home");
+        await ns.nextPortWrite(tempPid);
+        let coreUpgradeCost: number = ns.readPort(tempPid);
+        while (ns.getServerMoneyAvailable("home") > coreUpgradeCost){ //BOOP
+            ns.exec("factions/upgrade_cores.ts", "home");
             tempPid = ns.exec("factions/get_core_cost.ts", "home");
             await ns.nextPortWrite(tempPid);
-            let coreUpgradeCost: number = ns.readPort(tempPid);
-            while (ns.getServerMoneyAvailable("home") > coreUpgradeCost){ //BOOP
-                ns.exec("factions/upgrade_cores.ts", "home");
-                tempPid = ns.exec("factions/get_core_cost.ts", "home");
-                await ns.nextPortWrite(tempPid);
-                coreUpgradeCost = ns.readPort(tempPid);
-            }
-
-            ns.exec("factions/install_augmentations.ts", "home");
-
+            coreUpgradeCost = ns.readPort(tempPid);
         }
+        ns.exec("factions/install_augmentations.ts", "home");
     }
+    
 }

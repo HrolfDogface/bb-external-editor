@@ -1,6 +1,5 @@
 NFG level 61
 
-Ram dodge proto installer
 put all faction stuff in a seperate launcher that cycles every five minutes or some such and runs independantly from the prestige scripts
 
 create status panel for prestige scripts and proto installer to share what they are doing
