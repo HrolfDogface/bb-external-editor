@@ -27,7 +27,7 @@ export async function main(ns: NS) {
       targets.push(readValue);
     }
     
-    ns.resizeTail(495, 32 + (24 * targets.length));
+    ns.ui.resizeTail(495, 32 + (24 * targets.length));
 
     ns.clearLog();
     for (let i = 0; i < targets.length; i++){

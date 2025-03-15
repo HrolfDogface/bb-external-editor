@@ -1,5 +1,6 @@
 export async function main(ns: NS) {
 
+    //ns.tprint("debug pt. 1");
     const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(false);
     if(ownedAugs.includes("TheRedPill")){    
         const level: number = ns.getHackingLevel();
@@ -10,9 +11,10 @@ export async function main(ns: NS) {
             ns.exec("destroy_world_daemon.ts", "home", 1, 12, "prestige.ts"); 
         }
     }
-
+    
     const currentRam: number = ns.getServerMaxRam("home");
-
+    
+    //ns.tprint("debug pt. 2");
     let tempPid: number = ns.exec("factions/get_ram_cost.ts", "home");
     await ns.nextPortWrite(tempPid);
     let ramUpgradeCost: number = ns.readPort(tempPid);
@@ -22,12 +24,14 @@ export async function main(ns: NS) {
     }
 
     if (ns.getServerMoneyAvailable("home") > ramUpgradeCost){ //BOOP
-        ns.exec("factions/upgrade_ram.ts", "home");
+        tempPid = ns.exec("factions/upgrade_ram.ts", "home");
+        await ns.nextPortWrite(tempPid);
         while (ns.getServerMaxRam("home") < (1024 * 8)){ //BOOP
-            ns.exec("factions/upgrade_ram.ts", "home");
+            tempPid = ns.exec("factions/upgrade_ram.ts", "home");
+            await ns.nextPortWrite(tempPid);
         }
     }
-
+    
     if (ns.getServerMaxRam("home") < (1024 * 8)) return; //BOOP
 
     let nfgCount: number = 10 - ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length;
@@ -38,33 +42,40 @@ export async function main(ns: NS) {
     //const installCost: number = ramUpgradeCost + nfgCost;
 
    //ns.tprint("Money threshold for buying and installing augments: " + ns.formatNumber(nfgCost));
-
+    
     if (ns.getServerMoneyAvailable("home") > nfgCost){ //BOOP
         
         //Purchase NFG
         while(ns.getServerMoneyAvailable("home") > ns.singularity.getAugmentationPrice("NeuroFlux Governor")){ //BOOP //BOOP
             const nfgRepReq: number = ns.singularity.getAugmentationRepReq("NeuroFlux Governor"); //BOOP
             const csecRep: number = ns.singularity.getFactionRep("CyberSec"); //BOOP
+            //ns.tprint("debug pt. 3");
+            
             if(nfgRepReq > csecRep){
                 //ns.tprint("debug pt. A");
                 if(ns.getFavorToDonate() > ns.singularity.getFactionFavor("CyberSec")){ //BOOP //BOOP
                     //ns.tprint("debug pt. B");
                     break;
                 }else{
-                    ns.exec("factions/donate.ts", "home", 1, "CyberSec", 100);
+                    tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", 100);
+                    await ns.nextPortWrite(tempPid);
                     const donationResult: number = ns.singularity.getFactionRep("CyberSec") - csecRep; //BOOP
                     const donationAmmount: number = 99 * (nfgRepReq - csecRep) / donationResult;
                     if(donationAmmount > ns.getServerMoneyAvailable("home")){ //BOOP
                         //ns.tprint("debug pt. D");
                         break;
                     }else {
-                        ns.exec("factions/donate.ts", "home", 1, "CyberSec", donationAmmount);
+                        tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", donationAmmount);
+                        await ns.nextPortWrite(tempPid);
                     }
                 }
             }
-            ns.exec("factions/purchase.ts", "home", 1, "CyberSec", "NeuroFlux Governor");
-        }  
-
+            //ns.tprint("debug pt. 4");
+            tempPid = ns.exec("factions/purchase.ts", "home", 1, "CyberSec", "NeuroFlux Governor");
+            await ns.nextPortWrite(tempPid);
+            
+        } 
+        
             //go through each faction to see which ones have any rep to detect joined factions
         for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){
             const faction: string = Object.values(ns.enums.FactionName)[i];
@@ -84,14 +95,18 @@ export async function main(ns: NS) {
                     }
                     //need to check if donation is possible to buy augmentation
                     if (rep > ns.singularity.getAugmentationRepReq(augmentations[i])){ //BOOP
-                        ns.exec("factions/purchase.ts", "home", 1, faction, augmentations[i]);
+                        tempPid = ns.exec("factions/purchase.ts", "home", 1, faction, augmentations[i]);
+                        await ns.nextPortWrite(tempPid);
                     }else if(ns.getFavorToDonate() <= ns.singularity.getFactionFavor(faction)){ //BOOP                        
-                        ns.exec("factions/donate.ts", "home", 1, faction, 100);
+                        tempPid = ns.exec("factions/donate.ts", "home", 1, faction, 100);
+                        await ns.nextPortWrite(tempPid);
                         const donationResult: number = ns.singularity.getFactionRep(faction) - rep; //BOOP
                         const donationAmmount: number = 99 * (ns.singularity.getAugmentationRepReq(augmentations[i]) - rep) / donationResult; //BOOP
                         if(donationAmmount <= ns.getServerMoneyAvailable("home")){ //BOOP
-                           ns.exec("factions/donate.ts", "home", 1, faction, donationAmmount);
-                           ns.exec("factions/purchase.ts", "home", 1, faction, augmentations[i]);
+                            tempPid = ns.exec("factions/donate.ts", "home", 1, faction, donationAmmount);
+                            await ns.nextPortWrite(tempPid);
+                            tempPid = ns.exec("factions/purchase.ts", "home", 1, faction, augmentations[i]);
+                            await ns.nextPortWrite(tempPid);
                         }
                     }
 
@@ -125,7 +140,5 @@ export async function main(ns: NS) {
             ns.exec("factions/install_augmentations.ts", "home");
 
         }
-
     }
-
 }
