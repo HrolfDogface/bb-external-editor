@@ -9,6 +9,7 @@ lerna-debug.log*
 scan_all.txt
 batchLog.txt
 trash-log.txt
+prestigeLog.txt
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

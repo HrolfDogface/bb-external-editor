@@ -16,8 +16,8 @@ export async function main(ns: NS) {
     }
 
     
-    ns.exec("commit_crime.ts", "home", 1, "Mug");
+    //ns.exec("commit_crime.ts", "home", 1, "Mug");
 
-    //ns.singularity.commitCrime("Mug")
+    ns.singularity.commitCrime("Mug")
 
 }

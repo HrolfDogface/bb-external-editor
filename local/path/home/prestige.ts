@@ -110,7 +110,7 @@ export async function main(ns: NS) {
     ns.exec("pop.ts", "home", 1, target);
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){
-      ns.exec("loop_max.ts", "home", 1, hostname, target);
+      ns.exec("loop_max.ts", hostname, 1, hostname, target);
     }else{
       ns.exec("batch/batcher.ts", hostname, 1, hostname, target);
     }
