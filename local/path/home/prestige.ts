@@ -23,6 +23,7 @@ export async function main(ns: NS) {
   
   await ns.sleep(2000);
   ns.exec("scp.ts", "home", 1, "status_panel.ts", "joesguns");
+  await ns.sleep(2000);
   ns.exec('status_panel.ts', "joesguns");
 
   //const crime: string = "Mug";
@@ -70,7 +71,7 @@ export async function main(ns: NS) {
         ramCost = ns.readPort(tempPid);
       }
     }
-    ns.exec("purchase_server.ts", "home", 1, "pserv-prestige", maxRam);
+    tempPid = ns.exec("purchase_server.ts", "home", 1, "pserv-prestige", maxRam);
     await ns.nextPortWrite(tempPid);
     hostname = ns.readPort(tempPid);
 
@@ -79,7 +80,8 @@ export async function main(ns: NS) {
     ns.exec("scp.ts", "home", 1, "money.ts", hostname);
     ns.exec("scp.ts", "home", 1, "security.ts", hostname);
     ns.exec("scp.ts", "home", 1, "hack.ts", hostname);
-    ns.exec("scp.ts", "home", 1, "batch/pre_batcher.ts", hostname);
+    await ns.sleep(0);
+    //ns.exec("scp.ts", "home", 1, "batch/pre_batcher.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/batcher.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/H_worker.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/W_worker.ts", hostname);
@@ -104,7 +106,7 @@ export async function main(ns: NS) {
     //while(!portHack(ns, target)){    
     //  await ns.sleep(15000);
     //  }
-    //await ns.sleep(2000);
+    await ns.sleep(0);
     tempPid = ns.exec("pop.ts", "home", 1, target, true);
     await ns.nextPortWrite(tempPid);
     await ns.sleep(2000);
@@ -122,11 +124,13 @@ export async function main(ns: NS) {
       const ramUpgradeCost: number = ns.readPort(tempPid);
         
       //wait for enough money and then upgrade home ram one time before doing anything else
+      currentMoney = ns.getServerMoneyAvailable("home");
       while (currentMoney < ramUpgradeCost){
         currentMoney = ns.getServerMoneyAvailable("home");
         await ns.sleep(10000);
       }
-      ns.exec("upgrade_Ram.ts", "home", 1);      
+      ns.exec("upgrade_Ram.ts", "home", 1);  
+      await ns.sleep(2000);    
       ns.exec("factions/meta_daemon.ts", "home", 1);
       await ns.sleep(0);
     }

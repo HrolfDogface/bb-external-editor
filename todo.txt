@@ -1,5 +1,8 @@
 NFG level 61
 
+modify proto_installer to purchase all other augments before NFG
+modify proto_installer to purchase and install "The Red Pill" immediately when possible
+
 create status panel for prestige scripts and proto installer to share what they are doing
 
 #automate backdooring world daemon and log time stamps etc.
@@ -14,7 +17,6 @@ have pop_all check level requirement so as not to spam errors
 Ram Dodge pop_all etc.
 Ram Dodge prestige.ts
 
-after ram dodging pop, popz and pop all remove the initial server ram upgrade from prestige
 
 improve prestige and prestige_trash looping logic
 
@@ -52,10 +54,10 @@ create script to run max share threads on a server (need to communicate ammount 
 add sharing home into prestige and prestige_trash
 
 upgrade batcher targeting to figure out actual money gain
+upgrade batcher to increase target % if there is enough ram to max depth at the initial percentage
+upgrade batcher to decrease target % dynamically to reach max depth
 
-update prebatcher to redo server prep if needed in between batches
 
-convert all scripts to TS
 refactor scripts
 
 read through every function in the documentation again
