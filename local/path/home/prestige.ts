@@ -126,9 +126,9 @@ export async function main(ns: NS) {
         currentMoney = ns.getServerMoneyAvailable("home");
         await ns.sleep(10000);
       }
-      ns.exec("upgrade_Ram.ts", "home", 1);
-      
+      ns.exec("upgrade_Ram.ts", "home", 1);      
       ns.exec("factions/meta_daemon.ts", "home", 1);
+      await ns.sleep(0);
     }
 
     if (ns.getPurchasedServers().length >= ns.getPurchasedServerLimit() )
