@@ -2,7 +2,7 @@ export async function main(ns: NS) {
 
     //ns.tprint("debug pt. 1");
     const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(false);
-    if(ownedAugs.includes("TheRedPill")){    
+    if(ownedAugs.includes("The Red Pill")){    
         const level: number = ns.getHackingLevel();
         const daemonLevel: number = ns.getServerRequiredHackingLevel("w0r1d_d43m0n");
         if(level >= daemonLevel){

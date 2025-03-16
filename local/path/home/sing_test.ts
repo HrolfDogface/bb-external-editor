@@ -33,20 +33,21 @@ export async function main(ns: NS) {
     //ns.tprint((millionRep - hundredRep)/(hundredRep - startRep));
     //ns.tprint((hundredRep - startRep)*10000);
 
-    const factionName: string = ns.enums.FactionName.CyberSec;
+    const factionName: string = ns.enums.FactionName.Daedalus;
 
     ns.tprint(factionName);
+    ns.tprint(ns.singularity.getAugmentationsFromFaction(factionName));
 
-     //go through each faction to see which ones have any rep to detect joined factions
-     for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){
-        if (ns.singularity.getFactionRep(Object.values(ns.enums.FactionName)[i]) > 0){
-            ns.tprint(Object.values(ns.enums.FactionName)[i]);
-            const augmentations: string [] = ns.singularity.getAugmentationsFromFaction(Object.values(ns.enums.FactionName)[i]);
-            for (let i = 0; i < augmentations.length;i++){
-                ns.tprint(augmentations[i]);
-            }
-        }
-    }
+    // //go through each faction to see which ones have any rep to detect joined factions
+    // for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){
+    //    if (ns.singularity.getFactionRep(Object.values(ns.enums.FactionName)[i]) > 0){
+    //        ns.tprint(Object.values(ns.enums.FactionName)[i]);
+    //        const augmentations: string [] = ns.singularity.getAugmentationsFromFaction(Object.values(ns.enums.FactionName)[i]);
+    //        for (let i = 0; i < augmentations.length;i++){
+    //            ns.tprint(augmentations[i]);
+    //        }
+    //    }
+    //}
 
 
 }
