@@ -36,8 +36,6 @@ export async function main(ns: NS) {
   }
 */
   ns.killall("home", true);
-  
-  ns.exec("factions/meta_daemon.ts", "home", 1);
 
   ns.exec("trash_bash.ts", "home", 1, 100);
 
@@ -55,6 +53,9 @@ export async function main(ns: NS) {
     for(let i: number = 0; i < servers.length; i++){
       ns.killall(servers[i]);
     }
+  
+    ns.exec("factions/meta_daemon.ts", "home", 1);
+    await ns.sleep(0);
 
     const level: number = ns.getHackingLevel();
     let scanLevel: number = level/3;
@@ -91,6 +92,7 @@ export async function main(ns: NS) {
       if(servers.length >= 15){        
       ns.exec("share_pserv.ts", "home", 1);
       }
+      await ns.sleep(10000);
     }
 
 
