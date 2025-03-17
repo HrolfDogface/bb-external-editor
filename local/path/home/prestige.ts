@@ -5,6 +5,7 @@ export async function main(ns: NS) {
 
   //set aside 50 pids to use as port id's for global variable storage
   ns.exec("burn_pids.ts", "home", 1, 50);
+  await ns.sleep(0);
 
   const universityTargetLevel: number = 80;
   ns.exec("university.ts", "home", 1);
@@ -19,12 +20,16 @@ export async function main(ns: NS) {
     level = ns.readPort(tempPid);
   }
 
-  ns.exec("pop.ts", "home", 1, "joesguns");
+  //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 1\n", "a");
+  tempPid = ns.exec("pop.ts", "home", 1, "joesguns");
+  await ns.nextPortWrite(tempPid);
+  ns.readPort(tempPid);
   
   await ns.sleep(2000);
   ns.exec("scp.ts", "home", 1, "status_panel.ts", "joesguns");
   await ns.sleep(2000);
   ns.exec('status_panel.ts', "joesguns");
+  //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 2\n", "a");
 
   //const crime: string = "Mug";
   ns.exec("gym_mug.ts", "home", 1);
@@ -40,6 +45,7 @@ export async function main(ns: NS) {
     currentMoney = ns.getServerMoneyAvailable("home");
     await ns.sleep(10000);
   }
+  //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 3\n", "a");
   
   //ns.kill("security.ts", "home", "n00dles");
   //ns.kill("money.ts", "home", "n00dles");
@@ -58,22 +64,27 @@ export async function main(ns: NS) {
     tempPid = ns.exec("get_purchased_server_cost.ts", "home", 1, maxRam);
     await ns.nextPortWrite(tempPid);
     let ramCost: number = ns.readPort(tempPid);
+    //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 4\n", "a");
 
     if (level < 10){
       level = 10;
     }
     
     if(firstLoop){
+      await ns.sleep(200);    
+      ns.exec("factions/meta_daemon.ts", "home", 1);
       while(currentMoney < ramCost){
         maxRam = maxRam / 2;
         tempPid = ns.exec("get_purchased_server_cost.ts", "home", 1, maxRam);
         await ns.nextPortWrite(tempPid);
         ramCost = ns.readPort(tempPid);
+        //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 5\n", "a");
       }
     }
     tempPid = ns.exec("purchase_server.ts", "home", 1, "pserv-prestige", maxRam);
     await ns.nextPortWrite(tempPid);
     hostname = ns.readPort(tempPid);
+    //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 6\n", "a");
 
     ns.exec("scp.ts", "home", 1, "target_prep.ts", hostname);
     ns.exec("scp.ts", "home", 1, "loop_max.ts", hostname);
@@ -88,6 +99,7 @@ export async function main(ns: NS) {
     ns.exec("scp.ts", "home", 1, "batch/G_worker.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/W_worker2.ts", hostname);
     firstLoop = false;
+    //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 7\n", "a");
 
     let neighbors = search(ns, "home", level);
     neighbors = neighbors.sort(function (a, b) { return b.money - a.money; });
@@ -100,6 +112,7 @@ export async function main(ns: NS) {
       target = neighbors[1].hostName;
       previousTarget = target;
     }
+    //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 8\n", "a");
 
     //need to add port check to pop
     //ns.exec("pop.ts", "home", 1, target);
@@ -109,12 +122,14 @@ export async function main(ns: NS) {
     await ns.sleep(0);
     tempPid = ns.exec("pop.ts", "home", 1, target, true);
     await ns.nextPortWrite(tempPid);
+    ns.readPort(tempPid);
     await ns.sleep(2000);
     if(maxRam < 1024 * 4){
       ns.exec("loop_max.ts", hostname, 1, hostname, target);
     }else{
       ns.exec("batch/batcher.ts", hostname, 1, hostname, target);
     }
+    //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 9\n", "a");
 
     ns.writePort(1, target);
 
@@ -122,19 +137,21 @@ export async function main(ns: NS) {
       tempPid = ns.exec("get_upgraded_home_ram_cost.ts", "home");
       await ns.nextPortWrite(tempPid);
       const ramUpgradeCost: number = ns.readPort(tempPid);
+      //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 10\n", "a");
         
       //wait for enough money and then upgrade home ram one time before doing anything else
       currentMoney = ns.getServerMoneyAvailable("home");
       while (currentMoney < ramUpgradeCost){
         currentMoney = ns.getServerMoneyAvailable("home");
         await ns.sleep(10000);
+        //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 11\n", "a");
       }
-      ns.exec("upgrade_Ram.ts", "home", 1);  
-      await ns.sleep(2000);    
-      ns.exec("factions/meta_daemon.ts", "home", 1);
+      ns.exec("upgrade_ram.ts", "home", 1);  
       await ns.sleep(0);
+      //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 12\n", "a");
     }
 
+    //ns.write("prestigeLog.txt", performance.now() + "[prestige.ts]: debug pt. 13\n", "a");
     if (ns.getPurchasedServers().length >= ns.getPurchasedServerLimit() )
     {
       break;

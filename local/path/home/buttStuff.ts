@@ -1,10 +1,14 @@
 export async function main(ns: NS) {
     const target: string = String(ns.args[0]);
+    const serverHackLevel = ns.getServer(target).requiredHackingSkill;
+    const hackingLevel = ns.getHackingLevel()
+    if(serverHackLevel > hackingLevel) return;
     const path: string [] = search(ns, "home", target);
     for(let i = 1; i < path.length; i++){
         //ns.tprint(path[i]);
         ns.singularity.connect(path[i]);
     }
+    
     
     await ns.singularity.installBackdoor();
     

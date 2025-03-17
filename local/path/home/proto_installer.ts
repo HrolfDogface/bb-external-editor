@@ -12,24 +12,25 @@ export async function main(ns: NS) {
         }
     }
     
-    const currentRam: number = ns.getServerMaxRam("home");
+    //const currentRam: number = ns.getServerMaxRam("home");
     
     //ns.tprint("debug pt. 2");
     let tempPid: number = ns.exec("factions/get_ram_cost.ts", "home");
     await ns.nextPortWrite(tempPid);
     let ramUpgradeCost: number = ns.readPort(tempPid);
 
-    if (currentRam < (1024 * 8)){
-        ramUpgradeCost = 2 * ramUpgradeCost * (1024 * 8) / currentRam;
-    }
+    //if (currentRam < (1024 * 8)){
+    //    ramUpgradeCost = 2 * ramUpgradeCost * (1024 * 8) / currentRam;
+    //}
 
     if (ns.getServerMoneyAvailable("home") > ramUpgradeCost){ //BOOP
         tempPid = ns.exec("factions/upgrade_ram.ts", "home");
         await ns.nextPortWrite(tempPid);
-        while (ns.getServerMaxRam("home") < (1024 * 8)){ //BOOP
-            tempPid = ns.exec("factions/upgrade_ram.ts", "home");
-            await ns.nextPortWrite(tempPid);
-        }
+        ns.readPort(tempPid);
+        //while (ns.getServerMaxRam("home") < (1024 * 8)){ //BOOP
+        //    tempPid = ns.exec("factions/upgrade_ram.ts", "home");
+        //    await ns.nextPortWrite(tempPid);
+        //}
     }
     
     if (ns.getServerMaxRam("home") < (1024 * 8)) return; //BOOP
@@ -59,6 +60,7 @@ export async function main(ns: NS) {
                 }else{
                     tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", 100);
                     await ns.nextPortWrite(tempPid);
+                    ns.readPort(tempPid);
                     const donationResult: number = ns.singularity.getFactionRep("CyberSec") - csecRep; //BOOP
                     const donationAmmount: number = 99 * (nfgRepReq - csecRep) / donationResult;
                     if(donationAmmount > ns.getServerMoneyAvailable("home")){ //BOOP
@@ -67,12 +69,14 @@ export async function main(ns: NS) {
                     }else {
                         tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", donationAmmount);
                         await ns.nextPortWrite(tempPid);
+                        ns.readPort(tempPid);
                     }
                 }
             }
             //ns.tprint("debug pt. 4");
             tempPid = ns.exec("factions/purchase.ts", "home", 1, "CyberSec", "NeuroFlux Governor");
             await ns.nextPortWrite(tempPid);
+            ns.readPort(tempPid);
             
         } 
         
@@ -97,16 +101,20 @@ export async function main(ns: NS) {
                     if (rep > ns.singularity.getAugmentationRepReq(augmentations[i])){ //BOOP
                         tempPid = ns.exec("factions/purchase.ts", "home", 1, faction, augmentations[i]);
                         await ns.nextPortWrite(tempPid);
+                        ns.readPort(tempPid);
                     }else if(ns.getFavorToDonate() <= ns.singularity.getFactionFavor(faction)){ //BOOP                        
                         tempPid = ns.exec("factions/donate.ts", "home", 1, faction, 100);
                         await ns.nextPortWrite(tempPid);
+                        ns.readPort(tempPid);
                         const donationResult: number = ns.singularity.getFactionRep(faction) - rep; //BOOP
                         const donationAmmount: number = 99 * (ns.singularity.getAugmentationRepReq(augmentations[i]) - rep) / donationResult; //BOOP
                         if(donationAmmount <= ns.getServerMoneyAvailable("home")){ //BOOP
                             tempPid = ns.exec("factions/donate.ts", "home", 1, faction, donationAmmount);
                             await ns.nextPortWrite(tempPid);
+                            ns.readPort(tempPid);
                             tempPid = ns.exec("factions/purchase.ts", "home", 1, faction, augmentations[i]);
                             await ns.nextPortWrite(tempPid);
+                            ns.readPort(tempPid);
                         }
                     }
 
@@ -132,6 +140,7 @@ export async function main(ns: NS) {
         let coreUpgradeCost: number = ns.readPort(tempPid);
         while (ns.getServerMoneyAvailable("home") > coreUpgradeCost){ //BOOP
             ns.exec("factions/upgrade_cores.ts", "home");
+            await ns.sleep(0);
             tempPid = ns.exec("factions/get_core_cost.ts", "home");
             await ns.nextPortWrite(tempPid);
             coreUpgradeCost = ns.readPort(tempPid);
