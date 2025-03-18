@@ -21,7 +21,7 @@ improve prestige and prestige_trash looping logic
 Working for factions and switching between them
 *-Work for CSEC if favor + favor gained is less than 150
 *-work for all other factions that have favor less than 150 one at a time until they have 150 favor
--rotate through and check augments available in increments of 10k rep (maybe scale this ammount)
+-rotate through work and check augments available in increments of 10k rep (maybe scale this ammount)
 
 
 
@@ -53,24 +53,9 @@ Factions:
 "Tian Di Hui"
 "Volhaven"
 
-figure out ram cost
-upgrade ram
-upgrade cores
 
-finish_bitnode.ts
 
-check to see if upgrading ram is a better idea
-check to see if you can donate or not 
-if not check other augments along with NFG to get to 10 augments
-figure total NFG upgrade cost
-figure total NFG donation cost
 
-wait for money
-donate
-purchase NFG
-purchase all other augments
-
-install augments
 
 NFG: 14% increase per level plus mult increase of 1.9 per mult.
 so tenth level of NFG costs (first level cost) * 1.14^10 * 1.9^10

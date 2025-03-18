@@ -4,7 +4,7 @@
 //
 //
 //11: Travel Flag
-//
+//12: auto work flag
 //
 //
 
@@ -15,7 +15,9 @@ export async function main(ns: NS) {
     if(count > 0){
         ns.exec("burn_pids.ts", "home", 1, count);
     }
-
+    ns.clearPort(11);
+    ns.clearPort(12);
     ns.writePort(11, true);
+    ns.writePort(12, true);
 
 }

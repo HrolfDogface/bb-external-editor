@@ -1,6 +1,5 @@
 export async function main(ns: NS) {
-
-    //const factions: string[] = ["CyberSec", "Daedalus", "NiteSec", "The Black Hand", "Aevum", "Chongqing", "Ishima", "New Tokyo", "Sector-12", "Slum Snakes", "Tetrads", "Tian Di Hui", "Volhaven"];
+    if (!ns.peek(12)) return;
     const factions: string[] = ["CyberSec", "Daedalus", "NiteSec", "The Black Hand", "BitRunners", "Sector-12", "Aevum", "Chongqing", "Ishima", "New Tokyo", "Tetrads", "Tian Di Hui", "Volhaven", "Slum Snakes"];
 
     for(let i = 0; i < factions.length; i++){
