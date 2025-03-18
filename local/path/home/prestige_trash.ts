@@ -92,7 +92,7 @@ export async function main(ns: NS) {
       if(servers.length >= 15){        
       ns.exec("share_pserv.ts", "home", 1);
       }
-      await ns.sleep(10000);
+      await ns.sleep(180000);
     }
 
 
