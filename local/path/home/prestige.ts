@@ -7,7 +7,7 @@ export async function main(ns: NS) {
   ns.exec("burn_pids.ts", "home", 1, 50);
   await ns.sleep(0);
 
-  const universityTargetLevel: number = 80;
+  const universityTargetLevel: number = 130;
   ns.exec("university.ts", "home", 1);
   let tempPid: number = ns.exec("get_hacking_level.ts", "home");
   await ns.nextPortWrite(tempPid);
@@ -59,7 +59,7 @@ export async function main(ns: NS) {
   while (true){
     tempPid = ns.exec("get_hacking_level.ts", "home");
     await ns.nextPortWrite(tempPid);
-    level = ns.readPort(tempPid) / 2;
+    level = ns.readPort(tempPid) / 3;
 
     tempPid = ns.exec("get_purchased_server_cost.ts", "home", 1, maxRam);
     await ns.nextPortWrite(tempPid);
@@ -94,6 +94,7 @@ export async function main(ns: NS) {
     await ns.sleep(0);
     //ns.exec("scp.ts", "home", 1, "batch/pre_batcher.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/batcher.ts", hostname);
+    ns.exec("scp.ts", "home", 1, "batch/batcher2.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/H_worker.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/W_worker.ts", hostname);
     ns.exec("scp.ts", "home", 1, "batch/G_worker.ts", hostname);

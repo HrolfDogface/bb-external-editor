@@ -1,7 +1,7 @@
 export async function main(ns: NS) {
 
   //const ram = 1024 * 1024;
-  const ram = 1024 * 512;//ns.getPurchasedServerMaxRam();
+  const ram = 128;//ns.getPurchasedServerMaxRam();
   
   
   let cost = ns.getPurchasedServerCost(ram);
@@ -22,22 +22,25 @@ export async function main(ns: NS) {
   //ns.deleteServer("pserv-6");
   //ns.deleteServer("pserv-7");
   //ns.deleteServer("pserv-8");
-  //ns.deleteServer("pserv-9");
+  //ns.deleteServer("foo-0");
   
  /*
-  let hostname = ns.purchaseServer("pserv-" + ns.args[0], ram);
-  ns.scp("batch/target_presp.ts", hostname);
-  ns.scp("batch/pre_batcher.ts", hostname);
-  ns.scp("batch/money.ts", hostname);
-  ns.scp("batch/security.ts", hostname);
+  //let hostname = ns.purchaseServer("pserv-" + ns.args[0], ram);
+  let hostname = ns.purchaseServer("foo", ram);
+  ns.scp("target_prep.ts", hostname);
+  ns.scp("batch/batcher2.ts", hostname);
+  ns.scp("money.ts", hostname);
+  ns.scp("security.ts", hostname);
   ns.scp("batch/H_worker.ts", hostname);
   ns.scp("batch/W_worker.ts", hostname);
   ns.scp("batch/G_worker.ts", hostname);
+  ns.scp("batch/W_worker2.ts", hostname);
+  */
   
-  ns.exec("pop.ts", "home", 1, ns.args[1]);
-  await ns.sleep(2000);
-  ns.exec("batch/pre_batcher.ts", hostname, 1, ns.args[1], hostname);
-*/
+  //ns.exec("pop.ts", "home", 1, ns.args[1]);
+  //await ns.sleep(2000);
+  //ns.exec("batch/pre_batcher.ts", hostname, 1, ns.args[1], hostname);
+
   /*
   for (let i = 1; i < ns.args.length; i++){
     ns.exec("pop.ts", "home", 1, ns.args[i]);
