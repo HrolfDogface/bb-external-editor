@@ -1,56 +1,29 @@
 NFG level 61
 
+upgrade batcher targeting to figure out actual money gain
+upgrade batcher to increase target % if there is enough ram to max depth at the initial percentage
+upgrade batcher to decrease target % dynamically to reach max depth
 
+create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
+add sharing home into prestige and prestige_trash
 
 create status panel for prestige scripts and proto installer to share what they are doing
 
 #automate backdooring world daemon and log time stamps etc.
 add a bitnode timer to the prestige logging
 
-
 have batcher fill up the rest of a server's ram with share
-
-Ram Dodge pop_all etc.
-
 
 improve prestige and prestige_trash looping logic
 
-set and peek reserved ports for global variables
 
-kill all batcher.ts script targetin all pserv and home
-
-join factions scripts
-#-join all available factions
--check if any factions can have their joining criteria met 
--meet criteria (pop servers and travel places)
--join all available factions
 
 Working for factions and switching between them
 *-Work for CSEC if favor + favor gained is less than 150
 *-work for all other factions that have favor less than 150 one at a time until they have 150 favor
 -rotate through and check augments available in increments of 10k rep (maybe scale this ammount)
 
-#Buying augments (and any prerequisites, using recursion) from most to least expensive without having to manually poke through the various faction listings
-#-Buy max ammount of NFG, donating as needed
-#-Spend rest of money to buy as many augments as possible. Starting with most expensive that can be purchased including cost of any necessary donations
 
-#upgrading ram and cores
-#script to figure out when to restart
-#-Can you ugrade ram to minimum 8TB?
-#-Can you stack 10 levels of NFG?
-
-#restart (install augments after buying)
-#-Buy home ram upgrades
-#-buy augments
-#-buy cores
-#-restart
-
-create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
-add sharing home into prestige and prestige_trash
-
-upgrade batcher targeting to figure out actual money gain
-upgrade batcher to increase target % if there is enough ram to max depth at the initial percentage
-upgrade batcher to decrease target % dynamically to reach max depth
 
 
 refactor scripts
@@ -59,12 +32,9 @@ read through every function in the documentation again
 Working for companies, training CHA to qualify for promotions, accepting promotions, and joining the company faction once it's available
 create server prep daemon to buy, upgrade and run on a pserv. Also decrease max servers for trashbash by 1.
 add timers to status panel? At least for server prep
-migrate all to typescript
 do contracts!
 do infiltration
 do stocks
-Have Batcher Auto increase and decrease target % absed on RAM
-do JIT batcher**maybe**
 
 
 

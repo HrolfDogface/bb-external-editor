@@ -39,7 +39,8 @@ export async function main(ns: NS) {
     ns.tprint(ns.singularity.getAugmentationsFromFaction(factionName));
 
     
-    ns.writePort(ns.pid, true);
+    ns.clearPort(11);
+    ns.writePort(11, true);
 
     // //go through each faction to see which ones have any rep to detect joined factions
     // for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){
