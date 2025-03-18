@@ -46,41 +46,7 @@ export async function main(ns: NS) {
     
     if (ns.getServerMoneyAvailable("home") > nfgCost){ //BOOP
         
-        //Purchase NFG
-        while(ns.getServerMoneyAvailable("home") > ns.singularity.getAugmentationPrice("NeuroFlux Governor")){ //BOOP //BOOP
-            const nfgRepReq: number = ns.singularity.getAugmentationRepReq("NeuroFlux Governor"); //BOOP
-            const csecRep: number = ns.singularity.getFactionRep("CyberSec"); //BOOP
-            //ns.tprint("debug pt. 3");
-            
-            if(nfgRepReq > csecRep){
-                //ns.tprint("debug pt. A");
-                if(ns.getFavorToDonate() > ns.singularity.getFactionFavor("CyberSec")){ //BOOP //BOOP
-                    //ns.tprint("debug pt. B");
-                    break;
-                }else{
-                    tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", 100);
-                    await ns.nextPortWrite(tempPid);
-                    ns.readPort(tempPid);
-                    const donationResult: number = ns.singularity.getFactionRep("CyberSec") - csecRep; //BOOP
-                    const donationAmmount: number = 99 * (nfgRepReq - csecRep) / donationResult;
-                    if(donationAmmount > ns.getServerMoneyAvailable("home")){ //BOOP
-                        //ns.tprint("debug pt. D");
-                        break;
-                    }else {
-                        tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", donationAmmount);
-                        await ns.nextPortWrite(tempPid);
-                        ns.readPort(tempPid);
-                    }
-                }
-            }
-            //ns.tprint("debug pt. 4");
-            tempPid = ns.exec("factions/purchase.ts", "home", 1, "CyberSec", "NeuroFlux Governor");
-            await ns.nextPortWrite(tempPid);
-            ns.readPort(tempPid);
-            
-        } 
-        
-            //go through each faction to see which ones have any rep to detect joined factions
+        //go through each faction to see which ones have any rep to detect joined factions
         for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){
             const faction: string = Object.values(ns.enums.FactionName)[i];
             const rep: number = ns.singularity.getFactionRep(faction) //BOOP
@@ -122,6 +88,40 @@ export async function main(ns: NS) {
                 }
             }
         }
+
+        //Purchase NFG
+        while(ns.getServerMoneyAvailable("home") > ns.singularity.getAugmentationPrice("NeuroFlux Governor")){ //BOOP //BOOP
+            const nfgRepReq: number = ns.singularity.getAugmentationRepReq("NeuroFlux Governor"); //BOOP
+            const csecRep: number = ns.singularity.getFactionRep("CyberSec"); //BOOP
+            //ns.tprint("debug pt. 3");
+            
+            if(nfgRepReq > csecRep){
+                //ns.tprint("debug pt. A");
+                if(ns.getFavorToDonate() > ns.singularity.getFactionFavor("CyberSec")){ //BOOP //BOOP
+                    //ns.tprint("debug pt. B");
+                    break;
+                }else{
+                    tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", 100);
+                    await ns.nextPortWrite(tempPid);
+                    ns.readPort(tempPid);
+                    const donationResult: number = ns.singularity.getFactionRep("CyberSec") - csecRep; //BOOP
+                    const donationAmmount: number = 99 * (nfgRepReq - csecRep) / donationResult;
+                    if(donationAmmount > ns.getServerMoneyAvailable("home")){ //BOOP
+                        //ns.tprint("debug pt. D");
+                        break;
+                    }else {
+                        tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", donationAmmount);
+                        await ns.nextPortWrite(tempPid);
+                        ns.readPort(tempPid);
+                    }
+                }
+            }
+            //ns.tprint("debug pt. 4");
+            tempPid = ns.exec("factions/purchase.ts", "home", 1, "CyberSec", "NeuroFlux Governor");
+            await ns.nextPortWrite(tempPid);
+            ns.readPort(tempPid);
+            
+        } 
     }
 
     if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= 10){
@@ -145,6 +145,9 @@ export async function main(ns: NS) {
             await ns.nextPortWrite(tempPid);
             coreUpgradeCost = ns.readPort(tempPid);
         }
+        ns.exec("factions/install_augmentations.ts", "home");
+    }else if (ns.singularity.getOwnedAugmentations(true).includes("The Red Pill") && !ns.singularity.getOwnedAugmentations(false).includes("The Red Pill")){
+        //install imediately if you have The Red Pill
         ns.exec("factions/install_augmentations.ts", "home");
     }
     

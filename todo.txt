@@ -1,7 +1,6 @@
 NFG level 61
 
-modify proto_installer to purchase all other augments before NFG
-modify proto_installer to purchase and install "The Red Pill" immediately when possible
+
 
 create status panel for prestige scripts and proto installer to share what they are doing
 
