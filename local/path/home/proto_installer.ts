@@ -149,6 +149,13 @@ export async function main(ns: NS) {
     }else if (ns.singularity.getOwnedAugmentations(true).includes("The Red Pill") && !ns.singularity.getOwnedAugmentations(false).includes("The Red Pill")){
         //install imediately if you have The Red Pill
         ns.exec("factions/install_augmentations.ts", "home");
+    }else if (ns.singularity.getFactionFavor("CyberSec") + ns.singularity.getFactionFavorGain("CyberSec") > ns.getFavorToDonate()){
+        //install if Cybersec has earmed enough faction to start donating on the next run
+        if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= 1){
+            if (ns.singularity.getFactionFavor("CyberSec") < ns.getFavorToDonate()){
+                ns.exec("factions/install_augmentations.ts", "home");
+            }
+        }
     }
     
 }
