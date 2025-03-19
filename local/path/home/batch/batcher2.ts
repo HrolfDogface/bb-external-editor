@@ -70,8 +70,8 @@ export async function main(ns: NS) {
     const batchDelay: number = 3;
 
     //let hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/5));
-    let hackThreads: number =  1;
-    const growthRatio: number = maxMoney/(ns.hackAnalyze(targetHost)*hackThreads);
+    let hackThreads: number =  16;
+    const growthRatio: number = 1/(1 - ns.hackAnalyze(targetHost)*hackThreads);
     let growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, growthRatio) * 1.1);
     if (hackThreads < 1) hackThreads = 1;
     if (growthThreads < 1) growthThreads = 1;

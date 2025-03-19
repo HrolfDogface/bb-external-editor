@@ -1,8 +1,11 @@
 NFG level 61
 
+upgrade loopmax to be smart about loop counts
+
 upgrade batcher targeting to figure out actual money gain
 upgrade batcher to increase target % if there is enough ram to max depth at the initial percentage
-upgrade batcher to decrease target % dynamically to reach max depth
+
+
 
 create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
 add sharing home into prestige and prestige_trash
