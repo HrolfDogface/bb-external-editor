@@ -6,6 +6,7 @@ export async function main(ns: NS) {
   ns.printRaw(<MyComponent />);
 }
 
+
 function MyComponent() {
   return (
     <div>Hello World!</div>
