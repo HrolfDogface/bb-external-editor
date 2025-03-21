@@ -1,5 +1,7 @@
 NFG level 61
 
+get rep for faction point augments in Tian Di Hui first
+
 upgrade loopmax to be smart about loop counts
 
 upgrade batcher targeting to figure out actual money gain
