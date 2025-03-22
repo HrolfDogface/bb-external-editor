@@ -22,22 +22,22 @@ export async function main(ns: NS) {
         const upgradeCost = ns.getPurchasedServerCost(currentRam*2);
         const maxCost = ns.getPurchasedServerCost(ns.getPurchasedServerMaxRam());
         while (true){
-          if (ns.getHackingLevel() > level * 1.15){
-            break;
-          }  
-          if ((servers.length < 15)&&(ns.getServerMoneyAvailable("home") )> maxCost){
-            break;
-          }       
-          if (ns.getServerMoneyAvailable("home") > upgradeCost){
-            break;
-          }
-          if ((servers.length < 10)&&(ns.getServerMoneyAvailable("home") > serverCost)){
-            break;
-          }
-          if(servers.length >= 15){        
-          ns.exec("share_pserv.ts", "home", 1);
-          }
-          await ns.sleep(600000);
+            await ns.sleep(600000);
+            if (ns.getHackingLevel() > level * 1.15){
+              break;
+            }  
+            if ((servers.length < 15)&&(ns.getServerMoneyAvailable("home") )> maxCost){
+              break;
+            }       
+            if (ns.getServerMoneyAvailable("home") > upgradeCost){
+              break;
+            }
+            if ((servers.length < 10)&&(ns.getServerMoneyAvailable("home") > serverCost)){
+              break;
+            }
+            if(servers.length >= 15){        
+            ns.exec("share_pserv.ts", "home", 1);
+            }
         }
     
     
