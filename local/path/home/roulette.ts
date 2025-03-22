@@ -1,9 +1,9 @@
 export async function main(ns: NS) {
-    ns.disableLog('ALL');
-    ns.ui.openTail();
+    //ns.disableLog('ALL');
+    //ns.ui.openTail();
     for(let i = 0; i < 1000; i++){
         const time: number = new Date().getTime();
-        let doc = eval('document');
+        const doc = eval('document');
         const playButton = doc.evaluate("//button[text() = 'Play roulette']", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (playButton !== null) {
           //ns.print("found head button!");
