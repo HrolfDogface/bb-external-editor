@@ -1,9 +1,5 @@
 export async function main(ns: NS) {
 
-    //set aside 50 pids to use as port id's for global variable storage
-    ns.exec("burn_pids.ts", "home", 1, 50);
-    await ns.sleep(0);
-
   const universityTargetLevel: number = 130;
   ns.exec("university.ts", "home", 1);
   while (ns.getHackingLevel() < universityTargetLevel){

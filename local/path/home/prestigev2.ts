@@ -16,7 +16,7 @@ export async function main(ns: NS) {
     ns.exec("casino.ts", "home", 1, 50);
     await ns.sleep(100);
     ns.exec("roulette.ts", "home", 1, 50);
-    await ns.sleep(1000);
+    await ns.sleep(20000);
 
     if (ns.getServerMaxRam("home") < 64){
         ns.exec("upgrade_ram.ts", "home", 1);  
