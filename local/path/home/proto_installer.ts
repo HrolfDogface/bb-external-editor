@@ -33,7 +33,7 @@ export async function main(ns: NS) {
         //}
     }
     
-    if (ns.getServerMaxRam("home") < (1024 * 8)) return; //BOOP
+    //if (ns.getServerMaxRam("home") < (1024 * 8)) return; //BOOP
 
     let nfgCount: number = 10 - ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length;
     if (nfgCount < 0) nfgCount = 0;

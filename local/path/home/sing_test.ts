@@ -33,7 +33,7 @@ export async function main(ns: NS) {
     //ns.tprint((millionRep - hundredRep)/(hundredRep - startRep));
     //ns.tprint((hundredRep - startRep)*10000);
 
-    const factionName: string = ns.enums.FactionName.Daedalus;
+    const factionName: string = ns.enums.FactionName.TianDiHui;
 
     ns.tprint(factionName);
     ns.tprint(ns.singularity.getAugmentationsFromFaction(factionName));
