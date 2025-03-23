@@ -18,7 +18,7 @@ export async function main(ns: NS) {
     const invitations: string [] = ns.singularity.checkFactionInvitations();
 
     for (let i = 0; i < invitations.length; i++){
-        if(invitations[i] == "CyberSec"){          
+        if(invitations[i] == "NiteSec"){          
             ns.singularity.joinFaction(invitations[i]);
         }
         
