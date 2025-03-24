@@ -66,7 +66,7 @@ export async function main(ns: NS) {
     const weaken1Delay: number = 0;
     const growDelay: number = weakenTime - growTime + 0;
     const weaken2Delay: number = 0;
-    const batchDelay: number = 3;
+    const batchDelay: number = 1;
 
     let hackThreads: number =  Math.floor(ns.hackAnalyzeThreads(targetHost, maxMoney/5));
     let growthThreads: number = Math.ceil(ns.growthAnalyze(targetHost, 1.3));
