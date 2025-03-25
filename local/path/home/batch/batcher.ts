@@ -131,16 +131,16 @@ export async function main(ns: NS) {
 
 
       if ((ns.getServerSecurityLevel(targetHost) > minSecurity)||(ns.getServerMoneyAvailable(targetHost) < (ns.getServerMaxMoney(targetHost) * 0.98))){ 
-        let killNumber: number = 10;
+        let killNumber: number = 5;
         if (killNumber > hackPids.length) killNumber = hackPids.length;
         for (let i = 0; i < killNumber; i++){
           ns.kill(hackPids[i]);
         }
       }
-      hackPids.push(ns.exec("batch/H_worker.ts", exHost, hackThreads, targetHost, hackTime, performance.now() + hackTime + hackDelay + 3));
-      ns.exec("batch/W_worker.ts", exHost, weaken1Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken1Delay + 3);
-      ns.exec("batch/G_worker.ts", exHost, growthThreads, targetHost, growTime, performance.now() + growTime + growDelay + 3);    
-      ns.exec("batch/W_worker2.ts", exHost, weaken2Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken2Delay + 3, ns.pid, workerPid);
+      hackPids.push(ns.exec("batch/H_worker.ts", exHost, hackThreads, targetHost, hackTime, performance.now() + hackTime + hackDelay + batchDelay));
+      ns.exec("batch/W_worker.ts", exHost, weaken1Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken1Delay + batchDelay);
+      ns.exec("batch/G_worker.ts", exHost, growthThreads, targetHost, growTime, performance.now() + growTime + growDelay + batchDelay);    
+      ns.exec("batch/W_worker2.ts", exHost, weaken2Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken2Delay + batchDelay, ns.pid, workerPid);
       
       if (level != ns.getHackingLevel()){
         level = ns.getHackingLevel()

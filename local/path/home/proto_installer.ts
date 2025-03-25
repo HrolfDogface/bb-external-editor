@@ -35,7 +35,7 @@ export async function main(ns: NS) {
     
     //if (ns.getServerMaxRam("home") < (1024 * 8)) return; //BOOP
 
-    let nfgCount: number = 10 - ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length;
+    let nfgCount: number = 10 - (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length);
     if (nfgCount < 0) nfgCount = 0;
     const nfgBaseCost: number = ns.singularity.getAugmentationPrice("NeuroFlux Governor"); //BOOP
     const nfgCost: number = nfgBaseCost * Math.pow(1.14, nfgCount) * Math.pow(1.9, nfgCount);
@@ -92,32 +92,32 @@ export async function main(ns: NS) {
         //Purchase NFG
         while(ns.getServerMoneyAvailable("home") > ns.singularity.getAugmentationPrice("NeuroFlux Governor")){ //BOOP //BOOP
             const nfgRepReq: number = ns.singularity.getAugmentationRepReq("NeuroFlux Governor"); //BOOP
-            const csecRep: number = ns.singularity.getFactionRep("CyberSec"); //BOOP
+            const csecRep: number = ns.singularity.getFactionRep("NiteSec"); //BOOP
             //ns.tprint("debug pt. 3");
             
             if(nfgRepReq > csecRep){
                 //ns.tprint("debug pt. A");
-                if(ns.getFavorToDonate() > ns.singularity.getFactionFavor("CyberSec")){ //BOOP //BOOP
+                if(ns.getFavorToDonate() > ns.singularity.getFactionFavor("NiteSec")){ //BOOP //BOOP
                     //ns.tprint("debug pt. B");
                     break;
                 }else{
-                    tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", 100);
+                    tempPid = ns.exec("factions/donate.ts", "home", 1, "NiteSec", 100);
                     await ns.nextPortWrite(tempPid);
                     ns.readPort(tempPid);
-                    const donationResult: number = ns.singularity.getFactionRep("CyberSec") - csecRep; //BOOP
+                    const donationResult: number = ns.singularity.getFactionRep("NiteSec") - csecRep; //BOOP
                     const donationAmmount: number = 99 * (nfgRepReq - csecRep) / donationResult;
                     if(donationAmmount > ns.getServerMoneyAvailable("home")){ //BOOP
                         //ns.tprint("debug pt. D");
                         break;
                     }else {
-                        tempPid = ns.exec("factions/donate.ts", "home", 1, "CyberSec", donationAmmount);
+                        tempPid = ns.exec("factions/donate.ts", "home", 1, "NiteSec", donationAmmount);
                         await ns.nextPortWrite(tempPid);
                         ns.readPort(tempPid);
                     }
                 }
             }
             //ns.tprint("debug pt. 4");
-            tempPid = ns.exec("factions/purchase.ts", "home", 1, "CyberSec", "NeuroFlux Governor");
+            tempPid = ns.exec("factions/purchase.ts", "home", 1, "NiteSec", "NeuroFlux Governor");
             await ns.nextPortWrite(tempPid);
             ns.readPort(tempPid);
             

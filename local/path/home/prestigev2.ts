@@ -3,6 +3,9 @@ export async function main(ns: NS) {
     ns.exec("burn_pids.ts", "home", 1, 50);
     await ns.sleep(0);
 
+    //comment out crime for starting money once I have starter kit.
+    //should automate this check.
+    /*
     //mug for $500k
     ns.exec("gym_mug.ts", "home", 1, 50);
     await ns.sleep(0);
@@ -11,7 +14,7 @@ export async function main(ns: NS) {
       currentMoney = ns.getServerMoneyAvailable("home");
       await ns.sleep(10000);
     }
-
+*/
     //casino party
     ns.exec("casino.ts", "home", 1, 50);
     await ns.sleep(100);
