@@ -1,6 +1,8 @@
 //import { portHack } from "./pop";
 
 
+
+
 export async function main(ns: NS) {
 
     //ns.writePort(1, "omega-net");
@@ -41,6 +43,17 @@ export async function main(ns: NS) {
     
     ns.clearPort(12);
     ns.writePort(12, false);
+
+    const locations = ns.infiltration.getPossibleLocations();
+
+    for (const location of locations){        
+        const info = ns.infiltration.getInfiltration(location.name);
+        if (info.difficulty < 2.75){
+            ns.tprint(location);
+            ns.tprint(info.difficulty);
+            ns.tprint(info.reward);
+        }
+    }
 
     // //go through each faction to see which ones have any rep to detect joined factions
     // for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){

@@ -2,8 +2,8 @@ export async function main(ns: NS) {
 
     //const crimeVar: CrimeType = ns.enums.CrimeType[crime];
 
-    //while(ns.singularity.getCrimeChance("Mug") < 1)
-    while(true)
+    while(ns.singularity.getCrimeChance("Mug") < 1)
+    //while (true)
     {        
         ns.print("Chance to mug: " + ns.singularity.getCrimeChance("Mug") );
         ns.singularity.gymWorkout(ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.agility);

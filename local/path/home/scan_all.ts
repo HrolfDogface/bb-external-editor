@@ -18,6 +18,13 @@ export async function main(ns: NS) {
   for (let i = 0; i < neighbors.length; i++) {
     ns.write("scan_all.txt", neighbors[i].hostName + " $" + ns.formatNumber(neighbors[i].money) + " " + neighbors[i].level + "\n", "a");
   }
+  
+  neighbors = neighbors.sort(function (a, b) { return b.money/b.security - a.money/a.security; });
+
+  ns.write("scan_all.txt", "\nsorted by money/security\n\n", "a");
+  for (let i = 0; i < neighbors.length; i++) {
+    ns.write("scan_all.txt", neighbors[i].hostName + " $" + ns.formatNumber(neighbors[i].money) + " " + neighbors[i].level + " " + (neighbors[i].money/neighbors[i].security) + "\n", "a");
+  }
 
 }
 
@@ -31,10 +38,11 @@ export function search(ns: NS, hostName: string, maxLevel: number) {
   for (let i: number = 0; i < neighbor.length; i++) {
     const money: number = ns.getServerMaxMoney(neighbor[i]);
     const level: number = ns.getServerRequiredHackingLevel(neighbor[i]);
+    const security: number = ns.getServerMinSecurityLevel(neighbor[i]);
     const files: string[] = ns.ls(neighbor[i]);
-    ns.write("scan_all.txt", neighbor[i] + " $" + ns.formatNumber(money) + " " + level + " " + files.join(" ") + "\n", "a");
+    ns.write("scan_all.txt", neighbor[i] + " $" + ns.formatNumber(money) + " " + level + " " + security + " " + files.join(" ") + "\n", "a");
     if (level < maxLevel) {
-      neighborReturn.push(new ServerInfo(neighbor[i], money, level));
+      neighborReturn.push(new ServerInfo(neighbor[i], money, level, security));
     }
     neighborReturn = neighborReturn.concat(search(ns, neighbor[i], maxLevel));
   }
@@ -46,10 +54,12 @@ class ServerInfo {
   hostName: string;
   money: number;
   level: number;
+  security: number;
 
-  constructor(hostName: string, money: number, level: number) {
+  constructor(hostName: string, money: number, level: number, security: number) {
     this.hostName = hostName;
     this.money = money;
     this.level = level;
+    this.security = security;
   }
 }  
