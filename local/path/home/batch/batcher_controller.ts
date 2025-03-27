@@ -35,9 +35,9 @@ export async function main(ns: NS) {
             if ((servers.length < 10)&&(ns.getServerMoneyAvailable("home") > serverCost)){
               break;
             }
-            if(servers.length >= 15){        
-            ns.exec("share_pserv.ts", "home", 1);
-            }
+            //if(servers.length >= 15){        
+            //  ns.exec("share_pserv.ts", "home", 1);
+            //}
         }
     
     

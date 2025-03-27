@@ -50,7 +50,8 @@ export async function main(ns: NS) {
 
   ns.write("batch/batchLog.txt", performance.now() + "[batcher.ts]: done waiting for target prep\n", "a");
 
-  let workerPid = 0;
+  //let workerPid = 0;
+  let workerServer: string = ""; 
   const hackPids: number [] = [];
 
   let firstLoop: boolean = true;
@@ -115,7 +116,7 @@ export async function main(ns: NS) {
         hackPids.push(ns.exec("batch/H_worker.ts", exHost, hackThreads, targetHost, hackTime, performance.now() + hackTime + hackDelay + batchDelay * i));    
         ns.exec("batch/W_worker.ts", exHost, weaken1Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken1Delay + batchDelay * i);
         ns.exec("batch/G_worker.ts", exHost, growthThreads, targetHost, growTime, performance.now() + growTime + growDelay + batchDelay * i);    
-        ns.exec("batch/W_worker2.ts", exHost, weaken2Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken2Delay + batchDelay * i, ns.pid, 0);
+        ns.exec("batch/W_worker2.ts", exHost, weaken2Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken2Delay + batchDelay * i, ns.pid, "");
       }
     }
 
@@ -124,7 +125,7 @@ export async function main(ns: NS) {
     {
      
       await ns.nextPortWrite(ns.pid);
-      workerPid = ns.readPort(ns.pid);
+      workerServer = ns.readPort(ns.pid);
 
       //remove top hack worker pid from the list of pids
       hackPids.shift();
@@ -140,7 +141,7 @@ export async function main(ns: NS) {
       hackPids.push(ns.exec("batch/H_worker.ts", exHost, hackThreads, targetHost, hackTime, performance.now() + hackTime + hackDelay + batchDelay));
       ns.exec("batch/W_worker.ts", exHost, weaken1Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken1Delay + batchDelay);
       ns.exec("batch/G_worker.ts", exHost, growthThreads, targetHost, growTime, performance.now() + growTime + growDelay + batchDelay);    
-      ns.exec("batch/W_worker2.ts", exHost, weaken2Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken2Delay + batchDelay, ns.pid, workerPid);
+      ns.exec("batch/W_worker2.ts", exHost, weaken2Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken2Delay + batchDelay, ns.pid, workerServer);
       
       if (level != ns.getHackingLevel()){
         level = ns.getHackingLevel()
