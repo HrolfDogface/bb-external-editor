@@ -39,10 +39,10 @@ export async function main(ns: NS) {
   ns.writePort(1, "clear");
   const hosts: string [] = [];
   let count: number = 0
-  if((maxRam <= ns.getServerMaxRam("home"))||(serverCount == 0)){
-    count = 1;
-    hosts.push("home");
-  }
+  //if((maxRam <= ns.getServerMaxRam("home"))||(serverCount == 0)){
+  //  count = 1;
+  //  hosts.push("home");
+  //}
 
   const maxServers: number = ns.getPurchasedServerLimit();
   //const maxServers: number = 15;
@@ -70,7 +70,7 @@ export async function main(ns: NS) {
     ns.scp("target_prep.ts", hostname);
     ns.scp("money.ts", hostname);
     ns.scp("security.ts", hostname);
-    ns.scp("batch/batcher.ts", hostname);
+    ns.scp("batch/batcherv2.ts", hostname);
     ns.scp("batch/H_worker.ts", hostname);
     ns.scp("batch/W_worker.ts", hostname);
     ns.scp("batch/G_worker.ts", hostname);
@@ -80,14 +80,15 @@ export async function main(ns: NS) {
 
   }    
 
-  ns.exec("batch/batcherv2.ts", "home", 1, "joesguns", "home");
-  ns.writePort(1, "joesguns");
+  //ns.exec("home_share.ts", "home");
+  //ns.writePort(1, "joesguns");
 
   ns.exec("popz.ts", "home", 1, neighbors[0].hostName);
   await ns.sleep(2000);
   ns.exec("batch/batcherv2.ts", "home", 1, neighbors[0].hostName, ...hosts);
   ns.writePort(1, neighbors[0].hostName);
 
+  ns.exec("home_share.ts", "home");
 }
 
 export function search(ns: NS, hostName: string, maxLevel: number) {
