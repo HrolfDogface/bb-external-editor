@@ -85,7 +85,7 @@ export async function main(ns: NS) {
     if (growthThreads < 1) growthThreads = 1;
     if (growthThreadsHome < 1) growthThreadsHome = 1;
 
-    const hackSecurity: number = growthThreads * 0.002;
+    const hackSecurity: number = hackThreads * 0.002;
     const growSecurity: number = growthThreads * 0.004;
 
     const weakenAmountHome: number = ns.weakenAnalyze(10, cores);
