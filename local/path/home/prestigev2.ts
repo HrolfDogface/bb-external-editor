@@ -45,4 +45,8 @@ export async function main(ns: NS) {
     ns.exec("batch/batcher_controller.ts", "home", 1);
     await ns.sleep(0);
 
+    
+    ns.exec("gym_mug.ts", "home", 1, 50);
+    await ns.sleep(0);
+
 }

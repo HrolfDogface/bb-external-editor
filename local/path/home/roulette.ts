@@ -1,7 +1,7 @@
 export async function main(ns: NS) {
     //ns.disableLog('ALL');
     //ns.ui.openTail();
-    for(let i = 0; i < 1000; i++){
+    for(let i = 0; i < 50; i++){
         const time: number = new Date().getTime();
         const doc = eval('document');
         const playButton = doc.evaluate("//button[text() = 'Play roulette']", doc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
