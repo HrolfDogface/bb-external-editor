@@ -1,5 +1,7 @@
 export async function main(ns: NS) {
 
+    const augmentsMin: number = Number(ns.args[0]);
+
     //ns.tprint("debug pt. 1");
     const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(false);
     if(ownedAugs.includes("The Red Pill")){    
@@ -35,7 +37,7 @@ export async function main(ns: NS) {
     
     //if (ns.getServerMaxRam("home") < (1024 * 8)) return; //BOOP
 
-    let nfgCount: number = 10 - (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length);
+    let nfgCount: number = augmentsMin - (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length);
     if (nfgCount < 0) nfgCount = 0;
     const nfgBaseCost: number = ns.singularity.getAugmentationPrice("NeuroFlux Governor"); //BOOP
     const nfgCost: number = nfgBaseCost * Math.pow(1.14, nfgCount) * Math.pow(1.9, nfgCount);
@@ -124,7 +126,7 @@ export async function main(ns: NS) {
         } 
     }
 
-    if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= 10){
+    if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= augmentsMin){
         tempPid = ns.exec("factions/get_ram_cost.ts", "home");
         await ns.nextPortWrite(tempPid);
         ramUpgradeCost = ns.readPort(tempPid);
@@ -149,10 +151,10 @@ export async function main(ns: NS) {
     }else if (ns.singularity.getOwnedAugmentations(true).includes("The Red Pill") && !ns.singularity.getOwnedAugmentations(false).includes("The Red Pill")){
         //install imediately if you have The Red Pill
         ns.exec("factions/install_augmentations.ts", "home");
-    }else if (ns.singularity.getFactionFavor("CyberSec") + ns.singularity.getFactionFavorGain("CyberSec") > ns.getFavorToDonate()){
+    }else if (ns.singularity.getFactionFavor("NiteSec") + ns.singularity.getFactionFavorGain("NiteSec") > ns.getFavorToDonate()){
         //install if Cybersec has earmed enough faction to start donating on the next run
         if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= 1){
-            if (ns.singularity.getFactionFavor("CyberSec") < ns.getFavorToDonate()){
+            if (ns.singularity.getFactionFavor("NiteSec") < ns.getFavorToDonate()){
                 ns.exec("factions/install_augmentations.ts", "home");
             }
         }

@@ -7,12 +7,14 @@ export async function main(ns: NS) {
     //should automate this check.
     
     //mug for $500k
-    ns.exec("gym_mug.ts", "home", 1, 50);
-    await ns.sleep(0);
     let currentMoney: number = 0;
-    while( currentMoney < 500000){
-      currentMoney = ns.getServerMoneyAvailable("home");
-      await ns.sleep(10000);
+    if( currentMoney < 500000){
+        ns.exec("gym_mug.ts", "home", 1, 50);
+        await ns.sleep(0);
+        while( currentMoney < 500000){
+          currentMoney = ns.getServerMoneyAvailable("home");
+          await ns.sleep(10000);
+        }
     }
 
     //casino party

@@ -17,6 +17,7 @@ levelStart = ns.getHackingLevel();
 }
 
 ns.kill(pid);
+await ns.sleep(0);
 
 ns.exec("share.ts", "home", shareThreads);
 
