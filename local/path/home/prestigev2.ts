@@ -23,15 +23,18 @@ export async function main(ns: NS) {
     ns.exec("roulette.ts", "home", 1, 50);
     await ns.sleep(20000);
 
-    if (ns.getServerMaxRam("home") < 64){
+    while (ns.getServerMaxRam("home") < 128){
         ns.exec("upgrade_ram.ts", "home", 1);  
-        await ns.sleep(0);
+        await ns.sleep(100);
     }
 
     //return;
 
     ns.exec("pop.ts", "home", 1, "joesguns");
     ns.exec("home_share.ts", "home");
+
+    
+    ns.exec("proto_installer.ts", "home", 1, 1);
     
     const universityTargetLevel: number = 130;
     ns.exec("university.ts", "home", 1);
