@@ -10,6 +10,9 @@ const pid = ns.exec("money.ts", "home", prepGThreads, "joesguns");
 
 let levelStart = ns.getHackingLevel();
 
+
+await ns.sleep(300000);
+
 while(true){
 await ns.sleep(15000);
 if(levelStart == ns.getHackingLevel()) break;

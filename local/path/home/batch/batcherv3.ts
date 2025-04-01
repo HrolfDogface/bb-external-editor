@@ -68,7 +68,7 @@ export async function main(ns: NS) {
     const hackDelay: number = weakenTime - hackTime - 0;
     const growDelay: number = weakenTime - growTime - 0;
     const weaken2Delay: number = 0;
-    const batchDelay: number = 3;
+    const batchDelay: number = 0;
 
     let hackThreads: number =  Math.floor(0.2/ns.formulas.hacking.hackPercent(server, player));
     if (hackThreads < 1) hackThreads = 1;
@@ -107,7 +107,7 @@ export async function main(ns: NS) {
 
     let level = ns.getHackingLevel(); 
     let j: number = 0;  
-    const depth: number = weakenTime / batchDelay;
+    const depth: number = weakenTime / 1;
     let totalBatches:number = 0;
     for(const exHost of exHosts){
       const freeRam: number = ns.getServerMaxRam(exHost) - ns.getServerUsedRam(exHost);
