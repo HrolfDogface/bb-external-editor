@@ -30,13 +30,15 @@ export async function main(ns: NS) {
 
     //return;
 
+    ns.exec("pop.ts", "home", 1, "joesguns");
+    ns.exec("home_share.ts", "home");
+    
     const universityTargetLevel: number = 130;
     ns.exec("university.ts", "home", 1);
     while (ns.getHackingLevel() < universityTargetLevel){
         await ns.sleep(10000);
     }
 
-    ns.exec("pop.ts", "home", 1, "joesguns");
   
     await ns.sleep(2000);
     ns.scp("status_panel.ts", "joesguns");
