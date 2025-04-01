@@ -3,6 +3,8 @@ export async function main(ns: NS) {
         if (ns.getServerMoneyAvailable("home") > 50000000){
             ns.clearPort(11);
             ns.writePort(11, false);
+            ns.singularity.travelToCity(ns.enums.CityName.Sector12);
+            await ns.sleep(2000);
             ns.singularity.travelToCity(ns.enums.CityName.Aevum);
             await ns.sleep(2000);
             ns.singularity.travelToCity(ns.enums.CityName.Chongqing);
