@@ -18,6 +18,6 @@ export async function main(ns: NS) {
     ns.clearPort(11);
     ns.clearPort(12);
     ns.writePort(11, true);
-    ns.writePort(12, true);
+    ns.writePort(12, false);
 
 }

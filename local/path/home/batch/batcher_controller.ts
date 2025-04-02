@@ -6,6 +6,7 @@ export async function main(ns: NS) {
           ns.killall(servers[i]);
         }
         ns.exec("factions/meta_daemon.ts", "home", 1);
+        ns.exec("gang/capo.ts", "home", 1);
         await ns.sleep(0);
       
     

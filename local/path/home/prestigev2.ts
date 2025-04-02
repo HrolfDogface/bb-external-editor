@@ -34,7 +34,6 @@ export async function main(ns: NS) {
     ns.exec("home_share.ts", "home");
 
     
-    ns.exec("proto_installer.ts", "home", 1, 1);
     
     const universityTargetLevel: number = 130;
     ns.exec("university.ts", "home", 1);
@@ -47,13 +46,17 @@ export async function main(ns: NS) {
     ns.scp("status_panel.ts", "joesguns");
     ns.exec('status_panel.ts', "joesguns");
 
+    
+    ns.exec("proto_installer.ts", "home", 1, 1);
+
     ns.singularity.travelToCity(ns.enums.CityName.Chongqing);
     //ns.exec("factions/meta_daemon.ts", "home", 1);
     ns.exec("batch/batcher_controller.ts", "home", 1);
     await ns.sleep(0);
 
     
-    //ns.exec("gym_mug.ts", "home", 1, 50);
-    //await ns.sleep(0);
+    ns.exec("gym_mug.ts", "home", 1, 50);
+    await ns.sleep(0);
+
 
 }

@@ -10,7 +10,7 @@ export async function main(ns: NS) {
         if(level >= daemonLevel){
             ns.exec("popz.ts", "home", 1, "w0r1d_d43m0n");      
             await ns.sleep(10000);  
-            ns.exec("destroy_world_daemon.ts", "home", 1, 11, "prestigev2.ts"); 
+            ns.exec("destroy_world_daemon.ts", "home", 1, 2, "prestigev2.ts"); 
         }
     }
     

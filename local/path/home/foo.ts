@@ -1,10 +1,8 @@
-//import { GangMemberAscension } from "@/NetscriptDefinitions";
 
 export async function main(ns: NS) {
 
     for(const banger of ns.gang.getMemberNames()){
         const stats: GangMemberAscension = ns.gang.getAscensionResult(banger);
-        if (stats === undefined) continue;
         if(stats.str > 1.5){
             ns.exec("gang/ascend.ts", "home", 1, banger);
             await ns.sleep(100);
