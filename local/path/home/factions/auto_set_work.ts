@@ -7,7 +7,7 @@ export async function main(ns: NS) {
     }
     else{
         for(let i = 0; i < factions.length; i++){
-            if ((ns.singularity.getFactionRep(factions[i])>0) && ((ns.singularity.getFactionFavor(factions[i]) + ns.singularity.getFactionFavorGain(factions[i])) < ns.getFavorToDonate())){
+            if (ns.getPlayer().factions.includes(factions[i]) && ((ns.singularity.getFactionFavor(factions[i]) + ns.singularity.getFactionFavorGain(factions[i])) < ns.getFavorToDonate())){
                 ns.singularity.workForFaction(factions[i],ns.singularity.getFactionWorkTypes(factions[i])[0]);
                 break;
             }

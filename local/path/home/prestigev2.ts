@@ -7,7 +7,7 @@ export async function main(ns: NS) {
     //should automate this check.
     
     //mug for $500k
-    let currentMoney: number = 0;
+    let currentMoney: number = ns.getServerMoneyAvailable("home")nan;
     if( currentMoney < 500000){
         ns.exec("gym_mug.ts", "home", 1, 50);
         await ns.sleep(0);
@@ -35,6 +35,9 @@ export async function main(ns: NS) {
 
     
     
+    ns.exec("proto_installer.ts", "home", 1, 1);
+    await ns.sleep(0);
+
     const universityTargetLevel: number = 130;
     ns.exec("university.ts", "home", 1);
     while (ns.getHackingLevel() < universityTargetLevel){
@@ -42,12 +45,13 @@ export async function main(ns: NS) {
     }
 
   
-    await ns.sleep(2000);
+    await ns.sleep(60000);
     ns.scp("status_panel.ts", "joesguns");
     ns.exec('status_panel.ts', "joesguns");
 
     
     ns.exec("proto_installer.ts", "home", 1, 1);
+    await ns.sleep(100);
 
     ns.singularity.travelToCity(ns.enums.CityName.Chongqing);
     //ns.exec("factions/meta_daemon.ts", "home", 1);

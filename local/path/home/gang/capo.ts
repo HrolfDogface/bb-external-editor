@@ -2,11 +2,11 @@ export async function main(ns: NS) {
     while(!ns.gang.inGang()){
         if(!ns.gang.createGang("Slum Snakes")){
             await ns.sleep(60000);
-        }else{     
-            //turn on auto work      
-            ns.writePort(12, true);
         }
     }
+    ns.clearPort(12);
+    //turn on auto work    
+    ns.writePort(12, true);
 
     let previouesPower: number = ns.gang.getGangInformation().power;
     let tickNumber: number = 10;
