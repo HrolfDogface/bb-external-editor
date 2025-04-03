@@ -5,7 +5,7 @@
 //
 //11: Travel Flag
 //12: auto work flag
-//
+//13: sleeve task
 //
 
 
@@ -17,7 +17,9 @@ export async function main(ns: NS) {
     }
     ns.clearPort(11);
     ns.clearPort(12);
+    ns.clearPort(13);
     ns.writePort(11, true);
     ns.writePort(12, false);
+    ns.writePort(13, "murder");
 
 }

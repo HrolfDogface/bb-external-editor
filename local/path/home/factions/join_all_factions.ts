@@ -3,8 +3,6 @@ export async function main(ns: NS) {
         if (ns.getServerMoneyAvailable("home") > 50000000){
             ns.clearPort(11);
             ns.writePort(11, false);
-            ns.singularity.travelToCity(ns.enums.CityName.Sector12);
-            await ns.sleep(2000);
             ns.singularity.travelToCity(ns.enums.CityName.Aevum);
             await ns.sleep(2000);
             ns.singularity.travelToCity(ns.enums.CityName.Chongqing);
@@ -14,6 +12,8 @@ export async function main(ns: NS) {
             ns.singularity.travelToCity(ns.enums.CityName.NewTokyo);
             await ns.sleep(2000);
             ns.singularity.travelToCity(ns.enums.CityName.Volhaven);
+            await ns.sleep(2000);
+            ns.singularity.travelToCity(ns.enums.CityName.Sector12);
         }
     }
 

@@ -11,6 +11,12 @@ export async function main(ns: NS) {
     let previouesPower: number = ns.gang.getGangInformation().power;
     let tickNumber: number = 10;
     let task: string = "Terrorism";
+    
+    const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(true);
+    const augmentations: string [] = ns.singularity.getAugmentationsFromFaction("Slum Snakes");
+    const unownedCount = augmentations.filter(name => !ownedAugs.includes(name)).length;
+    if (unownedCount < 1) task = "Traffick Illegal Arms";
+
     while(true){
         await ns.gang.nextUpdate();
 
@@ -21,9 +27,7 @@ export async function main(ns: NS) {
             tickNumber = 0;
         }
 
-        if (ns.gang.getMemberNames().length >= 12){
-            //task = "Traffick Illegal Arms";
-        }else {
+        if (ns.gang.getMemberNames().length < 12){
             ns.exec("gang/recruit.ts", "home", 1);
         }
         

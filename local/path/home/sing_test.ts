@@ -44,6 +44,10 @@ export async function main(ns: NS) {
     ns.clearPort(12);
     ns.writePort(12, false);
 
+    
+    ns.clearPort(13);
+    ns.writePort(13, "murder");
+
     const locations = ns.infiltration.getPossibleLocations();
 
     for (const location of locations){        
