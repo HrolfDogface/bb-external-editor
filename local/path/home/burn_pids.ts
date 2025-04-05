@@ -6,6 +6,7 @@
 //11: Travel Flag
 //12: auto work flag
 //13: sleeve task
+//14: destroy bitnode flag
 //
 
 
@@ -18,8 +19,11 @@ export async function main(ns: NS) {
     ns.clearPort(11);
     ns.clearPort(12);
     ns.clearPort(13);
+    ns.clearPort(14);
+
     ns.writePort(11, true);
     ns.writePort(12, false);
     ns.writePort(13, "murder");
+    ns.writePort(14, true);
 
 }

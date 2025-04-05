@@ -2,7 +2,7 @@ export async function main(ns: NS) {
 
     const faction: string = String(ns.args[0]);
     
-    if (!ns.peek(12) && (faction != "Slum Snakes") ) {        
+    if ((!ns.peek(12)) && (faction != "Slum Snakes") ) {        
         ns.writePort(ns.pid, false);
         return;
     }

@@ -48,6 +48,9 @@ export async function main(ns: NS) {
     ns.clearPort(13);
     ns.writePort(13, "murder");
 
+    ns.tprint(ns.peek(12));
+
+/*
     const locations = ns.infiltration.getPossibleLocations();
 
     for (const location of locations){        
@@ -58,6 +61,8 @@ export async function main(ns: NS) {
             ns.tprint(info.reward);
         }
     }
+
+    */
 
     // //go through each faction to see which ones have any rep to detect joined factions
     // for(let i = 0; i < Object.keys(ns.enums.FactionName).length; i++){

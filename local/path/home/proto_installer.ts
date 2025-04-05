@@ -10,7 +10,10 @@ export async function main(ns: NS) {
         if(level >= daemonLevel){
             ns.exec("popz.ts", "home", 1, "w0r1d_d43m0n");      
             await ns.sleep(10000);  
-            ns.exec("destroy_world_daemon.ts", "home", 1, 10, "prestigev2.ts"); 
+            if (ns.peek(14)){
+                ns.exec("destroy_world_daemon.ts", "home", 1, 2, "prestigev2.ts"); 
+            }   
+            ns.tprint("destoy bitNode turned off");     
         }
     }
     

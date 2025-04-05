@@ -8,6 +8,10 @@ export async function main(ns: NS) {
     //turn on auto work    
     ns.writePort(12, true);
 
+    ns.clearPort(13);
+    ns.writePort(13, "uni");
+    //ns.writePort(13, "murder");
+
     let previouesPower: number = ns.gang.getGangInformation().power;
     let tickNumber: number = 10;
     let task: string = "Terrorism";
@@ -15,7 +19,7 @@ export async function main(ns: NS) {
     const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(true);
     const augmentations: string [] = ns.singularity.getAugmentationsFromFaction("Slum Snakes");
     const unownedCount = augmentations.filter(name => !ownedAugs.includes(name)).length;
-    if (unownedCount < 1) task = "Traffick Illegal Arms";
+    if (unownedCount < 3) task = "Traffick Illegal Arms";
 
     while(true){
         await ns.gang.nextUpdate();
