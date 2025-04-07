@@ -19,7 +19,7 @@ export async function main(ns: NS) {
     const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(true);
     const augmentations: string [] = ns.singularity.getAugmentationsFromFaction("Slum Snakes");
     const unownedCount = augmentations.filter(name => !ownedAugs.includes(name)).length;
-    if (unownedCount < 3) task = "Traffick Illegal Arms";
+    if (unownedCount < 1) task = "Traffick Illegal Arms";
 
     while(true){
         await ns.gang.nextUpdate();

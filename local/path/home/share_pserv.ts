@@ -3,7 +3,7 @@ export async function main(ns: NS) {
     const maxServers: number = ns.getPurchasedServerLimit();
     //const serverCount: number = ns.getPurchasedServers().length;
     const maxRam: number = ns.getPurchasedServerMaxRam();
-    for (let count: number = 0; count < maxServers; count++) {
+    for (let count: number = 15 ; count < maxServers; count++) {
       let hostname = "pserv-" + (count);
       if (!ns.serverExists(hostname)) {
         if(ns.getPurchasedServerCost(maxRam) > ns.getServerMoneyAvailable("home")){
