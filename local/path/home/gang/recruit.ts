@@ -41,7 +41,7 @@ export async function main(ns: NS) {
 
     const unusedNames: string[] = names.filter(name => !bangers.includes(name));
 
-    const banger = unusedNames[Math.floor(Math.random() * unusedNames.length)];
+    const banger = unusedNames[Math.floor(Math.random() * (unusedNames.length - 1))];
 
     ns.gang.recruitMember(banger);
 

@@ -7,22 +7,19 @@ export async function main(ns: NS) {
                 ns.sleeve.setToShockRecovery(i);
                 continue;
             }
+            const j = Math.round(Math.random() * 3)
             if(ns.peek(13) == "gym"){
-                switch (i){
+                switch (j){
                     case 0:
-                    case 4:
                         ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.agility);
                         break;
                     case 1:
-                    case 5:
                         ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.defense);
                     break;
                     case 2:
-                    case 6:
                         ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.dexterity);
                         break;
                     case 3:
-                    case 7:
                         ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.strength);
                         break;
                 }
@@ -34,21 +31,17 @@ export async function main(ns: NS) {
                 }else if(sleeve.skills.strength > 35){
                     ns.sleeve.setToCommitCrime(i, ns.enums.CrimeType.mug);
                 }else {
-                    switch (i){
+                    switch (j){
                         case 0:
-                        case 4:
                             ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.agility);
                             break;
                         case 1:
-                        case 5:
                             ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.defense);
                         break;
                         case 2:
-                        case 6:
                             ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.dexterity);
                             break;
                         case 3:
-                        case 7:
                             ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.strength);
                             break;
                     }
