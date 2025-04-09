@@ -2,9 +2,14 @@ NFG level 61
 
 BN 12.11
 
+game state object or dictionary
+can be used to initialize state ports from json file
+can be updated from state ports to json file
+
+
 make hack percentage for batcher a global port variable
 
-on entering bitnode go nuts upgrading the home server and soft resetting repeatedly until home server is at max casino money can buy
+on entering bitnode go nuts upgrading the home server and soft resetting repeatedly until home server is at max casino money can buy after crime!
 
 do uni with sleeves for int.
 

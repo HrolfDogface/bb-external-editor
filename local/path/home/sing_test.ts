@@ -1,5 +1,5 @@
 //import { portHack } from "./pop";
-
+import { PortNumber } from "./port_enum";
 
 
 
@@ -37,18 +37,26 @@ export async function main(ns: NS) {
 
     const factionName: string = ns.enums.FactionName.TianDiHui;
 
-    ns.tprint(factionName);
-    ns.tprint(ns.singularity.getAugmentationsFromFaction(factionName));
+    ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
+    ns.clearPort(PortNumber.destroyBitnodeFlag);
+    ns.writePort(PortNumber.destroyBitnodeFlag, false);
+    ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
+    ns.clearPort(PortNumber.destroyBitnodeFlag);
+    ns.writePort(PortNumber.destroyBitnodeFlag, true);
+    ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
 
-    
-    ns.clearPort(12);
-    ns.writePort(12, false);
+    //ns.tprint(factionName);
+    //ns.tprint(ns.singularity.getAugmentationsFromFaction(factionName));
+//
+    //
+    //ns.clearPort(12);
+    //ns.writePort(12, false);
+//
+    //
+    //ns.clearPort(13);
+    //ns.writePort(13, "murder");
 
-    
-    ns.clearPort(13);
-    ns.writePort(13, "murder");
-
-    ns.tprint(ns.peek(12));
+    //ns.tprint(ns.peek(12));
 
 /*
     const locations = ns.infiltration.getPossibleLocations();
