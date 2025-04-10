@@ -1,9 +1,11 @@
 export enum PortNumber {
     phase = 5,
+    hackPercentage = 10,
     travelFlag = 11,
     autoWorkFlag = 12,
     sleeveTask = 13,
     destroyBitnodeFlag = 14,
+    joinFlag = 15,
 }
 
 export enum Phase {

@@ -5,6 +5,38 @@ import { PortNumber } from "./port_enum";
 
 export async function main(ns: NS) {
 
+   //ns.clearPort(14);
+   //ns.writePort(14, true);
+
+   //let map = new Map();
+   //map.set(PortNumber.phase, 0);
+   //map.set(PortNumber.autoWorkFlag, false);
+   //map.set(PortNumber.destroyBitnodeFlag, true);
+   //map.set(PortNumber.hackPercentage, 20);
+   //map.set(PortNumber.sleeveTask, "murder");
+   //map.set(PortNumber.travelFlag, true);
+
+    //if(ns.peek(PortNumber.destroyBitnodeFlag) != "NULL PORT DATA") map.set(PortNumber.destroyBitnodeFlag, ns.peek(PortNumber.destroyBitnodeFlag));
+    const ports = Object.keys(PortNumber).filter((item) => {
+        return !isNaN(Number(item));
+    });
+    for (const port of ports){
+        //if(ns.peek(Number(port)) != "NULL PORT DATA") map.set(Number(port), ns.peek(Number(port)));
+        ns.tprint(port);
+        ns.tprint(ns.peek(Number(port)));
+    }
+
+    //ns.write("ports-state.json", JSON.stringify(Object.fromEntries(map)), "w");
+    //ns.tprint(map);
+//
+    //const dic = JSON.parse(ns.read("ports-state.json"));
+//
+    //ns.tprint(dic);
+    //ns.tprint(dic[PortNumber.phase]);
+    //
+    //map = new Map(Object.entries(dic));
+    //ns.tprint(map);
+
     //ns.writePort(1, "omega-net");
     //ns.writePort(1, "silver-helix");
     //ns.writePort(1, "phantasy");
@@ -35,15 +67,16 @@ export async function main(ns: NS) {
     //ns.tprint((millionRep - hundredRep)/(hundredRep - startRep));
     //ns.tprint((hundredRep - startRep)*10000);
 
-    const factionName: string = ns.enums.FactionName.TianDiHui;
+    //const factionName: string = ns.enums.FactionName.TianDiHui;
 
-    ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
-    ns.clearPort(PortNumber.destroyBitnodeFlag);
-    ns.writePort(PortNumber.destroyBitnodeFlag, false);
-    ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
-    ns.clearPort(PortNumber.destroyBitnodeFlag);
-    ns.writePort(PortNumber.destroyBitnodeFlag, true);
-    ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
+   //ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
+   //ns.clearPort(PortNumber.destroyBitnodeFlag);
+   //ns.writePort(PortNumber.destroyBitnodeFlag, false);
+   //ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
+   //ns.clearPort(PortNumber.destroyBitnodeFlag);
+   //ns.writePort(PortNumber.destroyBitnodeFlag, true);
+   //ns.tprint(ns.peek(PortNumber.destroyBitnodeFlag));
+   //ns.tprint(ns.peek(PortNumber.hackPercentage));
 
     //ns.tprint(factionName);
     //ns.tprint(ns.singularity.getAugmentationsFromFaction(factionName));

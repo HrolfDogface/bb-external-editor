@@ -20,7 +20,7 @@ export async function main(ns: NS) {
     ns.clearPort(12);
     ns.clearPort(13);
     ns.clearPort(14);
-
+//
     ns.writePort(11, true);
     ns.writePort(12, false);
     ns.writePort(13, "murder");
