@@ -4,14 +4,18 @@ import { Phase } from "./port_enum";
 export async function main(ns: NS) {
     
     ns.exec("burn_pids.ts", "home", 1, 50);
+    await ns.sleep(10);
     ns.exec("set_ports.ts", "home", 1);
+    await ns.sleep(10);
 
     ns.clearPort(PortNumber.travelFlag);
     ns.clearPort(PortNumber.autoWorkFlag);
     ns.clearPort(PortNumber.sleeveTask);
     ns.clearPort(PortNumber.joinFlag);
+    ns.clearPort(PortNumber.hackPercentage);
 
     ns.writePort(PortNumber.travelFlag, true);
+    ns.writePort(PortNumber.hackPercentage, 5);
 
     switch(ns.peek(PortNumber.phase)){
         case(Phase.murderParty):
@@ -36,5 +40,7 @@ export async function main(ns: NS) {
             break;
 
     }
+
+    ns.exec("save_ports.ts", "home", 1);
 
 }

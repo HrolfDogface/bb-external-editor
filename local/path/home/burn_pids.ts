@@ -16,14 +16,14 @@ export async function main(ns: NS) {
     if(count > 0){
         ns.exec("burn_pids.ts", "home", 1, count);
     }
-    ns.clearPort(11);
-    ns.clearPort(12);
-    ns.clearPort(13);
-    ns.clearPort(14);
+    //ns.clearPort(11);
+    //ns.clearPort(12);
+    //ns.clearPort(13);
+    //ns.clearPort(14);
 //
-    ns.writePort(11, true);
-    ns.writePort(12, false);
-    ns.writePort(13, "murder");
-    ns.writePort(14, true);
+    //ns.writePort(11, true);
+    //ns.writePort(12, false);
+    //ns.writePort(13, "murder");
+    //ns.writePort(14, true);
 
 }

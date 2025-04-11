@@ -1,3 +1,5 @@
+import { PortNumber } from "./port_enum";
+
 export async function main(ns: NS) {
 
     const augmentsMin: number = Number(ns.args[0]);
@@ -10,8 +12,10 @@ export async function main(ns: NS) {
         if(level >= daemonLevel){
             ns.exec("popz.ts", "home", 1, "w0r1d_d43m0n");      
             await ns.sleep(10000);  
-            if (ns.peek(14)){
-                ns.exec("destroy_world_daemon.ts", "home", 1, 12, "prestigev2.ts"); 
+            if (ns.peek(PortNumber.destroyBitnodeFlag)){
+                ns.exec("save_ports.ts", "home", 1);
+                await ns.sleep(10);
+                ns.exec("destroy_world_daemon.ts", "home", 1, ns.peek(PortNumber.nextBitnode), "enter_bitnode.ts"); 
             }   
             ns.tprint("destoy bitNode turned off");     
         }
@@ -150,14 +154,20 @@ export async function main(ns: NS) {
             await ns.nextPortWrite(tempPid);
             coreUpgradeCost = ns.readPort(tempPid);
         }
+        ns.exec("save_ports.ts", "home", 1);
+        await ns.sleep(10);
         ns.exec("factions/install_augmentations.ts", "home");
     }else if (ns.singularity.getOwnedAugmentations(true).includes("The Red Pill") && !ns.singularity.getOwnedAugmentations(false).includes("The Red Pill")){
         //install imediately if you have The Red Pill
+        ns.exec("save_ports.ts", "home", 1);
+        await ns.sleep(10);
         ns.exec("factions/install_augmentations.ts", "home");
     }else if (ns.singularity.getFactionFavor("NiteSec") + ns.singularity.getFactionFavorGain("NiteSec") > ns.getFavorToDonate()){
         //install if Cybersec has earmed enough faction to start donating on the next run
         if (ns.singularity.getOwnedAugmentations(true).length - ns.singularity.getOwnedAugmentations(false).length >= 1){
             if (ns.singularity.getFactionFavor("NiteSec") < ns.getFavorToDonate()){
+                ns.exec("save_ports.ts", "home", 1);
+                await ns.sleep(10);
                 ns.exec("factions/install_augmentations.ts", "home");
             }
         }

@@ -6,6 +6,7 @@ export enum PortNumber {
     sleeveTask = 13,
     destroyBitnodeFlag = 14,
     joinFlag = 15,
+    nextBitnode = 16,
 }
 
 export enum Phase {
