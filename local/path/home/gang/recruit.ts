@@ -1,7 +1,15 @@
+import { PortNumber } from "./../port_enum";
+import { Phase } from "./../port_enum";
+
 export async function main(ns: NS) {
 
     if (!ns.gang.canRecruitMember()) return;
-    if (ns.getServerMoneyAvailable("home") < 600000000) return;
+    if (ns.getServerMoneyAvailable("home") < 600000000){
+        if(ns.peek(PortNumber.phase) == Phase.gangStartup1){
+            ns.exec("soft_reset.ts", "home", 1);
+        }
+        return;
+    }
 
     const names: string[] = ["Lord Emp",
                                 "Spartan",
@@ -48,4 +56,8 @@ export async function main(ns: NS) {
     ns.gang.setMemberTask(banger, "Train Combat");
 
     ns.exec("gang/buy.ts", "home", 1, banger);
+
+    if(ns.peek(PortNumber.phase) == Phase.buyRam){
+        ns.exec("soft_reset.ts", "home", 1);
+    }
 }

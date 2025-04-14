@@ -1,3 +1,6 @@
+import { PortNumber } from "./../port_enum";
+import { Phase } from "./../port_enum";
+
 export async function main(ns: NS) {
 
     const banger: string = String(ns.args[0]);
@@ -7,7 +10,8 @@ export async function main(ns: NS) {
     const eqTypes: string[] = ["Weapon", "Armor", "Vehicle"];
 
     
-    if (ns.getServerMoneyAvailable("home") > 100000000000) eqTypes.push("Augmentation");
+    //if (ns.getServerMoneyAvailable("home") > 100000000000) eqTypes.push("Augmentation");
+    if(ns.peek(PortNumber.phase) == Phase.gangStartup2) eqTypes.push("Augmentation");
 
     for (const item of equipment){
         const equipmentType: string = ns.gang.getEquipmentType(item);

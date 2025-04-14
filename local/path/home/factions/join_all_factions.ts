@@ -1,5 +1,7 @@
+import { PortNumber } from "./../port_enum";
+
 export async function main(ns: NS) {
-    if (ns.peek(11)){
+    if (ns.peek(PortNumber.travelFlag)){
         if (ns.getServerMoneyAvailable("home") > 50000000){
             ns.clearPort(11);
             ns.writePort(11, false);
@@ -20,7 +22,7 @@ export async function main(ns: NS) {
     const invitations: string [] = ns.singularity.checkFactionInvitations();
 
     for (let i = 0; i < invitations.length; i++){
-        if ((!ns.peek(12)) && (invitations[i] != "Slum Snakes")) continue;
+        if ((!ns.peek(PortNumber.joinFlag)) && (invitations[i] != "Slum Snakes")) continue;
 
         if(invitations[i] == "NiteSec"){          
             ns.singularity.joinFaction(invitations[i]);
@@ -40,7 +42,7 @@ export async function main(ns: NS) {
     }
 
     for (let i = 0; i < invitations.length; i++){
-        if ((!ns.peek(12)) && (invitations[i] != "Slum Snakes")) continue;
+        if ((!ns.peek(PortNumber.joinFlag)) && (invitations[i] != "Slum Snakes")) continue;
 
         ns.singularity.joinFaction(invitations[i]);
         

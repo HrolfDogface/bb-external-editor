@@ -52,7 +52,7 @@ export async function main(ns: NS) {
                 ns.sleeve.setToCommitCrime(i, ns.enums.CrimeType.heist);
             }
             if(ns.peek(13) == "uni"){
-                ns.sleeve.setToUniversityCourse(i, ns.enums.LocationName.Sector12RothmanUniversity, ns.enums.UniversityClassType.leadership);
+                ns.sleeve.setToUniversityCourse(i, ns.enums.LocationName.Sector12RothmanUniversity, ns.enums.UniversityClassType.computerScience);
             }
 
         }

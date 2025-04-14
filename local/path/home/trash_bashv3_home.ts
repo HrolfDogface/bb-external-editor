@@ -1,3 +1,6 @@
+import { PortNumber } from "./port_enum";
+import { Phase } from "./port_enum";
+
 export async function main(ns: NS) {
   //ns.args[0] = maxLevel
 
@@ -51,6 +54,9 @@ export async function main(ns: NS) {
     serverCount = maxServers;
   }
 
+  if(ns.peek(PortNumber.phase) == Phase.gangGang){
+    serverCount = 0;
+  }
   const loopMax = serverCount + count;
 
  
