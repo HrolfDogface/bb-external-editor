@@ -24,7 +24,7 @@ export async function main(ns: NS) {
     ns.exec("casino.ts", "home", 1, 50);
     await ns.sleep(100);
     ns.exec("roulette.ts", "home", 1, 50);
-    await ns.sleep(20000);
+    await ns.sleep(5000);
 
     while (ns.getServerMaxRam("home") < 512){
         ns.exec("upgrade_ram.ts", "home", 1);  
@@ -52,12 +52,21 @@ export async function main(ns: NS) {
         case(Phase.gangStartup1):
             phazeTwo(ns);
             break;
-        case(Phase.gangStartup2):        
+        case(Phase.gangStartup2):   
+            ns.exec("proto_installer.ts", "home", 1, 1);
+            await ns.sleep(0);       
             phazeThree(ns);
             break;
         case(Phase.gangGang):  
             ns.exec("proto_installer.ts", "home", 1, 1);
-            await ns.sleep(0);     
+            await ns.sleep(10);
+            ns.exec("university.ts", "home", 1);
+            while (ns.getHackingLevel() < universityTargetLevel){
+                await ns.sleep(10000);
+            }
+            ns.exec("pop.ts", "home", 1, "joesguns");
+            ns.exec("home_share.ts", "home");
+            await ns.sleep(30000);     
             phazeFour(ns);
             break;
         case(Phase.stackNFG):        
@@ -70,6 +79,7 @@ export async function main(ns: NS) {
             }
             ns.exec("pop.ts", "home", 1, "joesguns");
             ns.exec("home_share.ts", "home");
+            await ns.sleep(30000);
             ns.scp("status_panel.ts", "joesguns");
             ns.exec('status_panel.ts', "joesguns");
             ns.exec("batch/batcher_controller.ts", "home", 1);
@@ -168,8 +178,6 @@ export function phazeThree(ns: NS){
 //prestige startup function for the slum snakes augmentation phase
 export function phazeFour(ns: NS){
     
-    ns.singularity.commitCrime("Homicide");    
-    ns.singularity.travelToCity(ns.enums.CityName.Chongqing);
     ns.exec("batch/batcher_controller.ts", "home", 1);
     
 }

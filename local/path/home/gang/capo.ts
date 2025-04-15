@@ -77,8 +77,16 @@ export async function main(ns: NS) {
         ns.exec("gang/war.ts", "home", 1);
 
         if(ns.peek(PortNumber.phase) == Phase.gangStartup2){
+
+            for(const banger of ns.gang.getMemberNames()){
+                ns.exec("gang/buy.ts", "home", 1, banger);
+                await ns.sleep(100);
+            }
             if (ns.getServerMoneyAvailable("home") < 9400000000){
+                ns.exec("gang/set_tasks.ts", "home", 1, task);
+                await ns.sleep(100);
                 ns.exec("soft_reset.ts", "home", 1);
+                await ns.sleep(100);
             }
             ns.clearPort(PortNumber.phase);
             ns.writePort(PortNumber.phase, Phase.gangGang);
