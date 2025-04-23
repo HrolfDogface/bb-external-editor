@@ -168,6 +168,8 @@ export async function main(ns: NS) {
             weakenPids.push(ns.exec("batch/W_worker2.ts", exHost, weaken2Threads, targetHost, weakenTime, performance.now() + weakenTime + weaken2Delay + batchDelay * j, ns.pid, exHost));
           }
           j++
+
+          if (j%5000 == 0) await ns.sleep(1);
         }
       } 
     }  

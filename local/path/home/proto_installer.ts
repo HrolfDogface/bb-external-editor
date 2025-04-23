@@ -148,8 +148,9 @@ export async function main(ns: NS) {
         await ns.nextPortWrite(tempPid);
         let coreUpgradeCost: number = ns.readPort(tempPid);
         while (ns.getServerMoneyAvailable("home") > coreUpgradeCost){ //BOOP
-            ns.exec("factions/upgrade_cores.ts", "home");
-            await ns.sleep(0);
+            tempPid = ns.exec("factions/upgrade_cores.ts", "home");
+            await ns.nextPortWrite(tempPid);
+            if(!ns.readPort(tempPid)) break;
             tempPid = ns.exec("factions/get_core_cost.ts", "home");
             await ns.nextPortWrite(tempPid);
             coreUpgradeCost = ns.readPort(tempPid);
