@@ -1,17 +1,19 @@
 NFG level 61
 
-BN 12.11
+BN 12.
 
-game state object or dictionary
-can be used to initialize state ports from json file
-can be updated from state ports to json file
+update capo and gang phases to buy augments for me and for gang members in all three gang phases and sof reset aggressively.
+
+Create hacknet controller
+    phase 0: buy no upgrades and spend all hashes on the gym
+    phase stack NFG: maybe add a new phase here focused on upgrading home PC ram. To do this build up hacknet and spend hashes on target server upgrades and then batch for all we are worth. Only needed if pservers are not available.
+
+upgrade batch_controller and trash_bash to use the gunner
 
 
 make hack percentage for batcher a global port variable
 
-on entering bitnode go nuts upgrading the home server and soft resetting repeatedly until home server is at max casino money can buy after crime!
 
-do uni with sleeves for int.
 
 create script to run max share threads on a server (need to communicate ammount of Ram used by Batcher)
 add sharing home into prestige and prestige_trash

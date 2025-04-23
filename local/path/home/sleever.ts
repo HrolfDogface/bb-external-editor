@@ -28,9 +28,10 @@ export async function main(ns: NS) {
             if(ns.peek(13) == "murder"){
                 if(sleeve.skills.agility > 60){
                     ns.sleeve.setToCommitCrime(i, ns.enums.CrimeType.homicide);
-                }else if(sleeve.skills.strength > 35){
-                    ns.sleeve.setToCommitCrime(i, ns.enums.CrimeType.mug);
-                }else {
+                }//else if(sleeve.skills.strength > 35){
+                 //   ns.sleeve.setToCommitCrime(i, ns.enums.CrimeType.mug);
+                //}
+                else {
                     switch (j){
                         case 0:
                             ns.sleeve.setToGymWorkout(i, ns.enums.LocationName.Sector12PowerhouseGym, ns.enums.GymType.agility);

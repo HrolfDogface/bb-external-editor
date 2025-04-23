@@ -43,7 +43,8 @@ export async function main(ns: NS) {
     while (ns.getServerMoneyAvailable(targetHost) < maxMoney){
       await ns.sleep(100);
     }
-  
+    await ns.sleep(1000);
+
     while (ns.getServerSecurityLevel(targetHost) > minSecurity){
       await ns.sleep(100);
     }  
@@ -80,15 +81,15 @@ export async function main(ns: NS) {
     const hackDelay: number = weakenTime - hackTime - 0;
     const growDelay: number = weakenTime - growTime - 0;
     const weaken2Delay: number = 0;
-    const batchDelay: number = 3;
+    const batchDelay: number = .05;
 
-    let hackThreads: number =  Math.floor(0.05/ns.formulas.hacking.hackPercent(server, player));
+    let hackThreads: number =  Math.floor(0.8/ns.formulas.hacking.hackPercent(server, player));
     if (hackThreads < 1) hackThreads = 1;
 
     const hackSecurity: number = hackThreads * 0.002;
 
     const cores: number = ns.getServer("home").cpuCores;
-    server.moneyAvailable = server.moneyMax * 0.95;
+    server.moneyAvailable = server.moneyMax * 0.2;
     server.hackDifficulty = server.minDifficulty + hackSecurity;
     let growthThreads: number = Math.ceil(ns.formulas.hacking.growThreads(server, player, server.moneyMax, 1) * 1.2);    
     let growthThreadsHome: number = Math.ceil(ns.formulas.hacking.growThreads(server, player, server.moneyMax, cores) * 1.2);
@@ -119,7 +120,7 @@ export async function main(ns: NS) {
 
     let level = ns.getHackingLevel(); 
     let j: number = 0;  
-    const depth: number = 120000;
+    const depth: number = 90000;
     let totalBatches:number = 0;
     for(const exHost of exHosts){
       const freeRam: number = ns.getServerMaxRam(exHost) - ns.getServerUsedRam(exHost);

@@ -11,7 +11,8 @@ export async function main(ns: NS) {
 
     
     //if (ns.getServerMoneyAvailable("home") > 100000000000) eqTypes.push("Augmentation");
-    if(ns.peek(PortNumber.phase) == Phase.gangStartup2) eqTypes.push("Augmentation");
+    //if(ns.peek(PortNumber.phase) == Phase.gangStartup2) eqTypes.push("Augmentation");
+    eqTypes.push("Augmentation");
 
     for (const item of equipment){
         const equipmentType: string = ns.gang.getEquipmentType(item);

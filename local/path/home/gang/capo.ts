@@ -33,7 +33,7 @@ export async function main(ns: NS) {
     const ownedAugs: string [] = ns.singularity.getOwnedAugmentations(false);
     const augmentations: string [] = ns.singularity.getAugmentationsFromFaction("Slum Snakes");
     const unownedCount = augmentations.filter(name => !ownedAugs.includes(name)).length;
-    if (unownedCount < 1){ 
+    if (unownedCount < 2){ 
         task = "Traffick Illegal Arms";
         if(ns.peek(PortNumber.phase) == Phase.gangGang){
             ns.clearPort(PortNumber.phase);
@@ -76,7 +76,7 @@ export async function main(ns: NS) {
 
         ns.exec("gang/war.ts", "home", 1);
 
-        if(ns.peek(PortNumber.phase) == Phase.gangStartup2){
+        if((ns.peek(PortNumber.phase) == Phase.gangStartup2)||(ns.peek(PortNumber.phase) == Phase.gangStartup1)){
 
             for(const banger of ns.gang.getMemberNames()){
                 ns.exec("gang/buy.ts", "home", 1, banger);
@@ -84,10 +84,14 @@ export async function main(ns: NS) {
             }
             if (ns.getServerMoneyAvailable("home") < 9400000000){
                 ns.exec("gang/set_tasks.ts", "home", 1, task);
-                await ns.sleep(100);
+                await ns.sleep(100); 
+                ns.exec("proto_installer.ts", "home", 1, 1);
+                await ns.sleep(1000);
                 ns.exec("soft_reset.ts", "home", 1);
                 await ns.sleep(100);
             }
+        }
+        if(ns.peek(PortNumber.phase) == Phase.gangStartup2){
             ns.clearPort(PortNumber.phase);
             ns.writePort(PortNumber.phase, Phase.gangGang);
             ns.exec("soft_reset.ts", "home", 1);

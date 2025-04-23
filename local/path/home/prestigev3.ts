@@ -66,8 +66,17 @@ export async function main(ns: NS) {
             }
             ns.exec("pop.ts", "home", 1, "joesguns");
             ns.exec("home_share.ts", "home");
-            await ns.sleep(30000);     
+            await ns.sleep(30000);   
+            ns.exec("proto_installer.ts", "home", 1, 1);
+            await ns.sleep(10000); 
             phazeFour(ns);
+            await ns.sleep(60000);   
+            ns.exec("proto_installer.ts", "home", 1, 1);
+            await ns.sleep(10000);  
+            if (ns.getServerMoneyAvailable("home") < 9400000000){
+                ns.exec("soft_reset.ts", "home", 1);
+                await ns.sleep(100);
+            }
             break;
         case(Phase.stackNFG):        
         case(Phase.stackNFG2):
