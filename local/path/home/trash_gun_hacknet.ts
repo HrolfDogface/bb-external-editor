@@ -1,6 +1,10 @@
+import { PortNumber } from "./port_enum";
+import { Phase } from "./port_enum";
+
 export async function main(ns: NS) {
   //ns.args[0] = maxLevel
 
+  //ns.ui.openTail();
   const maxLevel: number = Number(ns.args[0]);
   let maxRam: number = ns.getPurchasedServerMaxRam();
   let ramCost: number = ns.getPurchasedServerCost(maxRam);
@@ -39,10 +43,9 @@ export async function main(ns: NS) {
   ns.writePort(1, "clear");
   const hosts: string [] = [];
   let count: number = 0
-  //if((maxRam <= ns.getServerMaxRam("home"))||(serverCount == 0)){
-  //  count = 1;
-  //  hosts.push("home");
-  //}
+  
+  count = 1;
+  hosts.push("home");
 
   const maxServers: number = ns.getPurchasedServerLimit();
   //const maxServers: number = 15;
@@ -52,6 +55,9 @@ export async function main(ns: NS) {
     serverCount = maxServers;
   }
 
+  if(ns.peek(PortNumber.phase) == Phase.gangGang){
+    serverCount = 0;
+  }
   const loopMax = serverCount + count;
 
  
@@ -70,7 +76,7 @@ export async function main(ns: NS) {
     ns.scp("target_prep.ts", hostname);
     ns.scp("money.ts", hostname);
     ns.scp("security.ts", hostname);
-    ns.scp("batch/batcherv3.ts", hostname);
+    ns.scp("batch/gunner.ts", hostname);
     ns.scp("batch/H_worker.ts", hostname);
     ns.scp("batch/W_worker.ts", hostname);
     ns.scp("batch/G_worker.ts", hostname);
@@ -80,13 +86,14 @@ export async function main(ns: NS) {
 
   }    
 
-  ns.exec("home_share.ts", "home");
-  ns.writePort(1, "joesguns");
+  //ns.exec("home_share.ts", "home");
+  //ns.writePort(1, "joesguns");
 
   ns.exec("popz.ts", "home", 1, neighbors[0].hostName);
   await ns.sleep(2000);
-  ns.exec("batch/batcherv3.ts", "home", 1, neighbors[0].hostName, ...hosts);
-  ns.writePort(1, neighbors[0].hostName);
+  ns.exec("batch/gunner.ts", "home", 1, neighbors[0].hostName, ...hosts);
+  ns.writePort(1, neighbors[0].hostName);  
+  ns.exec("hacknet/study_loop.ts", "home", 1, neighbors[0].hostName);
 
   //ns.exec("home_share.ts", "home");
 }

@@ -12,7 +12,7 @@ export async function main(ns: NS) {
     if(ns.peek(PortNumber.phase) == Phase.gangGang){
         ns.exec("proto_installer.ts", "home", 1, 1);
     }else {
-        ns.exec("proto_installer.ts", "home", 1, 10);
+        ns.exec("proto_installer.ts", "home", 1, 3);
     }
     await ns.sleep(60000);
     }

@@ -11,7 +11,8 @@ export async function main(ns: NS) {
    
     if(ns.peek(PortNumber.phase) == Phase.murderParty){
         ns.clearPort(PortNumber.phase);
-        ns.writePort(PortNumber.phase, Phase.buyRam);
+        //ns.writePort(PortNumber.phase, Phase.buyRam);
+        ns.writePort(PortNumber.phase, Phase.gangStartup1);
 
         ns.clearPort(PortNumber.sleeveTask);
         ns.writePort(PortNumber.sleeveTask, "uni");

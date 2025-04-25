@@ -43,7 +43,7 @@ export async function main(ns: NS) {
     while (ns.getServerMoneyAvailable(targetHost) < maxMoney){
       await ns.sleep(100);
     }
-    await ns.sleep(1000);
+    await ns.sleep(150);
 
     while (ns.getServerSecurityLevel(targetHost) > minSecurity){
       await ns.sleep(100);
@@ -81,7 +81,7 @@ export async function main(ns: NS) {
     const hackDelay: number = weakenTime - hackTime - 0;
     const growDelay: number = weakenTime - growTime - 0;
     const weaken2Delay: number = 0;
-    const batchDelay: number = .05;
+    const batchDelay: number = 0.05;
 
     let hackThreads: number =  Math.floor(0.8/ns.formulas.hacking.hackPercent(server, player));
     if (hackThreads < 1) hackThreads = 1;
@@ -89,7 +89,7 @@ export async function main(ns: NS) {
     const hackSecurity: number = hackThreads * 0.002;
 
     const cores: number = ns.getServer("home").cpuCores;
-    server.moneyAvailable = server.moneyMax * 0.2;
+    server.moneyAvailable = server.moneyMax * 0.0;
     server.hackDifficulty = server.minDifficulty + hackSecurity;
     let growthThreads: number = Math.ceil(ns.formulas.hacking.growThreads(server, player, server.moneyMax, 1) * 1.2);    
     let growthThreadsHome: number = Math.ceil(ns.formulas.hacking.growThreads(server, player, server.moneyMax, cores) * 1.2);
@@ -120,9 +120,10 @@ export async function main(ns: NS) {
 
     let level = ns.getHackingLevel(); 
     let j: number = 0;  
-    const depth: number = 90000;
+    const depth: number = 200000;
     let totalBatches:number = 0;
     for(const exHost of exHosts){
+      if (totalBatches > depth) break;
       const freeRam: number = ns.getServerMaxRam(exHost) - ns.getServerUsedRam(exHost);
 
       let batches: number;
@@ -169,25 +170,32 @@ export async function main(ns: NS) {
           }
           j++
 
-          if (j%5000 == 0) await ns.sleep(1);
+          if (j%10000 == 0) await ns.sleep(1);
         }
       } 
-    }  
-
+    }
+    
+    await ns.sleep(weakenTime + weaken2Delay + batchDelay * j  / 2);
+/*  
     while (true)
     {
      
       await ns.nextPortWrite(ns.pid);
       workerServer = ns.readPort(ns.pid);
-
-      //remove top weaken worker pid from the list of pids
+      
       weakenPids.shift();
+
+      //while(workerServer != "NULL PORT DATA"){
+      //  //remove top weaken worker pid from the list of pids
+      //  weakenPids.shift();
+      //  workerServer = ns.readPort(ns.pid);
+      //}
 
       if (weakenPids.length < 1) break;
       
 
     }
-
+*/
     
   }
   

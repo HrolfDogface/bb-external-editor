@@ -14,9 +14,21 @@ export async function main(ns: NS) {
         const level: number = ns.getHackingLevel();
         let scanLevel: number = level/3;
         if (servers.length > 10) scanLevel = level/2;
-        ns.exec("trash_bashv3_home.ts", "home", 1, scanLevel);
+        ns.exec("trash_gun_hacknet.ts", "home", 1, scanLevel);
+        //ns.exec("trash_bashv3_home.ts", "home", 1, scanLevel);
         //ns.exec("trash_bashv3.ts", "home", 1, scanLevel);
         await ns.sleep(20000);
+        ns.exec("hacknet/buy_all.ts", "home", 1);
+        await ns.sleep(20000);
+        ns.exec("hacknet/buy_all.ts", "home", 1);
+        await ns.sleep(20000);
+        ns.exec("hacknet/buy_all.ts", "home", 1);
+        await ns.sleep(20000);
+        ns.exec("hacknet/buy_all.ts", "home", 1);
+        await ns.sleep(20000);
+        ns.exec("hacknet/buy_all.ts", "home", 1);
+        await ns.sleep(20000);
+        ns.exec("hacknet/buy_all.ts", "home", 1);
         
     
         servers = ns.getPurchasedServers();
