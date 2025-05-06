@@ -9,10 +9,10 @@ export async function main(ns: NS) {
             ns.hacknet.spendHashes("Improve Studying");
         }
         if(hashCount >= reduceCost){
-            ns.hacknet.spendHashes("Reduce Minimum Security", String(ns.args[0]));
+            //ns.hacknet.spendHashes("Reduce Minimum Security", String(ns.args[0]));
         }
         if(hashCount >= increaseCost){
-            ns.hacknet.spendHashes("Increase Maximum Money", String(ns.args[0]));
+            //ns.hacknet.spendHashes("Increase Maximum Money", String(ns.args[0]));
         }
         await ns.sleep(3000)
     }

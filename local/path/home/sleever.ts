@@ -49,7 +49,7 @@ export async function main(ns: NS) {
                     continue;
                 }
             }
-            if(ns.peek(13) == "hesit"){
+            if(ns.peek(13) == "heist"){
                 ns.sleeve.setToCommitCrime(i, ns.enums.CrimeType.heist);
             }
             if(ns.peek(13) == "uni"){

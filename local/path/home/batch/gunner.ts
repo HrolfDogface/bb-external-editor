@@ -81,7 +81,7 @@ export async function main(ns: NS) {
     const hackDelay: number = weakenTime - hackTime - 0;
     const growDelay: number = weakenTime - growTime - 0;
     const weaken2Delay: number = 0;
-    const batchDelay: number = 0.05;
+    const batchDelay: number = 0.00;
 
     let hackThreads: number =  Math.floor(0.8/ns.formulas.hacking.hackPercent(server, player));
     if (hackThreads < 1) hackThreads = 1;
@@ -170,12 +170,13 @@ export async function main(ns: NS) {
           }
           j++
 
-          if (j%10000 == 0) await ns.sleep(1);
+          if (j%200 == 0) await ns.sleep(0);
+          //if (j%8000 == 0) await ns.sleep(1);
         }
       } 
     }
     
-    await ns.sleep(weakenTime + weaken2Delay + batchDelay * j  / 2);
+    //await ns.sleep(weakenTime + weaken2Delay + batchDelay * j  / 2);
 /*  
     while (true)
     {
