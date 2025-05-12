@@ -17,18 +17,19 @@ export async function main(ns: NS) {
         ns.exec("trash_gun_hacknet.ts", "home", 1, scanLevel);
         //ns.exec("trash_bashv3_home.ts", "home", 1, scanLevel);
         //ns.exec("trash_bashv3.ts", "home", 1, scanLevel);
-        await ns.sleep(20000);
-        ns.exec("hacknet/buy_all.ts", "home", 1);
-        await ns.sleep(20000);
-        ns.exec("hacknet/buy_all.ts", "home", 1);
-        await ns.sleep(20000);
-        ns.exec("hacknet/buy_all.ts", "home", 1);
-        await ns.sleep(20000);
-        ns.exec("hacknet/buy_all.ts", "home", 1);
-        await ns.sleep(20000);
-        ns.exec("hacknet/buy_all.ts", "home", 1);
-        await ns.sleep(20000);
-        ns.exec("hacknet/buy_all.ts", "home", 1);
+        
+       //await ns.sleep(20000);
+       //ns.exec("hacknet/buy_all.ts", "home", 1);
+       //await ns.sleep(20000);
+       //ns.exec("hacknet/buy_all.ts", "home", 1);
+       //await ns.sleep(20000);
+       //ns.exec("hacknet/buy_all.ts", "home", 1);
+       //await ns.sleep(20000);
+       //ns.exec("hacknet/buy_all.ts", "home", 1);
+       //await ns.sleep(20000);
+       //ns.exec("hacknet/buy_all.ts", "home", 1);
+       //await ns.sleep(20000);
+       //ns.exec("hacknet/buy_all.ts", "home", 1);
         
     
         servers = ns.getPurchasedServers();

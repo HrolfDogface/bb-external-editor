@@ -11,7 +11,7 @@ export async function main(ns: NS) {
   if (delay < 0){
     delay = 0;
   }
-  await ns.grow(ns.args[0], {additionalMsec:  delay});
+  await ns.grow(ns.args[0], {additionalMsec:  delay, stock: false});
   //let money: number = await ns.grow(ns.args[0], {additionalMsec:  delay});
   //let totalTime = performance.now() - startTime;
   

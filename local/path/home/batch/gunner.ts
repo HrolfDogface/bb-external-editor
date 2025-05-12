@@ -83,13 +83,13 @@ export async function main(ns: NS) {
     const weaken2Delay: number = 0;
     const batchDelay: number = 0.00;
 
-    let hackThreads: number =  Math.floor(0.8/ns.formulas.hacking.hackPercent(server, player));
+    let hackThreads: number =  Math.floor(0.01/ns.formulas.hacking.hackPercent(server, player));
     if (hackThreads < 1) hackThreads = 1;
 
     const hackSecurity: number = hackThreads * 0.002;
 
     const cores: number = ns.getServer("home").cpuCores;
-    server.moneyAvailable = server.moneyMax * 0.0;
+    server.moneyAvailable = server.moneyMax * 0.97;
     server.hackDifficulty = server.minDifficulty + hackSecurity;
     let growthThreads: number = Math.ceil(ns.formulas.hacking.growThreads(server, player, server.moneyMax, 1) * 1.2);    
     let growthThreadsHome: number = Math.ceil(ns.formulas.hacking.growThreads(server, player, server.moneyMax, cores) * 1.2);
@@ -104,11 +104,11 @@ export async function main(ns: NS) {
     const weakenAmountHome: number = ns.weakenAnalyze(1, cores);
     const weakenAmount: number = ns.weakenAnalyze(1, 1);
 
-    let weaken2Threads: number = Math.ceil(1.2 * (hackSecurity + growSecurity)/weakenAmount);
+    let weaken2Threads: number = Math.ceil(1.4 * (hackSecurity + growSecurity)/weakenAmount);
     if ( weaken2Threads < 1)  weaken2Threads = 1;
 
     
-    let weaken2ThreadsHome: number = Math.ceil(1.2 * (hackSecurity + growSecurityHome)/weakenAmountHome);
+    let weaken2ThreadsHome: number = Math.ceil(1.4 * (hackSecurity + growSecurityHome)/weakenAmountHome);
     if ( weaken2ThreadsHome < 1)  weaken2ThreadsHome = 1;
 
     ns.write("batch/batchLog.txt", performance.now() + "[batcherv2.ts]: hackThreads = " + hackThreads + "\n", "a");    
@@ -120,7 +120,7 @@ export async function main(ns: NS) {
 
     let level = ns.getHackingLevel(); 
     let j: number = 0;  
-    const depth: number = 200000;
+    const depth: number = 30000;
     let totalBatches:number = 0;
     for(const exHost of exHosts){
       if (totalBatches > depth) break;
@@ -170,13 +170,13 @@ export async function main(ns: NS) {
           }
           j++
 
-          if (j%200 == 0) await ns.sleep(0);
-          //if (j%8000 == 0) await ns.sleep(1);
+          //if (j%200 == 0) await ns.sleep(0);
+          if (j%8000 == 0) await ns.sleep(1);
         }
       } 
     }
-    
-    //await ns.sleep(weakenTime + weaken2Delay + batchDelay * j  / 2);
+    //await ns.sleep(1000);
+    await ns.sleep(weakenTime + weaken2Delay + batchDelay * j  / 2);
 /*  
     while (true)
     {

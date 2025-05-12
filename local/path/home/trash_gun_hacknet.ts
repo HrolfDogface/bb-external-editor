@@ -93,7 +93,7 @@ export async function main(ns: NS) {
   await ns.sleep(2000);
   ns.exec("batch/gunner.ts", "home", 1, neighbors[0].hostName, ...hosts);
   ns.writePort(1, neighbors[0].hostName);  
-  ns.exec("hacknet/study_loop.ts", "home", 1, neighbors[0].hostName);
+  //ns.exec("hacknet/study_loop.ts", "home", 1, neighbors[0].hostName);
 
   //ns.exec("home_share.ts", "home");
 }
